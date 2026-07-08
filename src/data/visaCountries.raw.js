@@ -239,7 +239,7 @@ export const visaCountriesRaw = [
   ],
 },
 {
-    slug: "turkey",
+    slug: "turkey-visa",
     name: "Turkey",
     metaDescription: "how to apply for a Turkey visit visa from Pakistan, including Turkey visa fees and requirements.visa application process through O.S Travels",
     facts: [
@@ -264,7 +264,7 @@ export const visaCountriesRaw = [
     ],
   },
 {
-    slug: "hong-kong-visa",
+    slug: "hongkong-visa",
     name: "Hong Kong",
     metaDescription: "Discover the latest Hong Kong visa requirements for Pakistani citizens with this comprehensive guide. document preparation to visa processing",
     facts: [
