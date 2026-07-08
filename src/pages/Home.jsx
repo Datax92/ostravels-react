@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
 import { site } from "../data/site";
 import hero1 from "../assets/hero/Hero1.png";
 import hero2 from "../assets/hero/Hero2.png";
@@ -11,6 +12,12 @@ import TravelCard from "../components/TravelCard";
 import FileProcCard from "../components/FileProcCard";
 import DropboxCard from "../components/DropboxCard";
 import { baseKeywords } from "../data/seoKeywords";
+import reviewsData from "../data/reviews.json";
+
+// Reviews used in the home page carousel (3 cards per slide)
+const homeReviews = (reviewsData.reviews || [])
+  .filter((r) => r.text?.trim())
+  .slice(0, 12);
 
 const services = [
   { icon: "ri-passport-fill", title: "Visa Services", desc: "Complete assistance with visa application, document preparation and submission." },
@@ -139,8 +146,58 @@ const fileProcCountries = [
   },
 ];
 
+function HomeStar({ filled }) {
+  return (
+    <span style={{ color: filled ? "#f5a623" : "#d9d9d9", fontSize: "0.9rem" }} aria-hidden="true">
+      ★
+    </span>
+  );
+}
+
+function HomeAvatar({ src, name }) {
+  const [errored, setErrored] = useState(false);
+  const initial = (name || "G")[0].toUpperCase();
+  const hue =
+    (Array.from(name || "G").reduce((acc, c) => acc + c.charCodeAt(0), 0) * 37) % 360;
+  const bg = `hsl(${hue},55%,58%)`;
+
+  if (!src || errored) {
+    return (
+      <div
+        aria-hidden="true"
+        style={{
+          width: 44,
+          height: 44,
+          borderRadius: "50%",
+          background: bg,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontWeight: 700,
+          fontSize: "1.1rem",
+          color: "#fff",
+          flexShrink: 0,
+        }}
+      >
+        {initial}
+      </div>
+    );
+  }
+  return (
+    <img
+      src={src}
+      alt={name}
+      onError={() => setErrored(true)}
+      style={{ width: 44, height: 44, borderRadius: "50%", objectFit: "cover", flexShrink: 0 }}
+    />
+  );
+}
+
 export default function Home() {
   const [slide, setSlide] = useState(0);
+  const [reviewIdx, setReviewIdx] = useState(0);
+  const CARDS = 3;
+  const totalSlides = Math.ceil(homeReviews.length / CARDS);
 
   useEffect(() => {
     const t = setInterval(() => {
@@ -151,6 +208,9 @@ export default function Home() {
 
   const prevSlide = () => setSlide((i) => (i - 1 + heroSlides.length) % heroSlides.length);
   const nextSlide = () => setSlide((i) => (i + 1) % heroSlides.length);
+  const prevReview = () => setReviewIdx((i) => (i - 1 + totalSlides) % totalSlides);
+  const nextReview = () => setReviewIdx((i) => (i + 1) % totalSlides);
+  const visibleReviews = homeReviews.slice(reviewIdx * CARDS, reviewIdx * CARDS + CARDS);
 
   return (
     <>
@@ -271,13 +331,96 @@ export default function Home() {
         <section className="section__container">
           <h2 className="section__header">What Our Clients Say</h2>
           <p className="section__description">Real feedback from travellers we've assisted</p>
-          <div className="testimonial__grid">
-            {site.testimonials.map((t) => (
-              <div className="testimonial__card" key={t.name}>
-                <p className="quote">"{t.quote}"</p>
-                <p className="name">{t.name}</p>
-              </div>
+
+          {/* ── Carousel wrapper ── */}
+          <div style={{ position: "relative" }}>
+
+            {/* Prev arrow */}
+            <button
+              onClick={prevReview}
+              aria-label="Previous reviews"
+              style={{
+                position: "absolute", left: "-1.5rem", top: "50%",
+                transform: "translateY(-50%)", zIndex: 2,
+                background: "var(--white)", border: "1.5px solid #e5e7eb",
+                borderRadius: "50%", width: 40, height: 40,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                cursor: "pointer", boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                fontSize: "1.1rem", color: "var(--text-dark)", transition: "box-shadow 0.2s",
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.boxShadow = "0 4px 16px rgba(40,135,255,0.18)"}
+              onMouseLeave={(e) => e.currentTarget.style.boxShadow = "0 2px 8px rgba(0,0,0,0.1)"}
+            >
+              <i className="ri-arrow-left-s-line" />
+            </button>
+
+            {/* Cards — keyed on reviewIdx for fade-in re-mount */}
+            <div
+              key={reviewIdx}
+              className="testimonial__grid"
+              style={{ animation: "reviewFadeIn 0.35s ease" }}
+            >
+              {visibleReviews.map((r, i) => (
+                <div
+                  className="testimonial__card"
+                  key={i}
+                  style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                    <HomeAvatar src={r.avatar} name={r.name} />
+                    <div>
+                      <p className="name" style={{ marginBottom: 0 }}>{r.name}</p>
+                      {r.date && <p style={{ fontSize: "0.75rem", color: "var(--text-light)" }}>{r.date}</p>}
+                    </div>
+                  </div>
+                  <span role="img" aria-label={`${r.rating} out of 5 stars`}>
+                    {[1, 2, 3, 4, 5].map((s) => <HomeStar key={s} filled={s <= (r.rating || 5)} />)}
+                  </span>
+                  <p className="quote" style={{ marginBottom: 0 }}>"{r.text}"</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Next arrow */}
+            <button
+              onClick={nextReview}
+              aria-label="Next reviews"
+              style={{
+                position: "absolute", right: "-1.5rem", top: "50%",
+                transform: "translateY(-50%)", zIndex: 2,
+                background: "var(--white)", border: "1.5px solid #e5e7eb",
+                borderRadius: "50%", width: 40, height: 40,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                cursor: "pointer", boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                fontSize: "1.1rem", color: "var(--text-dark)", transition: "box-shadow 0.2s",
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.boxShadow = "0 4px 16px rgba(40,135,255,0.18)"}
+              onMouseLeave={(e) => e.currentTarget.style.boxShadow = "0 2px 8px rgba(0,0,0,0.1)"}
+            >
+              <i className="ri-arrow-right-s-line" />
+            </button>
+          </div>
+
+          {/* Dot indicators */}
+          <div style={{ display: "flex", justifyContent: "center", gap: "0.5rem", marginTop: "1.5rem" }}>
+            {Array.from({ length: totalSlides }).map((_, i) => (
+              <button
+                key={i}
+                aria-label={`Go to slide ${i + 1}`}
+                onClick={() => setReviewIdx(i)}
+                style={{
+                  width: i === reviewIdx ? 22 : 8,
+                  height: 8, borderRadius: 999, border: "none",
+                  background: i === reviewIdx ? "#F5A623" : "#d9d9d9",
+                  cursor: "pointer", padding: 0,
+                  transition: "width 0.3s, background 0.3s",
+                }}
+              />
             ))}
+          </div>
+
+          <div style={{ textAlign: "center", marginTop: "2rem" }}>
+            <Link to="/reviews/" className="btn">See More Reviews</Link>
           </div>
         </section>
       </div>

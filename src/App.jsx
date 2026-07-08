@@ -11,6 +11,7 @@ import Ticketing from "./pages/Ticketing";
 import BlogIndex from "./pages/BlogIndex";
 import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
+import Reviews from "./pages/Reviews";
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
         <Route path="/blog/:slug/" element={<BlogPost />} />
         <Route path="/contact-2/" element={<Contact />} />
         <Route path="/air-ticketing/" element={<Ticketing />} />
+        <Route path="/reviews/" element={<Reviews />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
