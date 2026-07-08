@@ -31,11 +31,15 @@ export default function BlogIndex() {
   return (
     <>
       <SEO
-        title="Travel & Visa Blog — Guides, Tips & News"
+        title="Travel & Visa Blog — Guides, Tips & News | O.S Travel & Tours"
         description="Read expert visa guides, Umrah tips, visa file processing explainers and travel checklists from O.S Travel & Tours — Islamabad's best and top travel agency for Pakistani citizens."
         keywords={blogIndexKeywords}
         image={featured.image}
         path="/blog/"
+        breadcrumbs={[
+          { name: "Home", url: "/" },
+          { name: "Travel & Visa Blog" },
+        ]}
       />
 
       {/* ===== Hero / Featured Post ===== */}

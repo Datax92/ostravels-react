@@ -229,6 +229,9 @@ export default function Home() {
           ...baseKeywords,
         ]}
         path="/"
+        breadcrumbs={[
+          { name: "Home" },
+        ]}
       />
       <header className="hero">
         <div className="heroslider">

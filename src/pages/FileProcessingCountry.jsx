@@ -22,6 +22,11 @@ export default function FileProcessingCountry() {
         keywords={fileProcessingKeywords(country.name)}
         image={meta.img}
         path={`/schengen-visa-file-processing/${country.slug}/`}
+        breadcrumbs={[
+          { name: "Home", url: "/" },
+          { name: "Visa File Processing", url: "/schengen-visa-file-processing/" },
+          { name: `${country.name} Visa` },
+        ]}
       />
 
       <div className="country__hero">

@@ -1,4 +1,5 @@
 import SEO from "../components/SEO";
+import { baseKeywords } from "../data/seoKeywords";
 import reviewsData from "../data/reviews.json";
 
 const GOOGLE_MAPS_REVIEWS_URL =
@@ -92,9 +93,22 @@ export default function Reviews() {
   return (
     <>
       <SEO
-        title="Client Reviews – O.S Travel & Tours Islamabad"
-        description="Read genuine Google reviews from happy travellers who used O.S Travel & Tours for visa services, air ticketing and travel assistance in Islamabad, Pakistan."
+        title="Client Reviews — O.S Travel & Tours | Google Reviews Islamabad"
+        description="Read genuine Google reviews from happy travellers who used O.S Travel & Tours for visa services, air ticketing and travel assistance in Islamabad, Pakistan. Rated 5 stars by 12,000+ clients."
+        keywords={[
+          "O.S Travel & Tours Reviews",
+          "Best Travel Agency Islamabad Reviews",
+          "Visa Agent Islamabad Reviews",
+          "OS Travel Google Reviews",
+          "Travel Agency Pakistan Client Reviews",
+          "Best Visa Consultant Islamabad Reviews",
+          ...baseKeywords,
+        ]}
         path="/reviews/"
+        breadcrumbs={[
+          { name: "Home", url: "/" },
+          { name: "Client Reviews" },
+        ]}
       />
 
       <style>{`

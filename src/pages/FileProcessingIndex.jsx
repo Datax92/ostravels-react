@@ -43,10 +43,14 @@ export default function FileProcessingIndex() {
   return (
     <>
       <SEO
-        title="Best Visa File Processing Services in Islamabad, Pakistan"
-        description="Best Schengen and other visa file processing services for Pakistani citizens — France, Germany, Italy, UK, USA, Canada, Australia and many more. Complete document preparation and file processing by O.S Travel & Tours, Islamabad."
+        title="Best Schengen Visa File Processing in Islamabad, Pakistan"
+        description="Best Schengen and other visa file processing services for Pakistani citizens — France, Germany, Italy, Spain, UK, USA, Canada, Australia and many more. Complete document preparation and file processing by O.S Travel & Tours, Islamabad."
         keywords={fileProcessingIndexKeywords}
         path="/schengen-visa-file-processing/"
+        breadcrumbs={[
+          { name: "Home", url: "/" },
+          { name: "Visa File Processing" },
+        ]}
       />
 
       <div className="page__header">
