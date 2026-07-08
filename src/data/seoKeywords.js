@@ -20,6 +20,36 @@ export const baseKeywords = [
   "Authorized Visa Drop Box Agent",
 ];
 
+// Keywords for the Air Ticketing / flight booking page.
+export const ticketingKeywords = [
+  "Air Ticketing Islamabad",
+  "Best Air Ticketing Agency Islamabad",
+  "Cheap Air Tickets Pakistan",
+  "Flight Booking Islamabad",
+  "Online Flight Booking Pakistan",
+  "Cheap Flights from Islamabad",
+  "Cheap Flights from Pakistan",
+  "Domestic Flight Booking Pakistan",
+  "International Flight Booking Pakistan",
+  "PIA Ticket Booking Islamabad",
+  "Emirates Ticket Booking Pakistan",
+  "Qatar Airways Ticket Booking Pakistan",
+  "Turkish Airlines Ticket Booking Pakistan",
+  "Etihad Airways Ticket Booking Pakistan",
+  "Airblue Ticket Booking Pakistan",
+  "Serene Air Ticket Booking",
+  "Fly Jinnah Ticket Booking",
+  "One Way Flight Ticket Pakistan",
+  "Round Trip Flight Ticket Pakistan",
+  "Umrah Flight Tickets Pakistan",
+  "Best Travel Agent for Air Tickets Islamabad",
+  "IATA Approved Travel Agent Islamabad",
+  "Book Flight Ticket Online Islamabad",
+  "Air Ticket Reservation Islamabad",
+  "Group Air Ticket Booking Pakistan",
+  ...baseKeywords,
+];
+
 // Per-country keyword builder for "Visa" category pages (Malaysia, Thailand, etc.)
 export function visaCountryKeywords(countryName) {
   return [

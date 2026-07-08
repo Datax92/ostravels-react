@@ -118,6 +118,10 @@ export default function Nav() {
             </AnimatePresence>
           </li>
           <li>
+            <Link to="/air-ticketing/">Air Ticketing</Link>
+          </li>
+
+          <li>
             <Link to="/blog/">Blog</Link>
           </li>
 
@@ -155,6 +159,9 @@ export default function Nav() {
             <ul className="mainnav__mobile-links">
             <li>
               <Link to="/" onClick={closeMobileMenu}>Home</Link>
+            </li>
+            <li>
+              <Link to="/air-ticketing/" onClick={closeMobileMenu}>Air Ticketing</Link>
             </li>
             <li>
               <Link to="/blog/" onClick={closeMobileMenu}>Blog</Link>

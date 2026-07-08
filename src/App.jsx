@@ -7,6 +7,7 @@ import VisaCountry from "./pages/VisaCountry";
 import FileProcessingIndex from "./pages/FileProcessingIndex";
 import FileProcessingCountry from "./pages/FileProcessingCountry";
 import Contact from "./pages/Contact";
+import Ticketing from "./pages/Ticketing";
 import BlogIndex from "./pages/BlogIndex";
 import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
@@ -24,6 +25,7 @@ export default function App() {
         <Route path="/blog/" element={<BlogIndex />} />
         <Route path="/blog/:slug/" element={<BlogPost />} />
         <Route path="/contact-2/" element={<Contact />} />
+        <Route path="/air-ticketing/" element={<Ticketing />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
