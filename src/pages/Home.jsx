@@ -1,18 +1,16 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { site } from "../data/site";
-import { visaCountries } from "../data/visaCountries";
-import { fileProcessingCountries } from "../data/fileProcessingCountries";
 import hero1 from "../assets/hero/Hero1.png";
 import hero2 from "../assets/hero/Hero2.png";
 import hero3 from "../assets/hero/Hero3.png";
 // import hero4 from "../assets/hero/Hero-4.png";
 import ImageAutoSlider from "../components/ImageAutoSlider";
 import SEO from "../components/SEO";
+import TravelCard from "../components/TravelCard";
+import FileProcCard from "../components/FileProcCard";
+import DropboxCard from "../components/DropboxCard";
 import { baseKeywords } from "../data/seoKeywords";
-
-const featuredVisa = ["malaysia-visa", "singapore-visa", "thailand-visa"];
-const featuredFileProcessing = ["france-visa", "united-kingdom-uk-visa", "united-states-usa-visa"];
 
 const services = [
   { icon: "ri-passport-fill", title: "Visa Services", desc: "Complete assistance with visa application, document preparation and submission." },
@@ -141,112 +139,6 @@ const fileProcCountries = [
   },
 ];
 
-function FileProcCard({ slug, country, img, flag, gradient, accent }) {
-  const cardRef = useRef(null);
-
-  const handleMouseEnter = () => {
-    const card = cardRef.current;
-    if (!card) return;
-    card.style.transition = "transform 0.1s ease-out";
-  };
-
-  const handleMouseMove = (e) => {
-    const card = cardRef.current;
-    if (!card) return;
-    const rect = card.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    card.style.transform = `perspective(1000px) rotateY(${x * 22}deg) rotateX(${-y * 22}deg) scale(1.04) translateY(-10px)`;
-  };
-
-  const handleMouseLeave = () => {
-    const card = cardRef.current;
-    if (!card) return;
-    card.style.transition = "transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)";
-    card.style.transform = "perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1) translateY(0)";
-  };
-
-  return (
-    <Link
-      ref={cardRef}
-      to={`/schengen-visa-file-processing/${slug}/`}
-      className="dropbox__card"
-      onMouseEnter={handleMouseEnter}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{ "--accent": accent }}
-    >
-      <img src={img} alt="" aria-hidden="true" className="dropbox__card-photo" loading="lazy" />
-      <div className="dropbox__card-tint" style={{ background: gradient }} />
-      <div className="dropbox__card-pattern" />
-      <div className="dropbox__card-glow" />
-
-      <div className="dropbox__card-top">
-        <span className="dropbox__arrow">
-          <i className="ri-arrow-right-up-line"></i>
-        </span>
-      </div>
-
-      <div className="dropbox__card-center">
-        <img
-          src={flag}
-          alt={`${country} flag — Best ${country} visa file processing agent Islamabad`}
-          className="dropbox__flag"
-          loading="lazy"
-        />
-      </div>
-
-      <div className="dropbox__card-bottom">
-        <h3>{country}</h3>
-        <p>Best {country} Visa File Processing</p>
-        <span className="dropbox__btn">
-          Learn More <i className="ri-arrow-right-line"></i>
-        </span>
-      </div>
-    </Link>
-  );
-}
-
-/* ---------- UPDATED: new-style DropboxCard ---------- */
-function DropboxCard({ code, country, img, flag, accent, href }) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="dropbox-card"
-      style={{ "--accent": accent }}
-    >
-      <div
-        className="dropbox-card__bg"
-        role="img"
-        aria-label={`Best ${country} authorized visa drop box agent — O.S Travel & Tours Islamabad`}
-        style={{ backgroundImage: `url(${img})` }}
-      />
-      <div className="dropbox-card__overlay" />
-
-      <div className="dropbox-card__content">
-        <h3 className="dropbox-card__title">
-          {country}
-          <img
-            src={flag}
-            alt={`${country} flag — Best ${country} visa drop box agent Islamabad`}
-            className="dropbox-card__flag"
-            loading="lazy"
-          />
-        </h3>
-        <p className="dropbox-card__stats">Best Authorized Drop Box Agent</p>
-
-        <div className="dropbox-card__btn">
-          <span>Visit Website</span>
-          <i className="ri-arrow-right-line dropbox-card__arrow-icon"></i>
-        </div>
-      </div>
-    </a>
-  );
-}
-/* ---------- end updated component ---------- */
-
 export default function Home() {
   const [slide, setSlide] = useState(0);
 
@@ -260,7 +152,7 @@ export default function Home() {
   const prevSlide = () => setSlide((i) => (i - 1 + heroSlides.length) % heroSlides.length);
   const nextSlide = () => setSlide((i) => (i + 1) % heroSlides.length);
 
-return (
+  return (
     <>
       <SEO
         title="Best Travel Agency in Islamabad, Pakistan"
@@ -305,20 +197,6 @@ return (
             ))}
           </div>
         </div>
-
-        {/* <div className="hero__overlay" />
-        <div className="hero__content">
-          <p className="eyebrow">Travel Agency in Islamabad, Pakistan</p>
-          <div className="hero__heading">
-            <h1 className="hero__heading--light">Premium.</h1>
-            <h1 className="hero__heading--dark">Accessible.</h1>
-          </div>
-          <p className="sub">{site.description}</p>
-          <div className="hero__btns">
-            <Link to="/visa/" className="btn">Explore Visa Services</Link>
-            <Link to="/contact-2/" className="btn btn--outline">Contact Us</Link>
-          </div>
-        </div> */}
       </header>
 
       <div className="home__content">
@@ -328,29 +206,7 @@ return (
           <p className="section__description">Popular visa destinations we help clients with</p>
           <div className="card__grid visa__grid">
             {featuredVisaCards.map((c) => (
-              <Link to={`/visa/${c.slug}/`} className="travel__card" key={c.slug}>
-                <img
-                  src={c.img}
-                  alt={`Best ${c.name} visa services for Pakistani citizens in Islamabad — apply ${c.name} visa online with O.S Travel & Tours`}
-                  className="travel__card-img"
-                />
-                <div className="travel__card-overlay" />
-                <div className="travel__card-content">
-                  <div className="travel__card-top"></div>
-                  <div className="travel__card-mid">
-                    <h3>{c.name}</h3>
-                    <p className="travel__card-location">{c.location}</p>
-                    <h5>OVERVIEW</h5>
-                    <p className="travel__card-overview">{c.overview}</p>
-                  </div>
-                  <div className="travel__card-bottom">
-                    <span className="travel__card-price">
-                      {c.price.toLocaleString()} <small>{c.pricePeriod}</small>
-                    </span>
-                    <span className="travel__card-btn">Book Now <i className="ri-arrow-right-line"></i></span>
-                  </div>
-                </div>
-              </Link>
+              <TravelCard key={c.slug} {...c} />
             ))}
           </div>
           <div style={{ textAlign: "center", marginTop: "2rem" }}>
