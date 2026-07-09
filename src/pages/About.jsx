@@ -7,12 +7,21 @@ export default function About() {
   return (
     <>
       <SEO
-        title="About Us — Best Travel Agency in Islamabad, Pakistan"
-        description="O.S Travel & Tours is the best and top travel agent for visa services in Islamabad, Pakistan. Learn about our mission, vision and why thousands of clients trust us for visa, Umrah, ticketing and hotel booking services."
-        keywords={["About O.S Travel & Tours", 
+        title="About Us — O.S Travel & Tours | Best Travel Agency in Islamabad"
+        description="O.S Travel & Tours is the best and top travel agent for visa services in Islamabad, Pakistan. With 10+ years of experience and 12,000+ happy clients, we offer visa services, Umrah visa, air ticketing, hotel booking and travel insurance."
+        keywords={[
+          "About O.S Travel & Tours",
           "Best Travel Agency Islamabad About Us",
-          "", ...baseKeywords]}
+          "OS Travel About Us",
+          "Travel Agency Islamabad About",
+          "Best Visa Consultant Islamabad About",
+          ...baseKeywords,
+        ]}
         path="/contact/"
+        breadcrumbs={[
+          { name: "Home", url: "/" },
+          { name: "About Us" },
+        ]}
       />
 
       <ImageGallery />

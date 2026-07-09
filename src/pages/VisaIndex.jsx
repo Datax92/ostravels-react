@@ -7,10 +7,14 @@ export default function VisaIndex() {
   return (
     <>
       <SEO
-        title="Best Visa Services in Islamabad, Pakistan"
-        description="Best visa services for Pakistani citizens — Malaysia, Singapore, Thailand, Saudi Arabia, China, Hong Kong, Vietnam, Turkey and many more. Complete visa application, document preparation and submission by O.S Travel & Tours, Islamabad."
+        title="Best Visa Services in Islamabad, Pakistan — All Countries"
+        description="Best visa services for Pakistani citizens — Malaysia, Singapore, Thailand, Saudi Arabia, China, Hong Kong, Vietnam, Turkey, Indonesia, Azerbaijan, Kazakhstan and many more. Complete visa application, document preparation and submission by O.S Travel & Tours, Islamabad."
         keywords={visaIndexKeywords}
         path="/visa/"
+        breadcrumbs={[
+          { name: "Home", url: "/" },
+          { name: "Visa Services" },
+        ]}
       />
 
       <div className="page__header">

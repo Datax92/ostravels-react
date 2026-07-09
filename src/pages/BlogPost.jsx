@@ -84,6 +84,13 @@ export default function BlogPost() {
         image={post.image}
         path={`/blog/${post.slug}/`}
         type="article"
+        datePublished={post.date}
+        dateModified={post.date}
+        breadcrumbs={[
+          { name: "Home", url: "/" },
+          { name: "Blog", url: "/blog/" },
+          { name: post.title },
+        ]}
       />
       <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
 

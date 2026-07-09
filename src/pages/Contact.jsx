@@ -6,13 +6,22 @@ export default function Contact() {
   return (
     <>
       <SEO
-        title="Contact Us — Best Travel Agency in Islamabad, Pakistan"
-        description="Contact O.S Travel & Tours, the best travel agency in Islamabad, Pakistan, for visa services, Umrah visa, air ticketing, hotel booking and travel insurance. Call, email or visit our Blue Area office."
-        keywords={["Contact Best Travel Agency Islamabad", 
-          "O.S Travel & Tours Contact", 
+        title="Contact Us — O.S Travel & Tours | Best Travel Agency Islamabad"
+        description="Contact O.S Travel & Tours, the best travel agency in Islamabad, Pakistan. Call us at 051-2120700, email info@ostravels.com or visit our Blue Area, Islamabad office for visa services, Umrah visa, air ticketing, hotel booking and travel insurance."
+        keywords={[
+          "Contact Best Travel Agency Islamabad",
+          "O.S Travel & Tours Contact",
           "Best Visa Agency Blue Area Islamabad",
-           ...baseKeywords]}
+          "O.S Travel Phone Number",
+          "Travel Agency Islamabad Contact Number",
+          "Visa Agent Contact Islamabad",
+          ...baseKeywords,
+        ]}
         path="/contact-2/"
+        breadcrumbs={[
+          { name: "Home", url: "/" },
+          { name: "Contact Us" },
+        ]}
       />
 
       <div className="page__header">

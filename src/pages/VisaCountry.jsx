@@ -19,6 +19,11 @@ export default function VisaCountry() {
         keywords={visaCountryKeywords(country.name)}
         image={country.image}
         path={`/visa/${country.slug}/`}
+        breadcrumbs={[
+          { name: "Home", url: "/" },
+          { name: "Visa Services", url: "/visa/" },
+          { name: `${country.name} Visa` },
+        ]}
       />
 
       {country.image && (

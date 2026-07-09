@@ -1,149 +1,247 @@
-import { useEffect, useState } from "react";
+import SEO from "../components/SEO";
+import { baseKeywords } from "../data/seoKeywords";
+import reviewsData from "../data/reviews.json";
 
-// ---- CONFIG ----
-// Vite env var — add to your .env file:
-//   VITE_GOOGLE_MAPS_API_KEY=your_key_here
-// Restrict this key in Google Cloud Console to HTTP referrers
-// (your domain, e.g. ostravelandtours.com/*) — NOT by IP, since it
-// runs in the browser.
-const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+const GOOGLE_MAPS_REVIEWS_URL =
+  "https://www.google.com/maps/place/O.S+Travel+%26+Tours/@33.7178385,73.0733661,17z/data=!4m8!3m7!1s0x38dfbfa2da8ccd4b:0x1d0b22370a83b5d9!8m2!3d33.7178385!4d73.0733661!9m1!1b1";
 
-// Your O.S Travel & Tours Place ID — get it from:
-// https://developers.google.com/maps/documentation/places/web-service/place-id
-const PLACE_ID = import.meta.env.VITE_GOOGLE_PLACE_ID;
+const allReviews = (reviewsData.reviews || []).filter((r) => r.text?.trim());
+const { summary } = reviewsData;
 
-let loaderPromise = null;
-
-// Loads the Maps JS API script once and caches the promise so multiple
-// components mounting don't inject the script twice.
-function loadGoogleMaps() {
-  if (loaderPromise) return loaderPromise;
-
-  loaderPromise = new Promise((resolve, reject) => {
-    if (window.google?.maps) {
-      resolve(window.google.maps);
-      return;
-    }
-    const script = document.createElement("script");
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&v=weekly&loading=async&libraries=places`;
-    script.async = true;
-    script.onerror = () => reject(new Error("Failed to load Google Maps script"));
-    script.onload = () => resolve(window.google.maps);
-    document.head.appendChild(script);
-  });
-
-  return loaderPromise;
-}
 
 function Star({ filled }) {
   return (
-    <span style={{ color: filled ? "#f5a623" : "#d9d9d9" }} aria-hidden="true">
+    <span style={{ color: filled ? "#f5a623" : "#d9d9d9", fontSize: "1rem" }} aria-hidden="true">
       ★
     </span>
   );
 }
 
 function StarRow({ rating }) {
-  const rounded = Math.round(rating || 0);
+  const n = Math.round(rating || 0);
   return (
     <span role="img" aria-label={`${rating} out of 5 stars`}>
-      {[1, 2, 3, 4, 5].map((i) => (
-        <Star key={i} filled={i <= rounded} />
-      ))}
+      {[1, 2, 3, 4, 5].map((i) => <Star key={i} filled={i <= n} />)}
     </span>
   );
 }
 
+function Avatar({ src, name }) {
+  const initial = (name || "G")[0].toUpperCase();
+  const hue = (Array.from(name || "G").reduce((a, c) => a + c.charCodeAt(0), 0) * 37) % 360;
+
+  if (!src) {
+    return (
+      <div
+        aria-hidden="true"
+        style={{
+          width: 44, height: 44, borderRadius: "50%",
+          background: `hsl(${hue},55%,58%)`,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          fontWeight: 700, fontSize: "1.1rem", color: "#fff", flexShrink: 0,
+        }}
+      >
+        {initial}
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={src}
+      alt={name}
+      onError={(e) => { e.currentTarget.style.display = "none"; }}
+      style={{ width: 44, height: 44, borderRadius: "50%", objectFit: "cover", flexShrink: 0 }}
+    />
+  );
+}
+
+function ReviewCard({ r }) {
+  return (
+    <div className="testimonial__card review-card">
+      <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+        <Avatar src={r.avatar} name={r.name} />
+        <div>
+          <p style={{ fontWeight: 700, fontSize: "0.92rem", marginBottom: "0.1rem" }}>
+            {r.name}
+          </p>
+          {r.date && (
+            <p style={{ fontSize: "0.75rem", color: "var(--text-light)" }}>{r.date}</p>
+          )}
+        </div>
+      </div>
+      <StarRow rating={r.rating} />
+      <p className="quote" style={{ marginBottom: 0 }}>"{r.text}"</p>
+    </div>
+  );
+}
+
+// Split reviews round-robin into N vertical columns
+function splitColumns(list, n) {
+  const cols = Array.from({ length: n }, () => []);
+  list.forEach((r, i) => cols[i % n].push(r));
+  return cols;
+}
+
+const COLUMN_COUNT = 3;
+const columns = splitColumns(allReviews, COLUMN_COUNT);
+// Scroll all columns upwards in unison at a slower, synchronized pace
+const directions = ["scroll-up", "scroll-up", "scroll-up"];
+const durations = ["210s", "210s", "210s"];
+
 export default function Reviews() {
-  const [status, setStatus] = useState("loading"); // loading | success | error
-  const [place, setPlace] = useState(null);
-  const [error, setError] = useState(null);
+  return (
+    <>
+      <SEO
+        title="Client Reviews — O.S Travel & Tours | Google Reviews Islamabad"
+        description="Read genuine Google reviews from happy travellers who used O.S Travel & Tours for visa services, air ticketing and travel assistance in Islamabad, Pakistan. Rated 5 stars by 12,000+ clients."
+        keywords={[
+          "O.S Travel & Tours Reviews",
+          "Best Travel Agency Islamabad Reviews",
+          "Visa Agent Islamabad Reviews",
+          "OS Travel Google Reviews",
+          "Travel Agency Pakistan Client Reviews",
+          "Best Visa Consultant Islamabad Reviews",
+          ...baseKeywords,
+        ]}
+        path="/reviews/"
+        breadcrumbs={[
+          { name: "Home", url: "/" },
+          { name: "Client Reviews" },
+        ]}
+      />
 
-  useEffect(() => {
-    let cancelled = false;
+      <style>{`
+        .marquee-columns {
+          display: flex;
+          gap: 1.25rem;
+          justify-content: center;
+        }
 
-    async function run() {
-      try {
-        if (!API_KEY || !PLACE_ID) {
-          throw new Error(
-            "Missing VITE_GOOGLE_MAPS_API_KEY or VITE_GOOGLE_PLACE_ID in .env"
+        .marquee-column-viewport {
+          flex: 1 1 0;
+          min-width: 0;
+          height: 560px;
+          overflow: hidden;
+          position: relative;
+          -webkit-mask-image: linear-gradient(
+            to bottom,
+            transparent 0,
+            #000 8%,
+            #000 92%,
+            transparent 100%
+          );
+          mask-image: linear-gradient(
+            to bottom,
+            transparent 0,
+            #000 8%,
+            #000 92%,
+            transparent 100%
           );
         }
 
-        const maps = await loadGoogleMaps();
-        const { Place } = await maps.importLibrary("places");
-
-        const p = new Place({ id: PLACE_ID });
-        await p.fetchFields({
-          fields: ["displayName", "rating", "userRatingCount", "reviews", "googleMapsURI"],
-        });
-
-        if (!cancelled) {
-          setPlace(p);
-          setStatus("success");
+        .marquee-column-track {
+          display: flex;
+          flex-direction: column;
+          gap: 1.1rem;
+          width: 100%;
         }
-      } catch (err) {
-        if (!cancelled) {
-          setError(err.message);
-          setStatus("error");
+
+        .marquee-column-track.scroll-up {
+          animation-name: col-scroll-up;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
         }
-      }
-    }
+        .marquee-column-track.scroll-down {
+          animation-name: col-scroll-down;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+        }
 
-    run();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+        .marquee-column-viewport:hover .marquee-column-track {
+          animation-play-state: paused;
+        }
 
-  if (status === "loading") {
-    return (
-      <section className="section__container">
-        <p style={{ textAlign: "center", color: "#666" }}>Loading reviews…</p>
-      </section>
-    );
-  }
+        @keyframes col-scroll-up {
+          from { transform: translateY(0); }
+          to { transform: translateY(calc(-50% - 0.55rem)); }
+        }
+        @keyframes col-scroll-down {
+          from { transform: translateY(calc(-50% - 0.55rem)); }
+          to { transform: translateY(0); }
+        }
 
-  if (status === "error") {
-    return (
-      <section className="section__container">
-        <p style={{ textAlign: "center", color: "#999" }}>
-          Couldn't load reviews right now.
+        .review-card {
+          display: flex;
+          flex-direction: column;
+          gap: 0.65rem;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .review-card:hover {
+          transform: scale(1.02);
+          box-shadow: 0 12px 26px rgba(0,0,0,0.12);
+        }
+
+        /* Stack columns on smaller screens: 2 then 1 */
+        @media (max-width: 900px) {
+          .marquee-columns { flex-wrap: wrap; }
+          .marquee-column-viewport:nth-child(3) { display: none; }
+          .marquee-column-viewport { flex: 1 1 45%; height: 480px; }
+        }
+        @media (max-width: 560px) {
+          .marquee-column-viewport:nth-child(2) { display: none; }
+          .marquee-column-viewport { flex: 1 1 100%; height: 520px; }
+        }
+      `}</style>
+
+      <div className="page__header">
+        <h1>Client Reviews</h1>
+        <p style={{ color: "rgba(255,255,255,0.8)", marginTop: "0.4rem" }}>
+          Real feedback from our travellers — powered by Google
         </p>
-        {/* Remove this in production, useful while you're wiring up keys */}
-        {import.meta.env.DEV && <p style={{ textAlign: "center", color: "red" }}>{error}</p>}
-      </section>
-    );
-  }
-
-  const reviews = place.reviews ?? [];
-
-  return (
-    <section className="section__container">
-      <h2 className="section__header">What Our Clients Say</h2>
-      <div style={{ textAlign: "center", marginBottom: "1.5rem", color: "#555" }}>
-        <StarRow rating={place.rating} />{" "}
-        <span>
-          {place.rating?.toFixed(1)} · {place.userRatingCount} reviews on Google
-        </span>
       </div>
 
-      <div className="testimonial__grid">
-        {reviews.map((r, i) => (
-          <div className="testimonial__card" key={i}>
-            <p className="quote">"{r.text}"</p>
-            <p className="name">{r.authorAttribution?.displayName ?? "Google User"}</p>
+      <section className="section__container">
+        {summary?.rating && (
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.4rem", marginBottom: "2.5rem" }}>
+            <div style={{ fontSize: "3rem", fontWeight: 800, lineHeight: 1 }}>
+              {summary.rating?.toFixed(1)}
+            </div>
+            <StarRow rating={summary.rating} />
+            <span style={{ color: "var(--text-light)", fontSize: "0.9rem" }}>
+              {allReviews.length}+ Google Reviews
+            </span>
           </div>
-        ))}
-      </div>
+        )}
 
-      {place.googleMapsURI && (
-        <div style={{ textAlign: "center", marginTop: "2rem" }}>
-          <a href={place.googleMapsURI} target="_blank" rel="noopener noreferrer" className="btn">
+        {/* Vertical auto-scrolling testimonial columns */}
+        <div className="marquee-columns">
+          {columns.map((col, ci) => (
+            <div className="marquee-column-viewport" key={ci}>
+              <div
+                className={`marquee-column-track ${directions[ci % directions.length]}`}
+                style={{ animationDuration: durations[ci % durations.length] }}
+              >
+                {col.map((r, i) => <ReviewCard key={`${ci}-a-${i}`} r={r} />)}
+                {col.map((r, i) => <ReviewCard key={`${ci}-b-${i}`} r={r} />)}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* See on Google CTA */}
+        <div style={{ textAlign: "center", marginTop: "2.5rem" }}>
+          <a
+            href={GOOGLE_MAPS_REVIEWS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn"
+            id="see-on-google-btn"
+          >
             See All Reviews on Google
           </a>
         </div>
-      )}
-    </section>
+      </section>
+    </>
   );
 }

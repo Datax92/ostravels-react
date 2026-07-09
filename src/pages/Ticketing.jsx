@@ -112,6 +112,10 @@ export default function Ticketing() {
         description="Book cheap air tickets in Islamabad, Pakistan with O.S Travel & Tours. Domestic & international flight booking on PIA, Emirates, Qatar Airways, Turkish Airlines & more. Get instant fares on WhatsApp."
         keywords={ticketingKeywords}
         path="/air-ticketing/"
+        breadcrumbs={[
+          { name: "Home", url: "/" },
+          { name: "Air Ticketing" },
+        ]}
       />
 
       <div className="page__header ticket__header">
