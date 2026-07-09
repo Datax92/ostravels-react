@@ -65,6 +65,49 @@ export function visaCountryKeywords(countryName) {
     ...baseKeywords,
   ];
 }
+// Edit these lists anytime — they drive the SEO keyword strip in the footer.
+// Keep entries short (2-5 words) and specific; that's what ranks for long-tail searches.
+
+export const airlinePartners = [
+  "Kuwait Airways", "Kenya Airways", "Gulf Air", "Fly Dubai", "Cathay Pacific",
+  "Etihad Airways", "Pakistan International Airlines", "Saudi Airlines", "Serene Air",
+  "SriLankan Airlines", "British Airways", "Oman Air", "Qatar Airways", "KLM Airlines",
+  "Lufthansa", "Ryanair", "Singapore Airlines", "Air Asia", "Air Canada",
+  "Austrian Airlines", "EasyJet", "Thai Airways", "American Airlines", "Turkish Airlines",
+  "Air Malindo", "Air China", "Air Arabia", "AirBlue", "Emirates", "Fly Jinnah", "AirSial",
+];
+
+export const hotelKeywords = [
+  "Al-Eiman Royal Hotel", "Hotels In Makkah And Madinah", "Shaza Al Madina",
+  "Sofaraa Al Huda Hotel Madinah", "Al Kiswah Towers Hotel", "Serena Hotel Faisalabad",
+  "Serena Hotel Gilgit", "Serena Hotel Hunza", "Serena Hotel Islamabad",
+  "Serena Hotel Khaplu", "Serena Hotel Quetta", "Serena Hotel Shigar Fort",
+  "Serena Hotel Swat", "Marriott Hotel Islamabad", "Marriott Hotel Karachi",
+  "Dar Al Tawhid", "Makarim Ajyad Hotel", "Intercontinental Dar Al Tawhid",
+  "Fairmont Clock Tower Makkah", "Hotels in Makkah Near Haram", "Pullman Zamzam Makkah",
+  "Swissotel Makkah", "Movenpick Hajar Tower", "Makkah Millennium Hotel",
+  "Hilton Makkah Convention Hotel", "Dar Al Taqwa", "Al Haram Hotel", "Anjum Hotel",
+  "Dar Al Hijra Intercontinental Hotel", "Al Marwa Rayhaan By Rotana", "Umrah Hotels",
+  "3 Star Hotels in Makkah", "Nearest Hotels in Makkah and Madinah", "Madinah Hilton Hotel",
+  "Pullman zamzam Madina", "Intercontinental Madinah Dar Al Iman an IHG Hotel",
+  "Closest Hotel to Makkah", "10 Best Hotels in Makkah", "Nearest Hotel in Makkah Haram",
+  "Luxury Hotels in Makkah Saudi Arabia", "4 Star Hotels in Makkah Near Haram",
+  "3 Star Hotels in Medina", "4 Star Hotels in Medina",
+];
+
+// Shown as a single centered line at the very bottom, separated by " • "
+export const bottomKeywordLine = [
+  "Cheap Flights Islamabad",
+  "Visa Consultant Blue Area",
+  "Umrah Packages 2026",
+  "Best Travel Agency Pakistan",
+  "Travel Insurance Online",
+  "Hajj Services",
+  "Corporate Travel Management",
+  "Air Blue Tickets",
+  "Serene Air Booking",
+  "PIA Flight Schedule",
+];
 
 // Per-country keyword builder for "Visa File Processing" category (Schengen, USA, UK, etc.)
 export function fileProcessingKeywords(countryName) {
