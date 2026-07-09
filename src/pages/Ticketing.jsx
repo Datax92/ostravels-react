@@ -3,7 +3,7 @@ import { site } from "../data/site";
 import SEO from "../components/SEO";
 import { ticketingKeywords } from "../data/seoKeywords";
 
-const WHATSAPP_NUMBER = "923105105220";
+const AGENCY_EMAIL = "ostravelsisb@gmail.com"; // TODO: confirm real inbox to receive ticket requests
 
 const airlines = [
   "PIA (Pakistan International Airlines)",
@@ -31,7 +31,7 @@ const popularRoutes = [
 const faqs = [
   {
     q: "How do I book an air ticket with O.S Travel & Tours?",
-    a: "Just fill in the flight details on this page and hit \"Send Request on WhatsApp\". Your trip details land directly in our WhatsApp inbox and one of our air ticketing experts replies with live fares and options within minutes.",
+    a: "Just fill in the flight details on this page and hit \"Send Request via Email\". Your trip details land directly in our inbox and one of our air ticketing experts replies with live fares and options within minutes.",
   },
   {
     q: "Which airlines can you book tickets for?",
@@ -43,7 +43,7 @@ const faqs = [
   },
   {
     q: "Do you charge for a fare quotation?",
-    a: "No, sending a request and getting a fare quote on WhatsApp is completely free. You only pay once you confirm and issue the ticket.",
+    a: "No, sending a request and getting a fare quote by email is completely free. You only pay once you confirm and issue the ticket.",
   },
 ];
 
@@ -76,40 +76,46 @@ export default function Ticketing() {
     e.preventDefault();
 
     const lines = [
-      "✈️ *New Air Ticket Request — O.S Travel & Tours*",
-      "",
-      `*Trip Type:* ${form.tripType}`,
-      `*From:* ${form.from}`,
-      `*To:* ${form.to}`,
-      `*Departure Date:* ${form.departDate}`,
+      `Trip Type: ${form.tripType}`,
+      `From: ${form.from}`,
+      `To: ${form.to}`,
+      `Departure Date: ${form.departDate}`,
     ];
 
     if (form.tripType === "Round Trip" && form.returnDate) {
-      lines.push(`*Return Date:* ${form.returnDate}`);
+      lines.push(`Return Date: ${form.returnDate}`);
     }
 
     lines.push(
-      `*Passengers:* ${form.adults} Adult(s), ${form.children} Child(ren), ${form.infants} Infant(s)`,
-      `*Class:* ${form.travelClass}`,
-      `*Preferred Airline:* ${form.airline}`,
+      `Passengers: ${form.adults} Adult(s), ${form.children} Child(ren), ${form.infants} Infant(s)`,
+      `Class: ${form.travelClass}`,
+      `Preferred Airline: ${form.airline}`,
       "",
-      `*Name:* ${form.name}`,
-      `*Phone:* ${form.phone}`
+      `Name: ${form.name}`,
+      `Phone: ${form.phone}`
     );
 
     if (form.notes) {
-      lines.push(`*Additional Notes:* ${form.notes}`);
+      lines.push(`Additional Notes: ${form.notes}`);
     }
 
-    const message = encodeURIComponent(lines.join("\n"));
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, "_blank", "noopener,noreferrer");
+    const subject = encodeURIComponent(
+      `New Air Ticket Request — ${form.from || "?"} to ${form.to || "?"}`
+    );
+    const body = encodeURIComponent(lines.join("\n"));
+
+    // opens Gmail's web compose window directly (new tab) — pre-filled,
+    // user just hits send. Avoids the OS "choose an app" prompt that
+    // plain mailto: links trigger.
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${AGENCY_EMAIL}&su=${subject}&body=${body}`;
+    window.open(gmailUrl, "_blank", "noopener,noreferrer");
   };
 
   return (
     <>
       <SEO
         title="Air Ticketing in Islamabad — Cheap Flight Booking | O.S Travel & Tours"
-        description="Book cheap air tickets in Islamabad, Pakistan with O.S Travel & Tours. Domestic & international flight booking on PIA, Emirates, Qatar Airways, Turkish Airlines & more. Get instant fares on WhatsApp."
+        description="Book cheap air tickets in Islamabad, Pakistan with O.S Travel & Tours. Domestic & international flight booking on PIA, Emirates, Qatar Airways, Turkish Airlines & more. Get instant fares by email."
         keywords={ticketingKeywords}
         path="/air-ticketing/"
         breadcrumbs={[
@@ -270,11 +276,11 @@ export default function Ticketing() {
             </label>
 
             <button type="submit" className="btn ticket__submit">
-              <i className="ri-whatsapp-fill"></i> Send Request on WhatsApp
+              <i className="ri-mail-send-line"></i> Send Request via Email
             </button>
             <p className="ticket__form-note">
-              Your flight request is sent straight to our WhatsApp — no account, no hassle. Our air ticketing team
-              replies with the best fares within minutes.
+              Your flight request opens in a pre-filled Gmail compose window — just hit send. Our air ticketing
+              team replies with the best fares within minutes.
             </p>
           </form>
         </div>
@@ -298,9 +304,9 @@ export default function Ticketing() {
             <p>PIA, Emirates, Qatar Airways, Etihad, Turkish Airlines, Airblue, Serene Air, Fly Jinnah and more.</p>
           </div>
           <div className="ticket__why-card">
-            <i className="ri-whatsapp-line"></i>
-            <h4>Instant WhatsApp Booking</h4>
-            <p>Send your travel details and get a live fare quotation on WhatsApp within minutes — no long forms, no waiting.</p>
+            <i className="ri-mail-send-line"></i>
+            <h4>Instant Email Booking</h4>
+            <p>Send your travel details and get a live fare quotation by email within minutes — no long forms, no waiting.</p>
           </div>
           <div className="ticket__why-card">
             <i className="ri-user-star-line"></i>
