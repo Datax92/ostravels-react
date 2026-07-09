@@ -31,8 +31,7 @@ export default function FloatingButtons() {
     setLoading(true);
 
     try {
-      const apiBase = import.meta.env.VITE_API_URL || "";
-      const res = await fetch(`${apiBase}/api/chat`, {
+      const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages: nextMessages.filter((m) => m !== WELCOME) }),
