@@ -126,6 +126,10 @@ export default function Nav() {
           </li>
 
           <li>
+            <Link to="/travel-insurance/">Travel Insurance</Link>
+          </li>
+
+          <li>
             <Link to="/contact/">About Us</Link>
           </li>
 
@@ -165,6 +169,9 @@ export default function Nav() {
             </li>
             <li>
               <Link to="/blog/" onClick={closeMobileMenu}>Blog</Link>
+            </li>
+            <li>
+              <Link to="/travel-insurance/" onClick={closeMobileMenu}>Travel Insurance</Link>
             </li>
             <li>
               <Link to="/contact/" onClick={closeMobileMenu}>About Us</Link>

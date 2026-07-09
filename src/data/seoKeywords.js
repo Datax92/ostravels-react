@@ -50,6 +50,26 @@ export const ticketingKeywords = [
   ...baseKeywords,
 ];
 
+// Keywords for the Travel Insurance page.
+export const insuranceKeywords = [
+  "Travel Insurance Pakistan",
+  "Best Travel Insurance Islamabad",
+  "Schengen Visa Travel Insurance",
+  "Schengen Compliant Travel Insurance Pakistan",
+  "Travel Insurance for Visa Application",
+  "International Travel Insurance Pakistan",
+  "Travel Medical Insurance Pakistan",
+  "Trip Cancellation Insurance Pakistan",
+  "Umrah Travel Insurance Pakistan",
+  "Student Travel Insurance Pakistan",
+  "Family Travel Insurance Pakistan",
+  "Online Travel Insurance Policy Pakistan",
+  "Travel Insurance Quote Islamabad",
+  "Emergency Medical Travel Insurance Pakistan",
+  "Buy Travel Insurance Online Pakistan",
+  ...baseKeywords,
+];
+
 // Per-country keyword builder for "Visa" category pages (Malaysia, Thailand, etc.)
 export function visaCountryKeywords(countryName) {
   return [

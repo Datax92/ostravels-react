@@ -6,6 +6,7 @@ import VisaIndex from "./pages/VisaIndex";
 import VisaCountry from "./pages/VisaCountry";
 import FileProcessingIndex from "./pages/FileProcessingIndex";
 import FileProcessingCountry from "./pages/FileProcessingCountry";
+import Insurance from "./pages/Insurance";
 import Contact from "./pages/Contact";
 import Ticketing from "./pages/Ticketing";
 import BlogIndex from "./pages/BlogIndex";
@@ -18,6 +19,7 @@ export default function App() {
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
+        <Route path="/travel-insurance" element={<Insurance />} />
         <Route path="/contact" element={<About />} />
         <Route path="/visa" element={<VisaIndex />} />
         <Route path="/visa/:slug" element={<VisaCountry />} />

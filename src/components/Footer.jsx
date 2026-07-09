@@ -48,6 +48,7 @@ export default function Footer() {
             <li><Link to="/contact/">About Us</Link></li>
             <li><Link to="/visa/">Visa</Link></li>
             <li><Link to="/schengen-visa-file-processing/">Visa File Processing</Link></li>
+            <li><Link to="/travel-insurance/">Travel Insurance</Link></li>
           </ul>
         </div>
 
