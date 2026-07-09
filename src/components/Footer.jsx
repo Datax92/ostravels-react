@@ -1,5 +1,21 @@
 import { Link } from "react-router-dom";
 import { site } from "../data/site";
+import { airlinePartners, hotelKeywords, bottomKeywordLine } from "../data/seoKeywords";
+
+// Renders a pipe-separated inline keyword list (plain text, not links —
+// these are search-intent keywords, not real internal pages)
+function KeywordRow({ items }) {
+  return (
+    <p className="footer__seo-row">
+      {items.map((item, i) => (
+        <span key={item}>
+          {item}
+          {i !== items.length - 1 && <span className="footer__seo-sep"> | </span>}
+        </span>
+      ))}
+    </p>
+  );
+}
 
 export default function Footer() {
   return (
@@ -64,7 +80,21 @@ export default function Footer() {
           </ul>
         </div>
       </div>
-          <div className="footer__map">
+      
+      {/* SEO keyword section */}
+      <div className="footer__seo">
+        <div className="section__container">
+          <h5 className="footer__seo-title">Our Airline Partners &amp; Destinations</h5>
+          <KeywordRow items={airlinePartners} />
+
+          <hr className="footer__seo-divider" />
+
+          <h5 className="footer__seo-title">Top Hotels &amp; Accommodation Keywords</h5>
+          <KeywordRow items={hotelKeywords} />
+        </div>
+      </div>
+
+      <div className="footer__map">
         <iframe
           title="O.S Travel & Tours — Office Location Map"
           src={`https://www.google.com/maps?q=${encodeURIComponent(`${site.name}, ${site.address}`)}&z=16&output=embed`}
@@ -81,11 +111,14 @@ export default function Footer() {
           <i className="ri-map-pin-2-fill"></i> Open in Google Maps
         </a>
       </div>
+
       <div className="footer__bar">
+        <p className="footer__seo-bottom">
+          {bottomKeywordLine.join(" • ")}
+        </p>
         © {new Date().getFullYear()} O.S Travel & Tours. All Rights Reserved.
       </div>
-
-  
+      
     </footer>
   );
 }
