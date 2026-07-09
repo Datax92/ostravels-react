@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { site } from "../data/site";
-import hero1 from "../assets/hero/Hero1.png";
-import hero2 from "../assets/hero/Hero2.png";
-import hero3 from "../assets/hero/Hero3.png";
+import hero1 from "../assets/hero/Hero1.webp";
+import hero2 from "../assets/hero/Hero2.webp";
+import hero3 from "../assets/hero/Hero3.webp";
 // import hero4 from "../assets/hero/Hero-4.png";
 import ImageAutoSlider from "../components/ImageAutoSlider";
 import SEO from "../components/SEO";
