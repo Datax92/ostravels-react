@@ -37,7 +37,7 @@ export default function FileProcCard({ slug, country, img, flag, gradient, accen
       onMouseLeave={handleMouseLeave}
       style={{ "--accent": accent }}
     >
-      <img src={img} alt="" aria-hidden="true" className="dropbox__card-photo" loading="lazy" />
+      <img src={img} alt="" aria-hidden="true" className="dropbox__card-photo" loading="lazy" decoding="async" width="400" height="500" />
       <div className="dropbox__card-tint" style={{ background: gradient }} />
       <div className="dropbox__card-pattern" />
       <div className="dropbox__card-glow" />
@@ -49,11 +49,14 @@ export default function FileProcCard({ slug, country, img, flag, gradient, accen
       </div>
 
       <div className="dropbox__card-center">
-        <img
+       <img
           src={flag}
           alt={`${country} flag — Best ${country} visa file processing agent Islamabad`}
           className="dropbox__flag"
           loading="lazy"
+          decoding="async"
+          width="28"
+          height="28"
         />
       </div>
 

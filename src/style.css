@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
 
 :root {
   --primary-color: #2887ff;
@@ -1085,7 +1084,73 @@ footer {
     display: flex;
   }
 }
+/* ── Logo layout patch: image + divider + text ── */
 
+.mainnav__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.95rem;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.mainnav__logo-img {
+  width: auto;
+  height: 54px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mainnav.scrolled .mainnav__logo-img {
+  height: 50px;
+}
+
+.mainnav__logo-divider {
+  display: block;
+  width: 1px;
+  height: 28px;
+  background: rgba(26, 26, 46, 0.18);
+  flex-shrink: 0;
+}
+
+.mainnav__logo-text {
+  font-weight: 800;
+  font-size: 1.3rem;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  /* colors are set via inline styles in JSX — nothing to override here */
+}
+
+/* ── Smooth scroll transition (replaces the abrupt snap) ── */
+
+.mainnav {
+  transition: box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              background 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mainnav__inner {
+  gap: 1rem;
+  transition: padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Fix: keep all nav links on one line ── */
+
+.mainnav__links {
+  gap: 1.25rem;
+}
+
+.mainnav__links > li > a {
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.mainnav__phone {
+  font-size: 0.82rem;
+  padding: 0.55rem 0.9rem;
+  flex-shrink: 0;
+}
 /* ===== Hero image slider (replaces video) ===== */
 .hero {
 
@@ -1120,11 +1185,14 @@ footer {
   z-index: 0;
 }
 
+/* NEW */
 .heroslider__slide {
   position: absolute;
   inset: 0;
-  background-size: cover;
-  background-position: center;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   opacity: 0;
   transition: opacity 1s ease-in-out;
 }

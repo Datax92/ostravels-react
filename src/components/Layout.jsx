@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { useLocation, Outlet } from "react-router-dom";
 import Nav from "./Nav";
 import Footer from "./Footer";
-import FloatingButtons from "./FloatingButtons";
+
+const FloatingButtons = lazy(() => import("./FloatingButtons"));
 
 export default function Layout() {
   const { pathname } = useLocation();
@@ -20,7 +21,9 @@ export default function Layout() {
         </div>
       </main>
       <Footer />
-      <FloatingButtons />
+      <Suspense fallback={null}>
+        <FloatingButtons />
+      </Suspense>
     </>
   );
 }

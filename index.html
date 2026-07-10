@@ -6,10 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google-site-verification" content="b1ttcoAznRWVCe_o-YBnOFVnn53TgtPj0LHy4KJsKPA" />
 
-  <link rel="preload" as="image" href="/hero/Hero1.webp" fetchpriority="high">
-  <link rel="preload" as="image" href="/hero/Hero2.webp" fetchpriority="high">
-  <link rel="preload" as="image" href="/hero/Hero3.webp" fetchpriority="high">
-  
   <!-- ===================== Favicon ===================== -->
   <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png" />
@@ -61,7 +57,7 @@
       "name": "O.S Travel & Tours",
       "alternateName": "OS Travel",
       "url": "https://ostravels.com",
-      "logo": "https://ostravels.com/favicon/apple-touch-icon.png",
+      "logo": "https://ostravels.com/favicon/logo.webp",
       "image": "https://ostravels.com/img/og-cover.jpg",
       "description": "Best and top travel agency in Islamabad, Pakistan — offering visa services, Umrah visa, air ticketing, hotel booking, travel insurance and Schengen visa file processing.",
       "telephone": ["+92-51-2120700", "+92-51-2120701", "+92-333-5542877"],
@@ -118,12 +114,30 @@
     </script>
 
   <!-- ===================== Performance: Preconnect ===================== -->
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
-  <link rel="preconnect" href="https://hatscripts.github.io" crossorigin />
-
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://hatscripts.github.io" crossorigin />
   <!-- ===================== Fonts ===================== -->
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+  <!-- DM Sans (moved out of style.css @import — @import blocks render even harder than a link tag) -->
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+    rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+      rel="stylesheet" />
+  </noscript>
+
+  <!-- Remixicon -->
+  <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" media="print"
+    onload="this.media='all'" />
+  <noscript>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+  </noscript>
 </head>
 
 <body>
