@@ -3,7 +3,7 @@ export const site = {
   tagline: "Best and Top Travel Agency in Islamabad, Pakistan",
   description:
     "Welcome to the best and top Travel Agency in Islamabad, Pakistan — O.S Travel & Tours, your one-stop solution for all your travel needs. We provide Visa Services, Air Ticketing, Hotel Booking, Travel Insurance and Visa File Preparation, ensuring a seamless, comfortable and memorable travel experience.",
-  phones: ["051-2120700", "051-2120701", "0333-5542877"],
+  phones: ["051-2120701", "051-2120700", "0333-5542877"],
   email: "ostravelsisb@gmail.com",
   emailAlt: "ostravelsisb@gmail.com",
   facebook: "https://www.facebook.com/osconsultants01/",
