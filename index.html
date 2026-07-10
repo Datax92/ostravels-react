@@ -6,10 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google-site-verification" content="b1ttcoAznRWVCe_o-YBnOFVnn53TgtPj0LHy4KJsKPA" />
 
-  <link rel="preload" as="image" href="/hero/Hero1.webp" fetchpriority="high">
-  <link rel="preload" as="image" href="/hero/Hero2.webp" fetchpriority="high">
-  <link rel="preload" as="image" href="/hero/Hero3.webp" fetchpriority="high">
-  
   <!-- ===================== Favicon ===================== -->
   <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png" />
@@ -124,7 +120,13 @@
   <link rel="preconnect" href="https://hatscripts.github.io" crossorigin />
 
   <!-- ===================== Fonts ===================== -->
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+  <!-- NEW -->
+  <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" media="print"
+    onload="this.media='all'" />
+  <noscript>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+  </noscript>
 </head>
 
 <body>

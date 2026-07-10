@@ -4,10 +4,15 @@ import { Link } from "react-router-dom";
 export default function TravelCard({ slug, name, location, overview, price, pricePeriod, img }) {
   return (
     <Link to={`/visa/${slug}/`} className="travel__card">
+      {/* NEW */}
       <img
         src={img}
         alt={`Best ${name} visa services for Pakistani citizens in Islamabad — apply ${name} visa online with O.S Travel & Tours`}
         className="travel__card-img"
+        loading="lazy"
+        decoding="async"
+        width="480"
+        height="360"
       />
       <div className="travel__card-overlay" />
       <div className="travel__card-content">

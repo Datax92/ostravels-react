@@ -41,7 +41,7 @@ const featuredVisaCards = [
     overview: "eVisa or sticker visa for Pakistani travelers. Tourism or business, valid up to 30 days stay.",
     price: 15000,
     pricePeriod: "PKR / eVisa",
-    img: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?q=80&w=1200&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?q=80&w=600&auto=format&fit=crop",
   },
   {
     slug: "singapore-visa",
@@ -50,7 +50,7 @@ const featuredVisaCards = [
     overview: "Online eVisa via ICA authorized agent. Fast, secure, reference number within 24 hours.",
     price: 18000,
     pricePeriod: "PKR / Visa",
-    img: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?q=80&w=1200&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?q=80&w=600&auto=format&fit=crop",
   },
   {
     slug: "thailand-visa",
@@ -59,7 +59,7 @@ const featuredVisaCards = [
     overview: "Tourist visa processing, embassy authorized. Return ticket & hotel booking arranged for you.",
     price: 15000,
     pricePeriod: "PKR / Visa",
-    img: "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=1200&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=600&auto=format&fit=crop",
   },
   {
     slug: "turkey-visa",
@@ -68,7 +68,7 @@ const featuredVisaCards = [
     overview: "eVisa & sticker visa support for tourism or business. Fast document review and submission.",
     price: 16000,
     pricePeriod: "PKR / Visa",
-    img: "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?q=80&w=1200&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?q=80&w=600&auto=format&fit=crop",
   },
   {
     slug: "hongkong-visa",
@@ -77,7 +77,7 @@ const featuredVisaCards = [
     overview: "Visa processing for business & tourism visits. Full document prep and submission handled.",
     price: 17000,
     pricePeriod: "PKR / Visa",
-    img: "https://images.unsplash.com/photo-1536599018102-9f803c140fc1?q=80&w=1200&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1536599018102-9f803c140fc1?q=80&w=600&auto=format&fit=crop",
   },
   {
     slug: "saudi-arabia-visa",
@@ -86,7 +86,7 @@ const featuredVisaCards = [
     overview: "Visit, Umrah & business visa support with complete documentation assistance.",
     price: 20000,
     pricePeriod: "PKR / Visa",
-    img: "https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?q=80&w=1200&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?q=80&w=600&auto=format&fit=crop",
   },
 ];
 
@@ -95,7 +95,7 @@ const dropboxCountries = [
   {
     code: "th",
     country: "Thailand",
-    img: "https://images.unsplash.com/photo-1508009603885-50cf7c579365?q=80&w=1200&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1508009603885-50cf7c579365?q=80&w=600&auto=format&fit=crop",
     flag: "https://hatscripts.github.io/circle-flags/flags/th.svg",
     accent: "#1e63d6",
     href: "https://islamabad.thaiembassy.org/en/page/96399-authorized-visa-drop-box-agents?menu=5d7615e015e39c4934002f92",
@@ -103,7 +103,7 @@ const dropboxCountries = [
   {
     code: "id",
     country: "Indonesia",
-    img: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=1200&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=600&auto=format&fit=crop",
     flag: "https://hatscripts.github.io/circle-flags/flags/id.svg",
     accent: "#d6291e",
     href: "",
@@ -111,7 +111,7 @@ const dropboxCountries = [
   {
     code: "vn",
     country: "Vietnam",
-    img: "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?q=80&w=1200&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?q=80&w=600&auto=format&fit=crop",
     flag: "https://hatscripts.github.io/circle-flags/flags/vn.svg",
     accent: "#c9c515",
     href: "",
@@ -123,7 +123,7 @@ const fileProcCountries = [
   {
     slug: "france-visa",
     country: "France",
-    img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=1200&auto=format&fit=crop", // Eiffel Tower, Paris
+    img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=600&auto=format&fit=crop", // Eiffel Tower, Paris
     flag: "https://hatscripts.github.io/circle-flags/flags/fr.svg",
     gradient: "linear-gradient(145deg, rgba(0,35,149,0.4) 0%, rgba(60,90,200,0.35) 45%, rgba(237,41,57,0.25) 100%)",
     accent: "#1a3faa",
@@ -131,7 +131,7 @@ const fileProcCountries = [
   {
     slug: "united-kingdom-uk-visa",
     country: "United Kingdom",
-    img: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80&w=1200&auto=format&fit=crop", // Big Ben, London
+    img: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80&w=600&auto=format&fit=crop", // Big Ben, London
     flag: "https://hatscripts.github.io/circle-flags/flags/gb.svg",
     gradient: "linear-gradient(145deg, rgba(1,33,105,0.4) 0%, rgba(200,16,46,0.3) 45%, rgba(255,255,255,0.15) 100%)",
     accent: "#c8102e",
@@ -139,7 +139,7 @@ const fileProcCountries = [
   {
     slug: "united-states-usa-visa",
     country: "United States",
-    img: "https://images.unsplash.com/photo-1522083165195-3424ed129620?q=80&w=1200&auto=format&fit=crop", // Statue of Liberty, NYC
+    img: "https://images.unsplash.com/photo-1522083165195-3424ed129620?q=80&w=600&auto=format&fit=crop", // Statue of Liberty, NYC
     flag: "https://hatscripts.github.io/circle-flags/flags/us.svg",
     gradient: "linear-gradient(145deg, rgba(178,34,52,0.4) 0%, rgba(60,59,110,0.35) 45%, rgba(255,255,255,0.15) 100%)",
     accent: "#3c3b6e",
@@ -235,13 +235,20 @@ export default function Home() {
       />
       <header className="hero">
         <div className="heroslider">
-          {heroSlides.map((src, i) => (
-            <div
-              key={src}
-              className={`heroslider__slide ${i === slide ? "active" : ""}`}
-              style={{ backgroundImage: `url(${src})` }}
-            />
-          ))}
+      {/* NEW */}
+      {heroSlides.map((src, i) => (
+        <img
+          key={src}
+          src={src}
+          alt={i === 0 ? "O.S Travel & Tours — best travel agency in Islamabad, Pakistan" : ""}
+          className={`heroslider__slide ${i === slide ? "active" : ""}`}
+          fetchPriority={i === 0 ? "high" : "low"}
+          loading={i === 0 ? "eager" : "lazy"}
+          decoding={i === 0 ? "sync" : "async"}
+          width="1600"
+          height="900"
+        />
+      ))}
 
           <button className="heroslider__arrow left" onClick={prevSlide} aria-label="Previous slide">
             <i className="ri-arrow-left-s-line"></i>

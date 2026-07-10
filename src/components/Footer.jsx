@@ -27,16 +27,17 @@ export default function Footer() {
           </Link>
           <p>{site.description}</p>
           <ul className="footer__socials">
-            <li>
-              <a href={site.facebook} target="_blank" rel="noreferrer">
-                <i className="ri-facebook-fill"></i>
-              </a>
-            </li>
-            <li>
-              <a href={site.youtube} target="_blank" rel="noreferrer">
-                <i className="ri-youtube-fill"></i>
-              </a>
-            </li>
+            {/* NEW */}
+          <li>
+            <a href={site.facebook} target="_blank" rel="noreferrer" aria-label="Follow O.S Travel & Tours on Facebook">
+              <i className="ri-facebook-fill" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li>
+            <a href={site.youtube} target="_blank" rel="noreferrer" aria-label="Subscribe to O.S Travel & Tours on YouTube">
+              <i className="ri-youtube-fill" aria-hidden="true"></i>
+            </a>
+          </li>
           </ul>
         </div>
 

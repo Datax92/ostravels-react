@@ -1,37 +1,41 @@
+import { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
-import About from "./pages/About";
-import VisaIndex from "./pages/VisaIndex";
-import VisaCountry from "./pages/VisaCountry";
-import FileProcessingIndex from "./pages/FileProcessingIndex";
-import FileProcessingCountry from "./pages/FileProcessingCountry";
-import Insurance from "./pages/Insurance";
-import Contact from "./pages/Contact";
-import Ticketing from "./pages/Ticketing";
-import BlogIndex from "./pages/BlogIndex";
-import BlogPost from "./pages/BlogPost";
-import NotFound from "./pages/NotFound";
-import Reviews from "./pages/Reviews";
+
+const About = lazy(() => import("./pages/About"));
+const VisaIndex = lazy(() => import("./pages/VisaIndex"));
+const VisaCountry = lazy(() => import("./pages/VisaCountry"));
+const FileProcessingIndex = lazy(() => import("./pages/FileProcessingIndex"));
+const FileProcessingCountry = lazy(() => import("./pages/FileProcessingCountry"));
+const Insurance = lazy(() => import("./pages/Insurance"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Ticketing = lazy(() => import("./pages/Ticketing"));
+const BlogIndex = lazy(() => import("./pages/BlogIndex"));
+const BlogPost = lazy(() => import("./pages/BlogPost"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const Reviews = lazy(() => import("./pages/Reviews"));
 
 export default function App() {
   return (
-    <Routes>
-      <Route element={<Layout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/travel-insurance" element={<Insurance />} />
-        <Route path="/contact" element={<About />} />
-        <Route path="/visa" element={<VisaIndex />} />
-        <Route path="/visa/:slug" element={<VisaCountry />} />
-        <Route path="/schengen-visa-file-processing" element={<FileProcessingIndex />} />
-        <Route path="/schengen-visa-file-processing/:slug" element={<FileProcessingCountry />} />
-        <Route path="/blog" element={<BlogIndex />} />
-        <Route path="/blog/:slug" element={<BlogPost />} />
-        <Route path="/contact-2" element={<Contact />} />
-        <Route path="/air-ticketing" element={<Ticketing />} />
-        <Route path="/reviews" element={<Reviews />} />
-        <Route path="*" element={<NotFound />} />
-      </Route>
-    </Routes>
+    <Suspense fallback={null}>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/travel-insurance" element={<Insurance />} />
+          <Route path="/contact" element={<About />} />
+          <Route path="/visa" element={<VisaIndex />} />
+          <Route path="/visa/:slug" element={<VisaCountry />} />
+          <Route path="/schengen-visa-file-processing" element={<FileProcessingIndex />} />
+          <Route path="/schengen-visa-file-processing/:slug" element={<FileProcessingCountry />} />
+          <Route path="/blog" element={<BlogIndex />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/contact-2" element={<Contact />} />
+          <Route path="/air-ticketing" element={<Ticketing />} />
+          <Route path="/reviews" element={<Reviews />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </Suspense>
   );
 }
