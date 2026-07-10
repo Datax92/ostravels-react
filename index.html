@@ -57,7 +57,7 @@
       "@type": "TravelAgency",
       "name": "O.S Travel & Tours",
       "alternateName": "OS Travel",
-      "url": "https://ostravels.com/favicon/logo.webp"
+      "url": "https://ostravels.com",
       "logo": "https://ostravels.com/favicon/logo.webp",
       "image": "https://ostravels.com/img/og-cover.jpg",
       "description": "Best and top travel agency in Islamabad, Pakistan — offering visa services, Umrah visa, air ticketing, hotel booking, travel insurance and Schengen visa file processing.",
@@ -118,9 +118,23 @@
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
   <link rel="preconnect" href="https://hatscripts.github.io" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
   <!-- ===================== Fonts ===================== -->
-  <!-- NEW -->
+  <!-- DM Sans (moved out of style.css @import — @import blocks render even harder than a link tag) -->
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+    rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+      rel="stylesheet" />
+  </noscript>
+
+  <!-- Remixicon -->
   <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" />
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" media="print"
     onload="this.media='all'" />
