@@ -1090,14 +1090,14 @@ footer {
 .mainnav__logo {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.95rem;
   text-decoration: none;
   flex-shrink: 0;
 }
 
 .mainnav__logo-img {
   width: auto;
-  height: 38px;
+  height: 54px;
   object-fit: contain;
   display: block;
   flex-shrink: 0;
@@ -1105,7 +1105,7 @@ footer {
 }
 
 .mainnav.scrolled .mainnav__logo-img {
-  height: 32px;
+  height: 50px;
 }
 
 .mainnav__logo-divider {
