@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { site } from "../data/site";
 import { visaCountries, visaMenuCrossListed } from "../data/visaCountries";
 import { fileProcessingCountries } from "../data/fileProcessingCountries";
+import logo from "../assets/logo.png"; // ← adjust path to match your project
 
 // how long to wait before closing dropdown after mouse leaves (stops flicker)
 const CLOSE_DELAY = 220;
@@ -42,8 +43,14 @@ export default function Nav() {
   return (
     <nav className={`mainnav ${scrolled ? "scrolled" : ""}`}>
       <div className="mainnav__inner">
+
+        {/* ── Logo: image + divider + text ── */}
         <Link to="/" className="mainnav__logo">
-          O.S <span>Travel & Tours</span>
+          <img src={logo} alt="O.S Travel & Tours logo" className="mainnav__logo-img" />
+          <span className="mainnav__logo-divider" aria-hidden="true" />
+          <span className="mainnav__logo-text">
+            O.S <span>Travel & Tours</span>
+          </span>
         </Link>
 
         <ul className="mainnav__links">
