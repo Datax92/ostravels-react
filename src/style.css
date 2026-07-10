@@ -1101,6 +1101,7 @@ footer {
   object-fit: contain;
   display: block;
   flex-shrink: 0;
+  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .mainnav.scrolled .mainnav__logo-img {
@@ -1119,20 +1120,23 @@ footer {
   font-weight: 800;
   font-size: 1.3rem;
   letter-spacing: -0.02em;
-  color: #1a1a2e;        /* "O.S" — dark */
   white-space: nowrap;
+  /* colors are set via inline styles in JSX — nothing to override here */
 }
 
-/* "Travel & Tours" — orange, explicit override to win specificity */
-.mainnav__logo-text span {
-  color: #f5a623 !important;
-}
+/* ── Smooth scroll transition (replaces the abrupt snap) ── */
 
-/* ── Fix: keep all nav links on one line ── */
+.mainnav {
+  transition: box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              background 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
 .mainnav__inner {
   gap: 1rem;
+  transition: padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* ── Fix: keep all nav links on one line ── */
 
 .mainnav__links {
   gap: 1.25rem;

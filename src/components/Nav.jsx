@@ -11,8 +11,8 @@ const CLOSE_DELAY = 220;
 
 export default function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [openMenu, setOpenMenu] = useState(null); // 'visa' | 'processing' | null (desktop hover dropdown)
-  const [mobileSubOpen, setMobileSubOpen] = useState({ visa: false, processing: false }); // mobile accordion
+  const [openMenu, setOpenMenu] = useState(null);
+  const [mobileSubOpen, setMobileSubOpen] = useState({ visa: false, processing: false });
   const [scrolled, setScrolled] = useState(false);
   const closeTimer = useRef(null);
 
@@ -49,7 +49,9 @@ export default function Nav() {
           <img src={logo} alt="O.S Travel & Tours logo" className="mainnav__logo-img" />
           <span className="mainnav__logo-divider" aria-hidden="true" />
           <span className="mainnav__logo-text">
-            O.S <span>Travel & Tours</span>
+            {/* Inline styles are the only guaranteed way to beat specificity wars */}
+            <span style={{ color: "#1a1a2e" }}>O.S </span>
+            <span style={{ color: "#f5a623" }}>Travel & Tours</span>
           </span>
         </Link>
 
@@ -124,6 +126,7 @@ export default function Nav() {
               )}
             </AnimatePresence>
           </li>
+
           <li>
             <Link to="/air-ticketing/">Air Ticketing</Link>
           </li>
@@ -168,101 +171,101 @@ export default function Nav() {
             transition={{ duration: 0.25, ease: "easeInOut" }}
           >
             <ul className="mainnav__mobile-links">
-            <li>
-              <Link to="/" onClick={closeMobileMenu}>Home</Link>
-            </li>
-            <li>
-              <Link to="/air-ticketing/" onClick={closeMobileMenu}>Air Ticketing</Link>
-            </li>
-            <li>
-              <Link to="/blog/" onClick={closeMobileMenu}>Blog</Link>
-            </li>
-            <li>
-              <Link to="/travel-insurance/" onClick={closeMobileMenu}>Travel Insurance</Link>
-            </li>
-            <li>
-              <Link to="/contact/" onClick={closeMobileMenu}>About Us</Link>
-            </li>
-            <li className={`mobile-dropdown ${mobileSubOpen.visa ? "open" : ""}`}>
-              <div className="mobile-dropdown__row">
-                <Link to="/visa/" onClick={closeMobileMenu}>Visa</Link>
-                <button
-                  type="button"
-                  className="mobile-dropdown__toggle"
-                  aria-label={mobileSubOpen.visa ? "Collapse Visa list" : "Expand Visa list"}
-                  aria-expanded={mobileSubOpen.visa}
-                  onClick={() => toggleMobileSub("visa")}
-                >
-                  <i className="ri-arrow-down-s-line"></i>
-                </button>
-              </div>
-              <AnimatePresence initial={false}>
-                {mobileSubOpen.visa && (
-                  <motion.ul
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.25, ease: "easeInOut" }}
+              <li>
+                <Link to="/" onClick={closeMobileMenu}>Home</Link>
+              </li>
+              <li>
+                <Link to="/air-ticketing/" onClick={closeMobileMenu}>Air Ticketing</Link>
+              </li>
+              <li>
+                <Link to="/blog/" onClick={closeMobileMenu}>Blog</Link>
+              </li>
+              <li>
+                <Link to="/travel-insurance/" onClick={closeMobileMenu}>Travel Insurance</Link>
+              </li>
+              <li>
+                <Link to="/contact/" onClick={closeMobileMenu}>About Us</Link>
+              </li>
+              <li className={`mobile-dropdown ${mobileSubOpen.visa ? "open" : ""}`}>
+                <div className="mobile-dropdown__row">
+                  <Link to="/visa/" onClick={closeMobileMenu}>Visa</Link>
+                  <button
+                    type="button"
+                    className="mobile-dropdown__toggle"
+                    aria-label={mobileSubOpen.visa ? "Collapse Visa list" : "Expand Visa list"}
+                    aria-expanded={mobileSubOpen.visa}
+                    onClick={() => toggleMobileSub("visa")}
                   >
-                    {visaCountries.map((c) => (
-                      <li key={c.slug}>
-                        <Link to={`/visa/${c.slug}/`} onClick={closeMobileMenu}>
-                          {c.name} Visa
-                        </Link>
-                      </li>
-                    ))}
-                    {visaMenuCrossListed.map((c) => (
-                      <li key={c.slug}>
-                        <Link
-                          to={`/schengen-visa-file-processing/${c.slug}/`}
-                          onClick={closeMobileMenu}>
-                          {c.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </motion.ul>
-                )}
-              </AnimatePresence>
-            </li>
-            <li className={`mobile-dropdown ${mobileSubOpen.processing ? "open" : ""}`}>
-              <div className="mobile-dropdown__row">
-                <Link to="/schengen-visa-file-processing/" onClick={closeMobileMenu}>
-                  Visa File Processing
-                </Link>
-                <button
-                  type="button"
-                  className="mobile-dropdown__toggle"
-                  aria-label={mobileSubOpen.processing ? "Collapse Visa File Processing list" : "Expand Visa File Processing list"}
-                  aria-expanded={mobileSubOpen.processing}
-                  onClick={() => toggleMobileSub("processing")}
-                >
-                  <i className="ri-arrow-down-s-line"></i>
-                </button>
-              </div>
-              <AnimatePresence initial={false}>
-                {mobileSubOpen.processing && (
-                  <motion.ul
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.25, ease: "easeInOut" }}
+                    <i className="ri-arrow-down-s-line"></i>
+                  </button>
+                </div>
+                <AnimatePresence initial={false}>
+                  {mobileSubOpen.visa && (
+                    <motion.ul
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25, ease: "easeInOut" }}
+                    >
+                      {visaCountries.map((c) => (
+                        <li key={c.slug}>
+                          <Link to={`/visa/${c.slug}/`} onClick={closeMobileMenu}>
+                            {c.name} Visa
+                          </Link>
+                        </li>
+                      ))}
+                      {visaMenuCrossListed.map((c) => (
+                        <li key={c.slug}>
+                          <Link
+                            to={`/schengen-visa-file-processing/${c.slug}/`}
+                            onClick={closeMobileMenu}>
+                            {c.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </motion.ul>
+                  )}
+                </AnimatePresence>
+              </li>
+              <li className={`mobile-dropdown ${mobileSubOpen.processing ? "open" : ""}`}>
+                <div className="mobile-dropdown__row">
+                  <Link to="/schengen-visa-file-processing/" onClick={closeMobileMenu}>
+                    Visa File Processing
+                  </Link>
+                  <button
+                    type="button"
+                    className="mobile-dropdown__toggle"
+                    aria-label={mobileSubOpen.processing ? "Collapse Visa File Processing list" : "Expand Visa File Processing list"}
+                    aria-expanded={mobileSubOpen.processing}
+                    onClick={() => toggleMobileSub("processing")}
                   >
-                    {fileProcessingCountries.map((c) => (
-                      <li key={c.slug}>
-                        <Link
-                          to={`/schengen-visa-file-processing/${c.slug}/`}
-                          onClick={closeMobileMenu}>
-                          {c.name} Visa
-                        </Link>
-                      </li>
-                    ))}
-                  </motion.ul>
-                )}
-              </AnimatePresence>
-            </li>
-            <li>
-              <Link to="/contact-2/" onClick={closeMobileMenu}>Contact</Link>
-            </li>
+                    <i className="ri-arrow-down-s-line"></i>
+                  </button>
+                </div>
+                <AnimatePresence initial={false}>
+                  {mobileSubOpen.processing && (
+                    <motion.ul
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25, ease: "easeInOut" }}
+                    >
+                      {fileProcessingCountries.map((c) => (
+                        <li key={c.slug}>
+                          <Link
+                            to={`/schengen-visa-file-processing/${c.slug}/`}
+                            onClick={closeMobileMenu}>
+                            {c.name} Visa
+                          </Link>
+                        </li>
+                      ))}
+                    </motion.ul>
+                  )}
+                </AnimatePresence>
+              </li>
+              <li>
+                <Link to="/contact-2/" onClick={closeMobileMenu}>Contact</Link>
+              </li>
             </ul>
           </motion.div>
         )}
