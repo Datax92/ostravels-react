@@ -46,7 +46,7 @@ export default function Nav() {
 
         {/* ── Logo: image + divider + text ── */}
         <Link to="/" className="mainnav__logo">
-          <img src={logo} alt="O.S Travel & Tours logo" className="mainnav__logo-img" />
+          <img src={logo} alt="O.S Travel & Tours logo" className="mainnav__logo-img" width="150" height="100" fetchPriority="high" decoding="async" />
           <span className="mainnav__logo-divider" aria-hidden="true" />
           <span className="mainnav__logo-text">
             {/* Inline styles are the only guaranteed way to beat specificity wars */}

@@ -9,4 +9,17 @@ export default defineConfig({
       "/api": "http://localhost:3001",
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes("node_modules")) {
+            if (id.includes("framer-motion")) return "framer-motion";
+            if (id.includes("react-router-dom")) return "react-router";
+            if (id.includes("react-dom") || id.includes("/react/")) return "react-vendor";
+          }
+        },
+      },
+    },
+  },
 })
