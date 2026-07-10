@@ -148,7 +148,7 @@ export default function SEO({
       "publisher": {
         "@type": "Organization",
         "name": SITE_NAME,
-        "logo": { "@type": "ImageObject", "url": `${SITE_URL}/img/favicon.png` },
+        "logo": { "@type": "ImageObject", "url": `${SITE_URL}/favicon/apple-touch-icon.png` },
       },
       ...(type === "article" && datePublished ? {
         "datePublished": datePublished,
