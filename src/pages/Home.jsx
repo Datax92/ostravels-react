@@ -188,6 +188,10 @@ function HomeAvatar({ src, name }) {
       src={src}
       alt={name}
       onError={() => setErrored(true)}
+      width="44"
+      height="44"
+      loading="lazy"
+      decoding="async"
       style={{ width: 44, height: 44, borderRadius: "50%", objectFit: "cover", flexShrink: 0 }}
     />
   );

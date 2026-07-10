@@ -19,12 +19,15 @@ export default function DropboxCard({ country, img, flag, accent, href }) {
       <div className="dropbox-card__content">
         <h3 className="dropbox-card__title">
           {country}
-          <img
-            src={flag}
-            alt={`${country} flag — Best ${country} visa drop box agent Islamabad`}
-            className="dropbox-card__flag"
-            loading="lazy"
-          />
+        <img
+          src={flag}
+          alt={`${country} flag — Best ${country} visa drop box agent Islamabad`}
+          className="dropbox-card__flag"
+          loading="lazy"
+          decoding="async"
+          width="28"
+          height="28"
+        />
         </h3>
         <p className="dropbox-card__stats">Best Authorized Drop Box Agent</p>
 

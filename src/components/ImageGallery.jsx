@@ -32,7 +32,7 @@ export default function ImageGallery() {
       <div className="gallery__row">
         {images.map((img, idx) => (
           <div className="gallery__item" key={idx}>
-            <img src={img.src} alt={img.alt} loading="lazy" />
+            <img src={img.src} alt={img.alt} loading="lazy" decoding="async" width="400" height="300" />
           </div>
         ))}
       </div>
