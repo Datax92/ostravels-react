@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { site } from "../data/site";
 import { visaCountries, visaMenuCrossListed } from "../data/visaCountries";
 import { fileProcessingCountries } from "../data/fileProcessingCountries";
-import logo from "../assets/logo.png"; // ← adjust path to match your project
+import logo from "../assets/logo.webp"; // ← adjust path to match your project
 
 // how long to wait before closing dropdown after mouse leaves (stops flicker)
 const CLOSE_DELAY = 220;
