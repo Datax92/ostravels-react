@@ -115,11 +115,24 @@ export default function Footer() {
       </div>
 
       <div className="footer__bar">
-        <p className="footer__seo-bottom">
-          {bottomKeywordLine.join(" • ")}
-        </p>
-        © {new Date().getFullYear()} O.S Travel & Tours. All Rights Reserved.
-      </div>
+  <p className="footer__seo-bottom">
+    {bottomKeywordLine.join(" • ")}
+  </p>
+
+  <p>
+    © {new Date().getFullYear()} O.S Travel & Tours. All Rights Reserved.
+    {" | "}
+    Created by{" "}
+    <a
+      href="https://www.datax.pk/"
+      target="_blank"
+      rel="noreferrer"
+      className="footer__credit"
+    >
+      Data X Technologies
+    </a>
+  </p>
+</div>
       
     </footer>
   );
