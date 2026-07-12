@@ -1,27 +1,27 @@
 const images = [
   {
-    src: "https://images.unsplash.com/photo-1719368472026-dc26f70a9b76?q=80&w=800&auto=format&fit=crop",
-    alt: "Best travel agency Islamabad Pakistan — client visa consultation",
+    src: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?q=80&w=800&auto=format&fit=crop",
+    alt: "Kuala Lumpur Malaysia Petronas Towers — Malaysia visa services O.S Travel Islamabad",
   },
   {
-    src: "https://images.unsplash.com/photo-1649265825072-f7dd6942baed?q=80&w=800&auto=format&fit=crop",
-    alt: "O.S Travel & Tours office Islamabad — best visa consultant Pakistan",
+    src: "https://images.unsplash.com/photo-1586724237569-f3d0c1dee8c6?q=80&w=800&auto=format&fit=crop",
+    alt: "Saudi Arabia Madinah Al-Masjid an-Nabawi — Umrah visa services Pakistan",
   },
   {
-    src: "https://images.unsplash.com/photo-1555212697-194d092e3b8f?q=80&w=800&auto=format&fit=crop",
-    alt: "Best travel agency Pakistan — passport and visa documentation services",
+    src: "https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?q=80&w=800&auto=format&fit=crop",
+    alt: "Egypt Pyramids of Giza — Egypt visa and travel packages O.S Travel Islamabad",
   },
   {
-    src: "https://images.unsplash.com/photo-1729086046027-09979ade13fd?q=80&w=800&auto=format&fit=crop",
-    alt: "Best Umrah and visa services Islamabad — international travel planning",
+    src: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=800&auto=format&fit=crop",
+    alt: "Nepal Mount Everest Himalayas — Nepal visa and trekking packages Pakistan",
   },
   {
-    src: "https://images.unsplash.com/photo-1601568494843-772eb04aca5d?q=80&w=800&auto=format&fit=crop",
-    alt: "Best tour agency Islamabad — flight ticketing and hotel booking services",
+    src: "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?q=80&w=800&auto=format&fit=crop",
+    alt: "Istanbul Turkey Hagia Sophia — Turkey visa services O.S Travel & Tours Islamabad",
   },
   {
-    src: "https://images.unsplash.com/photo-1585687501004-615dfdfde7f1?q=80&w=800&auto=format&fit=crop",
-    alt: "Best travel agency in Pakistan — trusted visa file processing team",
+    src: "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?q=80&w=800&auto=format&fit=crop",
+    alt: "China Great Wall — China visa services and travel packages O.S Travel Islamabad",
   },
 ];
 
