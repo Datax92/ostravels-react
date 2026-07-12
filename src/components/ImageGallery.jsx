@@ -1,27 +1,27 @@
 const images = [
   {
-    src: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?q=80&w=800&auto=format&fit=crop",
+    src: "https://images.unsplash.com/photo-1508009603885-50cf7c579365?q=80&w=800&auto=format&fit=crop",
     alt: "Kuala Lumpur Malaysia Petronas Towers — Malaysia visa services O.S Travel Islamabad",
   },
   {
-    src: "https://images.unsplash.com/photo-1586724237569-f3d0c1dee8c6?q=80&w=800&auto=format&fit=crop",
-    alt: "Saudi Arabia Madinah Al-Masjid an-Nabawi — Umrah visa services Pakistan",
+    src: "https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?q=80&w=800&auto=format&fit=crop",
+    alt: "Mecca Grand Mosque Kaaba Saudi Arabia — Umrah Hajj visa services O.S Travel Islamabad",
   },
   {
     src: "https://images.unsplash.com/photo-1568322445389-f64ac2515020?q=80&w=800&auto=format&fit=crop",
-    alt: "Egypt Pyramids of Giza — Egypt visa and travel packages O.S Travel Islamabad",
-  },
-    {
-    src: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=800&auto=format&fit=crop",
-    alt: "Nepal Mount Everest Himalayas — Nepal visa and trekking packages Pakistan",
+    alt: "Egypt Pyramids of Giza Cairo — Egypt visa and travel packages O.S Travel Islamabad",
   },
   {
-    src: "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?q=80&w=800&auto=format&fit=crop",
-    alt: "Istanbul Turkey Hagia Sophia — Turkey visa services O.S Travel & Tours Islamabad",
+    src: "https://images.unsplash.com/photo-1526772662000-3f88f10405ff?q=80&w=800&auto=format&fit=crop",
+    alt: "Nepal Himalayas Everest Base Camp — Nepal trekking visa packages O.S Travel Islamabad",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?q=80&w=800&auto=format&fit=crop",
+    alt: "Istanbul Turkey Hagia Sophia Blue Mosque — Turkey visa services O.S Travel Islamabad",
   },
   {
     src: "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?q=80&w=800&auto=format&fit=crop",
-    alt: "China Great Wall — China visa services and travel packages O.S Travel Islamabad",
+    alt: "China Great Wall Beijing — China visa services travel packages O.S Travel Islamabad",
   },
 ];
 
