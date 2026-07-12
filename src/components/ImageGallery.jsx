@@ -8,10 +8,10 @@ const images = [
     alt: "Saudi Arabia Madinah Al-Masjid an-Nabawi — Umrah visa services Pakistan",
   },
   {
-    src: "https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?q=80&w=800&auto=format&fit=crop",
+    src: "https://images.unsplash.com/photo-1568322445389-f64ac2515020?q=80&w=800&auto=format&fit=crop",
     alt: "Egypt Pyramids of Giza — Egypt visa and travel packages O.S Travel Islamabad",
   },
-  {
+    {
     src: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=800&auto=format&fit=crop",
     alt: "Nepal Mount Everest Himalayas — Nepal visa and trekking packages Pakistan",
   },
