@@ -1,31 +1,31 @@
 const images = [
   {
-    // Malaysia — Petronas Towers at night ✅ (already working)
+    // Malaysia ✅ Petronas Towers night
     src: "https://images.unsplash.com/photo-1755435147466-8b886176de9b?q=80&w=800&auto=format&fit=crop",
     alt: "Kuala Lumpur Malaysia Petronas Towers — Malaysia visa services O.S Travel Islamabad",
   },
   {
-    // Saudi Arabia — Kaaba Mecca at night ✅ (photo-1771170983433)
-    src: "https://images.unsplash.com/photo-1771170983433-1576bc4a7eec?q=80&w=800&auto=format&fit=crop",
+    // Saudi Arabia ✅ Kaaba Masjid al-Haram
+    src: "https://images.unsplash.com/photo-1513072064285-240f87fa81e8?q=80&w=800&auto=format&fit=crop",
     alt: "Mecca Kaaba Grand Mosque Saudi Arabia — Umrah Hajj visa services O.S Travel Islamabad",
   },
- {
-  // Egypt — Pyramids of Giza wide landscape ✅
-  src: "https://images.unsplash.com/photo-1679594384071-3b346dc70da8?q=80&w=800&auto=format&fit=crop",
-  alt: "Egypt Pyramids of Giza Cairo — Egypt visa travel packages O.S Travel Islamabad",
-},
-{
-  // Nepal — Annapurna Himalayas sunrise wide ✅
-  src: "https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?q=80&w=800&auto=format&fit=crop",
-  alt: "Nepal Himalayas Annapurna sunrise — Nepal trekking visa packages O.S Travel Islamabad",
-},
-{
-  // Turkey — Hagia Sophia with fountains blue sky ✅
-  src: "https://images.unsplash.com/photo-1752926269883-78794047bac5?q=80&w=800&auto=format&fit=crop",
-  alt: "Istanbul Turkey Hagia Sophia mosque — Turkey visa services O.S Travel & Tours Islamabad",
-},
   {
-    // China — Great Wall through green hills ✅ (photo-1761492159415)
+    // Egypt ✅ Aerial Pyramids of Giza
+    src: "https://images.unsplash.com/photo-1541769740-098e80269166?q=80&w=800&auto=format&fit=crop",
+    alt: "Egypt Pyramids of Giza Cairo — Egypt visa travel packages O.S Travel Islamabad",
+  },
+  {
+    // Nepal ✅ Himalayas fog landscape
+    src: "https://images.unsplash.com/photo-1490791539531-102a1e0beb7b?q=80&w=800&auto=format&fit=crop",
+    alt: "Nepal Himalayas mountains — Nepal trekking visa packages O.S Travel Islamabad",
+  },
+  {
+    // Turkey ✅ Hagia Sophia sunset
+    src: "https://images.unsplash.com/photo-1567712595315-545da0d341b2?q=80&w=800&auto=format&fit=crop",
+    alt: "Istanbul Turkey Hagia Sophia mosque sunset — Turkey visa services O.S Travel Islamabad",
+  },
+  {
+    // China ✅ Great Wall green hills
     src: "https://images.unsplash.com/photo-1761492159415-f100f11742a6?q=80&w=800&auto=format&fit=crop",
     alt: "China Great Wall Beijing — China visa services travel packages O.S Travel Islamabad",
   },
