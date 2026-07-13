@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
 import { site } from "../data/site";
 import { visaCountries, visaMenuCrossListed } from "../data/visaCountries";
 import { fileProcessingCountries } from "../data/fileProcessingCountries";
-import logo from "../assets/logo.webp"; // ← adjust path to match your project
+import logo from "../assets/logo.webp";
 
 // how long to wait before closing dropdown after mouse leaves (stops flicker)
 const CLOSE_DELAY = 220;
@@ -18,7 +17,7 @@ export default function Nav() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -49,7 +48,6 @@ export default function Nav() {
           <img src={logo} alt="O.S Travel & Tours logo" className="mainnav__logo-img" width="150" height="100" fetchPriority="high" decoding="async" />
           <span className="mainnav__logo-divider" aria-hidden="true" />
           <span className="mainnav__logo-text">
-            {/* Inline styles are the only guaranteed way to beat specificity wars */}
             <span style={{ color: "#1a1a2e" }}>O.S </span>
             <span style={{ color: "#f5a623" }}>Travel & Tours</span>
           </span>
@@ -59,7 +57,7 @@ export default function Nav() {
           <li>
             <Link to="/">Home</Link>
           </li>
-          
+
           <li
             className="mainnav__dropdown-parent"
             onMouseEnter={() => openNow("visa")}
@@ -68,32 +66,24 @@ export default function Nav() {
             <Link to="/visa/">
               Visa <i className="ri-arrow-down-s-line"></i>
             </Link>
-            <AnimatePresence>
-              {openMenu === "visa" && (
-                <motion.div
-                  className="mainnav__dropdown"
-                  initial={{ opacity: 0, y: 12, scale: 0.98 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 12, scale: 0.98 }}
-                  transition={{ duration: 0.2, ease: "easeOut" }}
-                  onMouseEnter={() => openNow("visa")}
-                  onMouseLeave={closeSoon}
-                >
-                  {visaCountries.map((c) => (
-                    <Link key={c.slug} to={`/visa/${c.slug}/`}>
-                      {c.name} Visa
-                    </Link>
-                  ))}
-                  {visaMenuCrossListed.map((c) => (
-                    <Link
-                      key={c.slug}
-                      to={`/schengen-visa-file-processing/${c.slug}/`}>
-                      {c.label}
-                    </Link>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <div
+              className={`mainnav__dropdown mainnav__dropdown--css ${openMenu === "visa" ? "mainnav__dropdown--open" : ""}`}
+              onMouseEnter={() => openNow("visa")}
+              onMouseLeave={closeSoon}
+            >
+              {visaCountries.map((c) => (
+                <Link key={c.slug} to={`/visa/${c.slug}/`}>
+                  {c.name} Visa
+                </Link>
+              ))}
+              {visaMenuCrossListed.map((c) => (
+                <Link
+                  key={c.slug}
+                  to={`/schengen-visa-file-processing/${c.slug}/`}>
+                  {c.label}
+                </Link>
+              ))}
+            </div>
           </li>
 
           <li
@@ -104,27 +94,19 @@ export default function Nav() {
             <Link to="/schengen-visa-file-processing/">
               Visa File Processing <i className="ri-arrow-down-s-line"></i>
             </Link>
-            <AnimatePresence>
-              {openMenu === "processing" && (
-                <motion.div
-                  className="mainnav__dropdown"
-                  initial={{ opacity: 0, y: 12, scale: 0.98 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 12, scale: 0.98 }}
-                  transition={{ duration: 0.2, ease: "easeOut" }}
-                  onMouseEnter={() => openNow("processing")}
-                  onMouseLeave={closeSoon}
-                >
-                  {fileProcessingCountries.map((c) => (
-                    <Link
-                      key={c.slug}
-                      to={`/schengen-visa-file-processing/${c.slug}/`}>
-                      {c.name} Visa
-                    </Link>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <div
+              className={`mainnav__dropdown mainnav__dropdown--css ${openMenu === "processing" ? "mainnav__dropdown--open" : ""}`}
+              onMouseEnter={() => openNow("processing")}
+              onMouseLeave={closeSoon}
+            >
+              {fileProcessingCountries.map((c) => (
+                <Link
+                  key={c.slug}
+                  to={`/schengen-visa-file-processing/${c.slug}/`}>
+                  {c.name} Visa
+                </Link>
+              ))}
+            </div>
           </li>
 
           <li>
@@ -160,116 +142,88 @@ export default function Nav() {
         </div>
       </div>
 
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            className="mainnav__mobile-panel"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: "easeInOut" }}
-          >
-            <ul className="mainnav__mobile-links">
-              <li>
-                <Link to="/" onClick={closeMobileMenu}>Home</Link>
-              </li>
-              <li>
-                <Link to="/air-ticketing/" onClick={closeMobileMenu}>Air Ticketing</Link>
-              </li>
-              <li>
-                <Link to="/blog/" onClick={closeMobileMenu}>Blog</Link>
-              </li>
-              <li>
-                <Link to="/travel-insurance/" onClick={closeMobileMenu}>Travel Insurance</Link>
-              </li>
-              <li>
-                <Link to="/contact/" onClick={closeMobileMenu}>About Us</Link>
-              </li>
-              <li className={`mobile-dropdown ${mobileSubOpen.visa ? "open" : ""}`}>
-                <div className="mobile-dropdown__row">
-                  <Link to="/visa/" onClick={closeMobileMenu}>Visa</Link>
-                  <button
-                    type="button"
-                    className="mobile-dropdown__toggle"
-                    aria-label={mobileSubOpen.visa ? "Collapse Visa list" : "Expand Visa list"}
-                    aria-expanded={mobileSubOpen.visa}
-                    onClick={() => toggleMobileSub("visa")}
-                  >
-                    <i className="ri-arrow-down-s-line"></i>
-                  </button>
-                </div>
-                <AnimatePresence initial={false}>
-                  {mobileSubOpen.visa && (
-                    <motion.ul
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.25, ease: "easeInOut" }}
-                    >
-                      {visaCountries.map((c) => (
-                        <li key={c.slug}>
-                          <Link to={`/visa/${c.slug}/`} onClick={closeMobileMenu}>
-                            {c.name} Visa
-                          </Link>
-                        </li>
-                      ))}
-                      {visaMenuCrossListed.map((c) => (
-                        <li key={c.slug}>
-                          <Link
-                            to={`/schengen-visa-file-processing/${c.slug}/`}
-                            onClick={closeMobileMenu}>
-                            {c.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </motion.ul>
-                  )}
-                </AnimatePresence>
-              </li>
-              <li className={`mobile-dropdown ${mobileSubOpen.processing ? "open" : ""}`}>
-                <div className="mobile-dropdown__row">
-                  <Link to="/schengen-visa-file-processing/" onClick={closeMobileMenu}>
-                    Visa File Processing
+      {/* Mobile menu — CSS transition, no framer-motion */}
+      <div className={`mainnav__mobile-panel mainnav__mobile-panel--css ${mobileOpen ? "mainnav__mobile-panel--open" : ""}`}>
+        <ul className="mainnav__mobile-links">
+          <li>
+            <Link to="/" onClick={closeMobileMenu}>Home</Link>
+          </li>
+          <li>
+            <Link to="/air-ticketing/" onClick={closeMobileMenu}>Air Ticketing</Link>
+          </li>
+          <li>
+            <Link to="/blog/" onClick={closeMobileMenu}>Blog</Link>
+          </li>
+          <li>
+            <Link to="/travel-insurance/" onClick={closeMobileMenu}>Travel Insurance</Link>
+          </li>
+          <li>
+            <Link to="/contact/" onClick={closeMobileMenu}>About Us</Link>
+          </li>
+          <li className={`mobile-dropdown ${mobileSubOpen.visa ? "open" : ""}`}>
+            <div className="mobile-dropdown__row">
+              <Link to="/visa/" onClick={closeMobileMenu}>Visa</Link>
+              <button
+                type="button"
+                className="mobile-dropdown__toggle"
+                aria-label={mobileSubOpen.visa ? "Collapse Visa list" : "Expand Visa list"}
+                aria-expanded={mobileSubOpen.visa}
+                onClick={() => toggleMobileSub("visa")}
+              >
+                <i className="ri-arrow-down-s-line"></i>
+              </button>
+            </div>
+            <ul className={`mobile-dropdown__submenu ${mobileSubOpen.visa ? "mobile-dropdown__submenu--open" : ""}`}>
+              {visaCountries.map((c) => (
+                <li key={c.slug}>
+                  <Link to={`/visa/${c.slug}/`} onClick={closeMobileMenu}>
+                    {c.name} Visa
                   </Link>
-                  <button
-                    type="button"
-                    className="mobile-dropdown__toggle"
-                    aria-label={mobileSubOpen.processing ? "Collapse Visa File Processing list" : "Expand Visa File Processing list"}
-                    aria-expanded={mobileSubOpen.processing}
-                    onClick={() => toggleMobileSub("processing")}
-                  >
-                    <i className="ri-arrow-down-s-line"></i>
-                  </button>
-                </div>
-                <AnimatePresence initial={false}>
-                  {mobileSubOpen.processing && (
-                    <motion.ul
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.25, ease: "easeInOut" }}
-                    >
-                      {fileProcessingCountries.map((c) => (
-                        <li key={c.slug}>
-                          <Link
-                            to={`/schengen-visa-file-processing/${c.slug}/`}
-                            onClick={closeMobileMenu}>
-                            {c.name} Visa
-                          </Link>
-                        </li>
-                      ))}
-                    </motion.ul>
-                  )}
-                </AnimatePresence>
-              </li>
-              <li>
-                <Link to="/contact-2/" onClick={closeMobileMenu}>Contact</Link>
-              </li>
+                </li>
+              ))}
+              {visaMenuCrossListed.map((c) => (
+                <li key={c.slug}>
+                  <Link
+                    to={`/schengen-visa-file-processing/${c.slug}/`}
+                    onClick={closeMobileMenu}>
+                    {c.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </li>
+          <li className={`mobile-dropdown ${mobileSubOpen.processing ? "open" : ""}`}>
+            <div className="mobile-dropdown__row">
+              <Link to="/schengen-visa-file-processing/" onClick={closeMobileMenu}>
+                Visa File Processing
+              </Link>
+              <button
+                type="button"
+                className="mobile-dropdown__toggle"
+                aria-label={mobileSubOpen.processing ? "Collapse Visa File Processing list" : "Expand Visa File Processing list"}
+                aria-expanded={mobileSubOpen.processing}
+                onClick={() => toggleMobileSub("processing")}
+              >
+                <i className="ri-arrow-down-s-line"></i>
+              </button>
+            </div>
+            <ul className={`mobile-dropdown__submenu ${mobileSubOpen.processing ? "mobile-dropdown__submenu--open" : ""}`}>
+              {fileProcessingCountries.map((c) => (
+                <li key={c.slug}>
+                  <Link
+                    to={`/schengen-visa-file-processing/${c.slug}/`}
+                    onClick={closeMobileMenu}>
+                    {c.name} Visa
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </li>
+          <li>
+            <Link to="/contact-2/" onClick={closeMobileMenu}>Contact</Link>
+          </li>
+        </ul>
+      </div>
     </nav>
   );
 }

@@ -2,22 +2,23 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { site } from "../data/site";
+// FIX 1: Only import the LCP hero image eagerly — others loaded via string URL at runtime
 import hero1 from "../assets/hero/Hero1.webp";
-import hero2 from "../assets/hero/Hero2.webp";
-import hero3 from "../assets/hero/Hero3.webp";
-// import hero4 from "../assets/hero/Hero-4.png";
-import ImageAutoSlider from "../components/ImageAutoSlider";
 import SEO from "../components/SEO";
 import TravelCard from "../components/TravelCard";
 import FileProcCard from "../components/FileProcCard";
 import DropboxCard from "../components/DropboxCard";
 import { baseKeywords } from "../data/seoKeywords";
-import reviewsData from "../data/reviews.json";
 
-// Reviews used in the home page carousel (3 cards per slide)
-const homeReviews = (reviewsData.reviews || [])
-  .filter((r) => r.text?.trim())
-  .slice(0, 12);
+// FIX 2: Lazy-import the other hero images so they don't block first paint
+// Using dynamic import resolves to Vite-hashed URLs without eager bundling
+const hero2Url = new URL("../assets/hero/Hero2.webp", import.meta.url).href;
+const hero3Url = new URL("../assets/hero/Hero3.webp", import.meta.url).href;
+
+// FIX 3: Load reviews lazily — it's 58KB JSON only needed for the reviews carousel
+//         We start with empty and fill after initial render
+const heroSlides = [hero1, hero2Url, hero3Url];
+const AUTOPLAY_MS = 5000;
 
 const services = [
   { icon: "ri-passport-fill", title: "Visa Services", desc: "Complete assistance with visa application, document preparation and submission." },
@@ -28,11 +29,6 @@ const services = [
   { icon: "ri-bank-fill", title: "Bank Accounts", desc: "Guidance and support related to bank account requirements for travel." },
 ];
 
-const heroSlides = [hero1, hero2, hero3];
-
-const AUTOPLAY_MS = 5000;
-
-// featured visa card data — img + price pulled from visa snapshot info
 const featuredVisaCards = [
   {
     slug: "malaysia-visa",
@@ -90,7 +86,6 @@ const featuredVisaCards = [
   },
 ];
 
-// Authorized visa drop box agents — flags via flagcdn (1x1 crop, round-safe)
 const dropboxCountries = [
   {
     code: "th",
@@ -118,12 +113,11 @@ const dropboxCountries = [
   },
 ];
 
-// file processing countries — landmark img instead of flag bg
 const fileProcCountries = [
   {
     slug: "france-visa",
     country: "France",
-    img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=60&w=480&auto=format&fit=crop", // Eiffel Tower, Paris
+    img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=60&w=480&auto=format&fit=crop",
     flag: "https://hatscripts.github.io/circle-flags/flags/fr.svg",
     gradient: "linear-gradient(145deg, rgba(0,35,149,0.4) 0%, rgba(60,90,200,0.35) 45%, rgba(237,41,57,0.25) 100%)",
     accent: "#1a3faa",
@@ -131,7 +125,7 @@ const fileProcCountries = [
   {
     slug: "united-kingdom-uk-visa",
     country: "United Kingdom",
-    img: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=60&w=480&auto=format&fit=crop", // Big Ben, London
+    img: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=60&w=480&auto=format&fit=crop",
     flag: "https://hatscripts.github.io/circle-flags/flags/gb.svg",
     gradient: "linear-gradient(145deg, rgba(1,33,105,0.4) 0%, rgba(200,16,46,0.3) 45%, rgba(255,255,255,0.15) 100%)",
     accent: "#c8102e",
@@ -139,7 +133,7 @@ const fileProcCountries = [
   {
     slug: "united-states-usa-visa",
     country: "United States",
-    img: "https://images.unsplash.com/photo-1522083165195-3424ed129620?q=60&w=480&auto=format&fit=crop", // Statue of Liberty, NYC
+    img: "https://images.unsplash.com/photo-1522083165195-3424ed129620?q=60&w=480&auto=format&fit=crop",
     flag: "https://hatscripts.github.io/circle-flags/flags/us.svg",
     gradient: "linear-gradient(145deg, rgba(178,34,52,0.4) 0%, rgba(60,59,110,0.35) 45%, rgba(255,255,255,0.15) 100%)",
     accent: "#3c3b6e",
@@ -166,17 +160,9 @@ function HomeAvatar({ src, name }) {
       <div
         aria-hidden="true"
         style={{
-          width: 44,
-          height: 44,
-          borderRadius: "50%",
-          background: bg,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontWeight: 700,
-          fontSize: "1.1rem",
-          color: "#fff",
-          flexShrink: 0,
+          width: 44, height: 44, borderRadius: "50%", background: bg,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          fontWeight: 700, fontSize: "1.1rem", color: "#fff", flexShrink: 0,
         }}
       >
         {initial}
@@ -185,13 +171,8 @@ function HomeAvatar({ src, name }) {
   }
   return (
     <img
-      src={src}
-      alt={name}
-      onError={() => setErrored(true)}
-      width="44"
-      height="44"
-      loading="lazy"
-      decoding="async"
+      src={src} alt={name} onError={() => setErrored(true)}
+      width="44" height="44" loading="lazy" decoding="async"
       style={{ width: 44, height: 44, borderRadius: "50%", objectFit: "cover", flexShrink: 0 }}
     />
   );
@@ -200,9 +181,13 @@ function HomeAvatar({ src, name }) {
 export default function Home() {
   const [slide, setSlide] = useState(0);
   const [reviewIdx, setReviewIdx] = useState(0);
+  // FIX 3: Lazy-load reviews — start empty, populate after first render
+  const [homeReviews, setHomeReviews] = useState([]);
+
   const CARDS = 3;
   const totalSlides = Math.ceil(homeReviews.length / CARDS);
 
+  // Lazy load hero slides 2 & 3 after page load
   useEffect(() => {
     const t = setInterval(() => {
       setSlide((i) => (i + 1) % heroSlides.length);
@@ -210,11 +195,39 @@ export default function Home() {
     return () => clearInterval(t);
   }, []);
 
+  // Load reviews after initial paint (deferred)
+  useEffect(() => {
+    // Use requestIdleCallback when available to avoid blocking paint
+    const load = () => {
+      import("../data/reviews.json").then((mod) => {
+        const data = mod.default || mod;
+        const filtered = (data.reviews || []).filter((r) => r.text?.trim()).slice(0, 12);
+        setHomeReviews(filtered);
+      });
+    };
+    if ("requestIdleCallback" in window) {
+      const id = requestIdleCallback(load, { timeout: 2000 });
+      return () => cancelIdleCallback(id);
+    } else {
+      const id = setTimeout(load, 200);
+      return () => clearTimeout(id);
+    }
+  }, []);
+
   const prevSlide = () => setSlide((i) => (i - 1 + heroSlides.length) % heroSlides.length);
   const nextSlide = () => setSlide((i) => (i + 1) % heroSlides.length);
   const prevReview = () => setReviewIdx((i) => (i - 1 + totalSlides) % totalSlides);
   const nextReview = () => setReviewIdx((i) => (i + 1) % totalSlides);
   const visibleReviews = homeReviews.slice(reviewIdx * CARDS, reviewIdx * CARDS + CARDS);
+
+  // FIX 4: Lazy-load ImageAutoSlider — it's below the fold
+  const [ImageAutoSlider, setImageAutoSlider] = useState(null);
+  useEffect(() => {
+    const id = setTimeout(() => {
+      import("../components/ImageAutoSlider").then((m) => setImageAutoSlider(() => m.default));
+    }, 1500);
+    return () => clearTimeout(id);
+  }, []);
 
   return (
     <>
@@ -239,20 +252,19 @@ export default function Home() {
       />
       <header className="hero">
         <div className="heroslider">
-      {/* NEW */}
-      {heroSlides.map((src, i) => (
-        <img
-          key={src}
-          src={src}
-          alt={i === 0 ? "O.S Travel & Tours — best travel agency in Islamabad, Pakistan" : ""}
-          className={`heroslider__slide ${i === slide ? "active" : ""}`}
-          fetchPriority={i === 0 ? "high" : "low"}
-          loading={i === 0 ? "eager" : "lazy"}
-          decoding={i === 0 ? "sync" : "async"}
-          width="1600"
-          height="900"
-        />
-      ))}
+          {heroSlides.map((src, i) => (
+            <img
+              key={i}
+              src={src}
+              alt={i === 0 ? "O.S Travel & Tours — best travel agency in Islamabad, Pakistan" : ""}
+              className={`heroslider__slide ${i === slide ? "active" : ""}`}
+              fetchPriority={i === 0 ? "high" : "low"}
+              loading={i === 0 ? "eager" : "lazy"}
+              decoding={i === 0 ? "sync" : "async"}
+              width="1600"
+              height="900"
+            />
+          ))}
 
           <button className="heroslider__arrow left" onClick={prevSlide} aria-label="Previous slide">
             <i className="ri-arrow-left-s-line"></i>
@@ -329,9 +341,12 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section__container">
-          <ImageAutoSlider />
-        </section>
+        {/* FIX 4: Only render ImageAutoSlider once loaded (below fold) */}
+        {ImageAutoSlider && (
+          <section className="section__container">
+            <ImageAutoSlider />
+          </section>
+        )}
 
         <section className="section__container banner__container">
           {site.stats.map((s) => (
@@ -346,92 +361,80 @@ export default function Home() {
           <h2 className="section__header">What Our Clients Say</h2>
           <p className="section__description">Real feedback from travellers we've assisted</p>
 
-          {/* ── Carousel wrapper ── */}
-          <div style={{ position: "relative" }}>
+          {homeReviews.length > 0 ? (
+            <div style={{ position: "relative" }}>
+              <button
+                onClick={prevReview}
+                aria-label="Previous reviews"
+                style={{
+                  position: "absolute", left: "-1.5rem", top: "50%",
+                  transform: "translateY(-50%)", zIndex: 2,
+                  background: "var(--white)", border: "1.5px solid #e5e7eb",
+                  borderRadius: "50%", width: 40, height: 40,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  cursor: "pointer", boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                  fontSize: "1.1rem", color: "var(--text-dark)", transition: "box-shadow 0.2s",
+                }}
+              >
+                <i className="ri-arrow-left-s-line" />
+              </button>
 
-            {/* Prev arrow */}
-            <button
-              onClick={prevReview}
-              aria-label="Previous reviews"
-              style={{
-                position: "absolute", left: "-1.5rem", top: "50%",
-                transform: "translateY(-50%)", zIndex: 2,
-                background: "var(--white)", border: "1.5px solid #e5e7eb",
-                borderRadius: "50%", width: 40, height: 40,
-                display: "flex", alignItems: "center", justifyContent: "center",
-                cursor: "pointer", boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-                fontSize: "1.1rem", color: "var(--text-dark)", transition: "box-shadow 0.2s",
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.boxShadow = "0 4px 16px rgba(40,135,255,0.18)"}
-              onMouseLeave={(e) => e.currentTarget.style.boxShadow = "0 2px 8px rgba(0,0,0,0.1)"}
-            >
-              <i className="ri-arrow-left-s-line" />
-            </button>
-
-            {/* Cards — keyed on reviewIdx for fade-in re-mount */}
-            <div
-              key={reviewIdx}
-              className="testimonial__grid"
-              style={{ animation: "reviewFadeIn 0.35s ease" }}
-            >
-              {visibleReviews.map((r, i) => (
-                <div
-                  className="testimonial__card"
-                  key={i}
-                  style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}
-                >
-                  <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-                    <HomeAvatar src={r.avatar} name={r.name} />
-                    <div>
-                      <p className="name" style={{ marginBottom: 0 }}>{r.name}</p>
-                      {r.date && <p style={{ fontSize: "0.75rem", color: "var(--text-light)" }}>{r.date}</p>}
+              <div key={reviewIdx} className="testimonial__grid" style={{ animation: "reviewFadeIn 0.35s ease" }}>
+                {visibleReviews.map((r, i) => (
+                  <div className="testimonial__card" key={i} style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                      <HomeAvatar src={r.avatar} name={r.name} />
+                      <div>
+                        <p className="name" style={{ marginBottom: 0 }}>{r.name}</p>
+                        {r.date && <p style={{ fontSize: "0.75rem", color: "var(--text-light)" }}>{r.date}</p>}
+                      </div>
                     </div>
+                    <span role="img" aria-label={`${r.rating} out of 5 stars`}>
+                      {[1, 2, 3, 4, 5].map((s) => <HomeStar key={s} filled={s <= (r.rating || 5)} />)}
+                    </span>
+                    <p className="quote" style={{ marginBottom: 0 }}>"{r.text}"</p>
                   </div>
-                  <span role="img" aria-label={`${r.rating} out of 5 stars`}>
-                    {[1, 2, 3, 4, 5].map((s) => <HomeStar key={s} filled={s <= (r.rating || 5)} />)}
-                  </span>
-                  <p className="quote" style={{ marginBottom: 0 }}>"{r.text}"</p>
-                </div>
+                ))}
+              </div>
+
+              <button
+                onClick={nextReview}
+                aria-label="Next reviews"
+                style={{
+                  position: "absolute", right: "-1.5rem", top: "50%",
+                  transform: "translateY(-50%)", zIndex: 2,
+                  background: "var(--white)", border: "1.5px solid #e5e7eb",
+                  borderRadius: "50%", width: 40, height: 40,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  cursor: "pointer", boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                  fontSize: "1.1rem", color: "var(--text-dark)", transition: "box-shadow 0.2s",
+                }}
+              >
+                <i className="ri-arrow-right-s-line" />
+              </button>
+            </div>
+          ) : (
+            <div style={{ height: "200px" }} aria-hidden="true" />
+          )}
+
+          {homeReviews.length > 0 && (
+            <div style={{ display: "flex", justifyContent: "center", gap: "0.5rem", marginTop: "1.5rem" }}>
+              {Array.from({ length: totalSlides }).map((_, i) => (
+                <button
+                  key={i}
+                  aria-label={`Go to slide ${i + 1}`}
+                  onClick={() => setReviewIdx(i)}
+                  style={{
+                    width: i === reviewIdx ? 22 : 8, height: 8,
+                    borderRadius: 999, border: "none",
+                    background: i === reviewIdx ? "#F5A623" : "#d9d9d9",
+                    cursor: "pointer", padding: 0,
+                    transition: "width 0.3s, background 0.3s",
+                  }}
+                />
               ))}
             </div>
-
-            {/* Next arrow */}
-            <button
-              onClick={nextReview}
-              aria-label="Next reviews"
-              style={{
-                position: "absolute", right: "-1.5rem", top: "50%",
-                transform: "translateY(-50%)", zIndex: 2,
-                background: "var(--white)", border: "1.5px solid #e5e7eb",
-                borderRadius: "50%", width: 40, height: 40,
-                display: "flex", alignItems: "center", justifyContent: "center",
-                cursor: "pointer", boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-                fontSize: "1.1rem", color: "var(--text-dark)", transition: "box-shadow 0.2s",
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.boxShadow = "0 4px 16px rgba(40,135,255,0.18)"}
-              onMouseLeave={(e) => e.currentTarget.style.boxShadow = "0 2px 8px rgba(0,0,0,0.1)"}
-            >
-              <i className="ri-arrow-right-s-line" />
-            </button>
-          </div>
-
-          {/* Dot indicators */}
-          <div style={{ display: "flex", justifyContent: "center", gap: "0.5rem", marginTop: "1.5rem" }}>
-            {Array.from({ length: totalSlides }).map((_, i) => (
-              <button
-                key={i}
-                aria-label={`Go to slide ${i + 1}`}
-                onClick={() => setReviewIdx(i)}
-                style={{
-                  width: i === reviewIdx ? 22 : 8,
-                  height: 8, borderRadius: 999, border: "none",
-                  background: i === reviewIdx ? "#F5A623" : "#d9d9d9",
-                  cursor: "pointer", padding: 0,
-                  transition: "width 0.3s, background 0.3s",
-                }}
-              />
-            ))}
-          </div>
+          )}
 
           <div style={{ textAlign: "center", marginTop: "2rem" }}>
             <Link to="/reviews/" className="btn">See More Reviews</Link>

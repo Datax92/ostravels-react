@@ -1,3 +1,4 @@
+# ===================== SPA Routing =====================
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
@@ -6,4 +7,49 @@
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !-l
   RewriteRule . /index.html [L]
+</IfModule>
+
+# ===================== FIX 5: Gzip / Brotli compression =====================
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml font/woff font/woff2 application/font-woff application/font-woff2
+  AddOutputFilterByType DEFLATE text/plain text/xml application/xml application/ld+json
+</IfModule>
+
+# ===================== FIX 6: Browser caching =====================
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # HTML — must revalidate (SPA entry point changes)
+  ExpiresByType text/html "access plus 0 seconds"
+
+  # Hashed JS/CSS assets — immutable (1 year)
+  <FilesMatch "\.(js|css)$">
+    ExpiresDefault "access plus 1 year"
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # Images — 6 months
+  <FilesMatch "\.(webp|jpg|jpeg|png|gif|svg|ico)$">
+    ExpiresDefault "access plus 6 months"
+    Header set Cache-Control "public, max-age=15552000"
+  </FilesMatch>
+
+  # Fonts — 1 year
+  <FilesMatch "\.(woff|woff2|ttf|otf|eot)$">
+    ExpiresDefault "access plus 1 year"
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # JSON data
+  <FilesMatch "\.json$">
+    ExpiresDefault "access plus 1 day"
+  </FilesMatch>
+</IfModule>
+
+# ===================== Security headers =====================
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>

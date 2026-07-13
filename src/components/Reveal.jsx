@@ -1,19 +1,9 @@
-import { motion } from "framer-motion";
-
-const EASE = [0.22, 1, 0.36, 1];
-
-const VARIANTS = {
-  up: { hidden: { opacity: 0, y: 46 }, show: { opacity: 1, y: 0 } },
-  down: { hidden: { opacity: 0, y: -46 }, show: { opacity: 1, y: 0 } },
-  left: { hidden: { opacity: 0, x: -56 }, show: { opacity: 1, x: 0 } },
-  right: { hidden: { opacity: 0, x: 56 }, show: { opacity: 1, x: 0 } },
-  scale: { hidden: { opacity: 0, scale: 0.86 }, show: { opacity: 1, scale: 1 } },
-  fade: { hidden: { opacity: 0 }, show: { opacity: 1 } },
-};
+import { useEffect, useRef } from "react";
 
 /**
- * Reveal — fades/slides a single element in as it scrolls into view.
- *   <Reveal direction="up" delay={0.1}>...</Reveal>
+ * Reveal — CSS-only scroll animation, zero JS animation library.
+ * Uses IntersectionObserver + a data attribute to trigger a CSS transition.
+ * Drop-in replacement for the framer-motion version.
  */
 export default function Reveal({
   children,
@@ -24,24 +14,40 @@ export default function Reveal({
   once = true,
   className = "",
 }) {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.setAttribute("data-visible", "true");
+          if (once) observer.disconnect();
+        } else if (!once) {
+          el.removeAttribute("data-visible");
+        }
+      },
+      { threshold: amount }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [amount, once]);
+
   return (
-    <motion.div
-      className={className}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once, amount }}
-      variants={VARIANTS[direction] || VARIANTS.up}
-      transition={{ duration, delay, ease: EASE }}
+    <div
+      ref={ref}
+      className={`reveal reveal--${direction} ${className}`}
+      style={{
+        transitionDuration: `${duration}s`,
+        transitionDelay: `${delay}s`,
+      }}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
 
-/**
- * RevealGroup — staggers its RevealItem children in as the group enters view.
- *   <RevealGroup className="grid"><RevealItem>...</RevealItem>...</RevealGroup>
- */
 export function RevealGroup({
   children,
   className = "",
@@ -49,27 +55,37 @@ export function RevealGroup({
   amount = 0.15,
   once = true,
 }) {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.setAttribute("data-visible", "true");
+          if (once) observer.disconnect();
+        } else if (!once) {
+          el.removeAttribute("data-visible");
+        }
+      },
+      { threshold: amount }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [amount, once]);
+
   return (
-    <motion.div
-      className={className}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once, amount }}
-      variants={{ show: { transition: { staggerChildren: stagger, delayChildren: 0.05 } } }}
-    >
+    <div ref={ref} className={`reveal-group ${className}`} data-stagger={stagger}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 
 export function RevealItem({ children, direction = "up", className = "" }) {
   return (
-    <motion.div
-      className={className}
-      variants={VARIANTS[direction] || VARIANTS.up}
-      transition={{ duration: 0.6, ease: EASE }}
-    >
+    <div className={`reveal-item reveal-item--${direction} ${className}`}>
       {children}
-    </motion.div>
+    </div>
   );
 }

@@ -113,21 +113,24 @@
     }
     </script>
 
+  <!-- ===================== FIX: Preload LCP Hero (critical path) ===================== -->
+  <link rel="preload" as="image" href="/assets/Hero1-BIp_yhY5.webp" fetchpriority="high" type="image/webp" />
   <!-- ===================== Performance: Preconnect ===================== -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="preconnect" href="https://hatscripts.github.io" crossorigin />
+<link rel="dns-prefetch" href="https://hatscripts.github.io" />
   <!-- ===================== Fonts ===================== -->
   <!-- DM Sans (moved out of style.css @import — @import blocks render even harder than a link tag) -->
   <link rel="preload" as="style"
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" />
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" />
   <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap"
     rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript>
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap"
       rel="stylesheet" />
   </noscript>
 
@@ -140,13 +143,13 @@
   </noscript>
   <script type="module" crossorigin src="/assets/index-CM2C-nnS.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/rolldown-runtime-CNC7AqOf.js">
-  <link rel="modulepreload" crossorigin href="/assets/framer-motion-DDe7tyIV.js">
   <link rel="modulepreload" crossorigin href="/assets/react-vendor-BCHQoAdr.js">
   <link rel="stylesheet" crossorigin href="/assets/index-Cm1PGegs.css">
 </head>
 
 <body>
-  <div id="root"></div>
+  <div id="root"></div>
+
 </body>
 
 </html>
