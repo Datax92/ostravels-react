@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-
+// ===============================================================================
 // ==== EDIT YOUR LIVE DOMAIN HERE (used for canonical + og:url + og:image) ====
 const SITE_URL = "https://ostravels.com";
 const SITE_NAME = "O.S Travel & Tours";
