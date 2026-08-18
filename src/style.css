@@ -1,4 +1,3 @@
-
 :root {
   --primary-color: #2887ff;
   --primary-color-dark: #2476da;
@@ -577,6 +576,50 @@ nav {
 .detail__main h2 {
   font-size: 1.5rem;
   margin: 1.5rem 0 0.75rem;
+}
+
+/* ---------- AUTHORIZED VISA DROP BOX NOTICE ---------- */
+.dropbox-notice {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  background: linear-gradient(135deg, rgba(40, 135, 255, 0.08), rgba(40, 135, 255, 0.03));
+  border: 1px solid rgba(40, 135, 255, 0.2);
+  border-left: 4px solid var(--primary-color);
+  border-radius: 1rem;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.dropbox-notice__icon {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.dropbox-notice__body h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+  color: var(--text-dark);
+}
+
+.dropbox-notice__body p {
+  margin: 0;
+  color: var(--text-light);
+  line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  .dropbox-notice {
+    flex-direction: column;
+  }
 }
 
 .detail__main p {

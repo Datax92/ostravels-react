@@ -1,10 +1,11 @@
-// external-link card used on Home "Authorized Visa Drop Boxes" section
+import { Link } from "react-router-dom";
+
+// internal-link card used on Home "Authorized Visa Drop Boxes" section —
+// routes to the respective country's visa page
 export default function DropboxCard({ country, img, flag, accent, href }) {
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
+    <Link
+      to={href}
       className="dropbox-card"
       style={{ "--accent": accent }}
     >
@@ -29,13 +30,13 @@ export default function DropboxCard({ country, img, flag, accent, href }) {
           height="28"
         />
         </h3>
-        <p className="dropbox-card__stats">Best Authorized Drop Box Agent</p>
+        <p className="dropbox-card__stats">Authorized Drop Box Agent — Verified</p>
 
         <div className="dropbox-card__btn">
-          <span>Visit Website</span>
+          <span>View {country} Visa</span>
           <i className="ri-arrow-right-line dropbox-card__arrow-icon"></i>
         </div>
       </div>
-    </a>
+    </Link>
   );
 }

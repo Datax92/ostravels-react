@@ -88,12 +88,20 @@ const featuredVisaCards = [
 
 const dropboxCountries = [
   {
+    code: "my",
+    country: "Malaysia",
+    img: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?q=60&w=480&auto=format&fit=crop",
+    flag: "https://hatscripts.github.io/circle-flags/flags/my.svg",
+    accent: "#d6291e",
+    href: "/visa/malaysia-visa/",
+  },
+  {
     code: "th",
     country: "Thailand",
     img: "https://images.unsplash.com/photo-1508009603885-50cf7c579365?q=60&w=480&auto=format&fit=crop",
     flag: "https://hatscripts.github.io/circle-flags/flags/th.svg",
     accent: "#1e63d6",
-    href: "https://islamabad.thaiembassy.org/en/page/96399-authorized-visa-drop-box-agents?menu=5d7615e015e39c4934002f92",
+    href: "/visa/thailand-visa/",
   },
   {
     code: "id",
@@ -101,7 +109,7 @@ const dropboxCountries = [
     img: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=60&w=480&auto=format&fit=crop",
     flag: "https://hatscripts.github.io/circle-flags/flags/id.svg",
     accent: "#d6291e",
-    href: "",
+    href: "/visa/indonesia-visa/",
   },
   {
     code: "vn",
@@ -109,7 +117,7 @@ const dropboxCountries = [
     img: "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?q=60&w=480&auto=format&fit=crop",
     flag: "https://hatscripts.github.io/circle-flags/flags/vn.svg",
     accent: "#c9c515",
-    href: "",
+    href: "/visa/vietnam-visa/",
   },
 ];
 
@@ -316,7 +324,7 @@ export default function Home() {
         <section className="section__container">
           <h2 className="section__header">Authorized Visa Drop Boxes</h2>
           <p className="section__description">
-            Submit your documents directly through our officially authorized partner drop-box agents
+            O.S Travel & Tours is a verified, embassy-authorized visa drop box agent for Malaysia, Thailand, Indonesia and Vietnam — submit your documents through a trusted, officially recognized channel
           </p>
           <div className="dropbox__grid">
             {dropboxCountries.map((d) => (

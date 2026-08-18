@@ -4,12 +4,15 @@ import NotFound from "./NotFound";
 import { site } from "../data/site";
 import SEO from "../components/SEO";
 import { visaCountryKeywords } from "../data/seoKeywords";
+import { dropboxNotices } from "../data/dropboxNotices";
 
 export default function VisaCountry() {
   const { slug } = useParams();
   const country = visaCountries.find((c) => c.slug === slug);
 
   if (!country) return <NotFound />;
+
+  const dropboxNotice = dropboxNotices[slug];
 
   return (
     <>
@@ -46,6 +49,18 @@ export default function VisaCountry() {
         <section className="section__container">
           <div className="detail__grid">
             <div className="detail__main">
+              {dropboxNotice && (
+                <div className="dropbox-notice">
+                  <div className="dropbox-notice__icon">
+                    <i className="ri-shield-check-fill"></i>
+                  </div>
+                  <div className="dropbox-notice__body">
+                    <h2>{dropboxNotice.heading}</h2>
+                    <p>{dropboxNotice.text}</p>
+                  </div>
+                </div>
+              )}
+
               <h2>Overview</h2>
               {country.description.map((p, i) => (
                 <p key={i}>{p}</p>
