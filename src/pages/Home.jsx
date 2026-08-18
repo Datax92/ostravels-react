@@ -326,7 +326,7 @@ export default function Home() {
           <p className="section__description">
             O.S Travel & Tours is a verified, embassy-authorized visa drop box agent for Malaysia, Thailand, Indonesia and Vietnam — submit your documents through a trusted, officially recognized channel
           </p>
-          <div className="dropbox__grid">
+          <div className="dropbox__grid dropbox__grid--authorized">
             {dropboxCountries.map((d) => (
               <DropboxCard key={d.code} {...d} />
             ))}

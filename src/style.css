@@ -1504,6 +1504,23 @@ footer {
   }
 }
 
+/* "Authorized Visa Drop Boxes" section — 4 countries in a single row */
+.dropbox__grid--authorized {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1024px) {
+  .dropbox__grid--authorized {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .dropbox__grid--authorized {
+    grid-template-columns: 1fr;
+  }
+}
+
 .dropbox__card {
   position: relative;
   display: flex;
