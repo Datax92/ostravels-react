@@ -1,5 +1,6 @@
 import { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 
@@ -18,24 +19,27 @@ const Reviews = lazy(() => import("./pages/Reviews"));
 
 export default function App() {
   return (
-    <Suspense fallback={null}>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/travel-insurance" element={<Insurance />} />
-          <Route path="/contact" element={<About />} />
-          <Route path="/visa" element={<VisaIndex />} />
-          <Route path="/visa/:slug" element={<VisaCountry />} />
-          <Route path="/schengen-visa-file-processing" element={<FileProcessingIndex />} />
-          <Route path="/schengen-visa-file-processing/:slug" element={<FileProcessingCountry />} />
-          <Route path="/blog" element={<BlogIndex />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="/contact-2" element={<Contact />} />
-          <Route path="/air-ticketing" element={<Ticketing />} />
-          <Route path="/reviews" element={<Reviews />} />
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
-    </Suspense>
+    <>
+      <Suspense fallback={null}>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/travel-insurance" element={<Insurance />} />
+            <Route path="/contact" element={<About />} />
+            <Route path="/visa" element={<VisaIndex />} />
+            <Route path="/visa/:slug" element={<VisaCountry />} />
+            <Route path="/schengen-visa-file-processing" element={<FileProcessingIndex />} />
+            <Route path="/schengen-visa-file-processing/:slug" element={<FileProcessingCountry />} />
+            <Route path="/blog" element={<BlogIndex />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/contact-2" element={<Contact />} />
+            <Route path="/air-ticketing" element={<Ticketing />} />
+            <Route path="/reviews" element={<Reviews />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </Suspense>
+      <Analytics />
+    </>
   );
 }
