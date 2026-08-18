@@ -6,7 +6,7 @@ import { fileProcessingCountries } from "../data/fileProcessingCountries";
 import logo from "../assets/logo.webp";
 
 // how long to wait before closing dropdown after mouse leaves (stops flicker)
-const CLOSE_DELAY = 220;
+const CLOSE_DELAY = 210;
 
 export default function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
