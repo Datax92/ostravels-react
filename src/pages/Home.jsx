@@ -243,7 +243,7 @@ export default function Home() {
         title="Best Travel Agency in Islamabad, Pakistan"
         description="O.S Travel & Tours is the best and top travel agency in Islamabad, Pakistan — offering visa services, Umrah visa, air ticketing, hotel booking, travel insurance and Schengen visa file processing for Malaysia, Singapore, Thailand, Saudi Arabia, UK, USA and many more countries."
         keywords={[
-          "Best Malaysia Visa Services",
+          "Best Malaysia Visa Services ",
           "Best Singapore Visa Services",
           "Best Thailand Visa Services",
           "Best Saudi Arabia Visa Services",

@@ -13,11 +13,12 @@ export default function VisaCountry() {
   if (!country) return <NotFound />;
 
   const dropboxNotice = dropboxNotices[slug];
+  const headingWord = dropboxNotice ? "Authorized" : "Best";
 
   return (
     <>
       <SEO
-        title={`Best ${country.name} Visa Services for Pakistani Citizens`}
+        title={`${headingWord} ${country.name} Visa Services for Pakistani Citizens`}
         description={country.metaDescription}
         keywords={visaCountryKeywords(country.name)}
         image={country.image}
@@ -33,11 +34,11 @@ export default function VisaCountry() {
         <div className="country__hero">
           <img
             src={country.image}
-            alt={`Best ${country.name} visa services in Islamabad Pakistan — ${country.name} landmark`}
+            alt={`${headingWord} ${country.name} visa services in Islamabad Pakistan — ${country.name} landmark`}
           />
           <div className="country__hero-overlay" />
           <div className="country__hero-content">
-            <h1>Best {country.name} Visa Services</h1>
+            <h1>{headingWord} {country.name} Visa Services</h1>
             <p className="breadcrumb">
               <Link to="/">Home</Link> / <Link to="/visa/">Visa</Link> / {country.name}
             </p>
