@@ -1,0 +1,13 @@
+# Legacy 301 redirects
+/contact-2/*           /contact/                        301!
+/contact-2            /contact/                        301!
+/branches/peshawar/*   /branches/islamabad-blue-area/   301!
+/branches/peshawar    /branches/islamabad-blue-area/   301!
+/about-us             /about/                          301!
+/privacy              /privacy-policy/                 301!
+/terms-and-conditions /terms/                          301!
+/ticketing            /air-ticketing/                  301!
+/insurance            /travel-insurance/               301!
+
+# SPA catch-all
+/*    /index.html   200

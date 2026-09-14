@@ -1,0 +1,51 @@
+{
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/contact-2",
+      "destination": "/contact/",
+      "permanent": true
+    },
+    {
+      "source": "/contact-2/(.*)",
+      "destination": "/contact/",
+      "permanent": true
+    },
+    {
+      "source": "/branches/peshawar",
+      "destination": "/branches/islamabad-blue-area/",
+      "permanent": true
+    },
+    {
+      "source": "/branches/peshawar/(.*)",
+      "destination": "/branches/islamabad-blue-area/",
+      "permanent": true
+    },
+    {
+      "source": "/about-us",
+      "destination": "/about/",
+      "permanent": true
+    },
+    {
+      "source": "/terms-and-conditions",
+      "destination": "/terms/",
+      "permanent": true
+    },
+    {
+      "source": "/ticketing",
+      "destination": "/air-ticketing/",
+      "permanent": true
+    },
+    {
+      "source": "/insurance",
+      "destination": "/travel-insurance/",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
+    }
+  ]
+}
