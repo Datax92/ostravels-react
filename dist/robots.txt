@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Disallow admin/API paths
+Disallow: /api/
+Disallow: /server/
+
+# Block crawling of query-string URLs (session IDs, filters)
+Disallow: /*?*
+
+# Sitemap location
+Sitemap: https://ostravels.com/sitemap.xml
