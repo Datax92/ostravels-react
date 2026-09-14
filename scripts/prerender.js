@@ -300,7 +300,7 @@ function generateSitemap() {
     xml += `    <priority>${route.priority}</priority>\n`;
     if (route.image) {
       xml += `    <image:image>\n`;
-      xml += `      <image:loc>${route.image}</image:loc>\n`;
+      xml += `      <image:loc>${route.image.replace(/&/g, '&amp;')}</image:loc>\n`;
       xml += `      <image:title>${route.h1.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</image:title>\n`;
       xml += `    </image:image>\n`;
     }
