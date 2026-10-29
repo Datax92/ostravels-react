@@ -8,7 +8,12 @@ import SEO from "../components/SEO";
 import TravelCard from "../components/TravelCard";
 import FileProcCard from "../components/FileProcCard";
 import DropboxCard from "../components/DropboxCard";
-import { baseKeywords } from "../data/seoKeywords";
+import { baseKeywords } from "../data/baseKeywords";
+import CountrySearch from "../components/CountrySearch";
+import FacebookFeed from "../components/FacebookFeed";
+import { osPrices, formatPrice } from "../data/pricing";
+import { countryMeta } from "../data/fileProcessingMeta";
+import { fileMenuIndex } from "../data/menuIndex.generated";
 
 // FIX 2: Lazy-import the other hero images so they don't block first paint
 // Using dynamic import resolves to Vite-hashed URLs without eager bundling
@@ -121,32 +126,39 @@ const dropboxCountries = [
   },
 ];
 
-const fileProcCountries = [
-  {
-    slug: "france-visa",
-    country: "France",
-    img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=60&w=480&auto=format&fit=crop",
-    flag: "https://hatscripts.github.io/circle-flags/flags/fr.svg",
-    gradient: "linear-gradient(145deg, rgba(0,35,149,0.4) 0%, rgba(60,90,200,0.35) 45%, rgba(237,41,57,0.25) 100%)",
-    accent: "#1a3faa",
-  },
-  {
-    slug: "united-kingdom-uk-visa",
-    country: "United Kingdom",
-    img: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=60&w=480&auto=format&fit=crop",
-    flag: "https://hatscripts.github.io/circle-flags/flags/gb.svg",
-    gradient: "linear-gradient(145deg, rgba(1,33,105,0.4) 0%, rgba(200,16,46,0.3) 45%, rgba(255,255,255,0.15) 100%)",
-    accent: "#c8102e",
-  },
-  {
-    slug: "united-states-usa-visa",
-    country: "United States",
-    img: "https://images.unsplash.com/photo-1522083165195-3424ed129620?q=60&w=480&auto=format&fit=crop",
-    flag: "https://hatscripts.github.io/circle-flags/flags/us.svg",
-    gradient: "linear-gradient(145deg, rgba(178,34,52,0.4) 0%, rgba(60,59,110,0.35) 45%, rgba(255,255,255,0.15) 100%)",
-    accent: "#3c3b6e",
-  },
-];
+// Featured cards always show the current price from pricing.js.
+function withLivePrice(card) {
+  const entry = osPrices[card.slug];
+  if (!entry) return card;
+  return { ...card, price: entry.price, pricePeriod: `${entry.currency} / ${entry.options ? "From" : "Visa"}` };
+}
+
+// File-processing cards built from the shared country metadata.
+const SHORT = { "United Kingdom (UK)": "United Kingdom", "United States (USA)": "United States" };
+function fileCard(slug) {
+  const meta = countryMeta[slug];
+  const name = fileMenuIndex.find((c) => c.slug === slug)?.name || slug;
+  const entry = osPrices[slug];
+  return {
+    slug,
+    country: SHORT[name] || name,
+    img: meta.img.replace("w=1200", "w=500"),
+    flag: `https://hatscripts.github.io/circle-flags/flags/${meta.flag}.svg`,
+    accent: meta.accent,
+    gradient: `linear-gradient(145deg, ${meta.accent}66 0%, ${meta.accent}33 50%, rgba(255,255,255,0.12) 100%)`,
+    price: entry ? formatPrice(entry.price, entry.currency) : null,
+  };
+}
+
+const schengenCards = [
+  "france-visa", "germany-visa", "italy-visa", "spain-visa", "netherlands-visa", "switzerland-visa",
+  "belgium-visa", "portugal-visa", "greece-visa", "austria-visa", "poland-visa", "czech-republic-visa",
+  "hungary-visa", "denmark-visa", "sweden-visa", "norway-visa",
+].filter((s) => countryMeta[s]).map(fileCard);
+
+const westernCards = [
+  "united-kingdom-uk-visa", "united-states-usa-visa", "canada-visa", "australia-visa", "new-zealand-visa",
+].map(fileCard);
 
 function HomeStar({ filled }) {
   return (
@@ -294,6 +306,7 @@ export default function Home() {
           <div className="hero__overlay-text">
             <h1>Best Travel Agency in Islamabad, Pakistan &mdash; Visa Services &amp; Air Ticketing</h1>
             <p>Trusted visa consultancy, Umrah packages, flight booking &amp; travel insurance for 12,000+ happy clients.</p>
+            <CountrySearch variant="hero" placeholder="Where do you want to go? Search a country…" />
             <div style={{ marginTop: "1.25rem", display: "flex", gap: "0.75rem", justifyContent: "center", flexWrap: "wrap" }}>
               <a
                 href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent("Hi O.S Travel & Tours, I would like to inquire about visa services and air ticketing.")}`}
@@ -338,7 +351,7 @@ export default function Home() {
           <p className="section__description">Popular visa destinations we help clients with</p>
           <div className="card__grid visa__grid">
             {featuredVisaCards.map((c) => (
-              <TravelCard key={c.slug} {...c} />
+              <TravelCard key={c.slug} {...withLivePrice(c)} />
             ))}
           </div>
           <div style={{ textAlign: "center", marginTop: "2rem" }}>
@@ -347,10 +360,22 @@ export default function Home() {
         </section>
 
         <section className="section__container">
-          <h2 className="section__header">Visa File Processing</h2>
-          <p className="section__description">Schengen &amp; other visa file preparation services</p>
+          <h2 className="section__header">Europe &amp; Schengen Visa File Processing</h2>
+          <p className="section__description">
+            One Schengen visa covers 29 European countries — complete file preparation for {formatPrice(osPrices["france-visa"].price)} (embassy fee separate)
+          </p>
           <div className="dropbox__grid">
-            {fileProcCountries.map((c) => (
+            {schengenCards.map((c) => (
+              <FileProcCard key={c.slug} {...c} />
+            ))}
+          </div>
+        </section>
+
+        <section className="section__container">
+          <h2 className="section__header">UK, USA, Canada, Australia &amp; New Zealand</h2>
+          <p className="section__description">Visa file processing for the world's most in-demand destinations</p>
+          <div className="dropbox__grid">
+            {westernCards.map((c) => (
               <FileProcCard key={c.slug} {...c} />
             ))}
           </div>
@@ -403,6 +428,22 @@ export default function Home() {
           ))}
         </section>
 
+        <section className="section__container fbsection">
+          <div className="fbsection__text">
+            <h2 className="section__header">Follow Us on Facebook</h2>
+            <p className="section__description">
+              Daily visa updates, embassy news, Umrah departures and client visa approvals — join 32,000+ travellers
+              following O.S Travel &amp; Tours. Scroll the feed to see our latest posts.
+            </p>
+            <ul className="fbsection__points">
+              <li><i className="ri-checkbox-circle-fill"></i> Latest visa approvals &amp; client stories</li>
+              <li><i className="ri-checkbox-circle-fill"></i> Embassy rule &amp; fee changes as they happen</li>
+              <li><i className="ri-checkbox-circle-fill"></i> Special fares, Umrah &amp; tour packages</li>
+            </ul>
+          </div>
+          <FacebookFeed />
+        </section>
+
         <section className="section__container">
           <h2 className="section__header">What Our Clients Say</h2>
           <p className="section__description">Real feedback from travellers we've assisted</p>
@@ -412,6 +453,7 @@ export default function Home() {
               <button
                 onClick={prevReview}
                 aria-label="Previous reviews"
+                className="reviews__arrow reviews__arrow--prev"
                 style={{
                   position: "absolute", left: "-1.5rem", top: "50%",
                   transform: "translateY(-50%)", zIndex: 2,
@@ -446,6 +488,7 @@ export default function Home() {
               <button
                 onClick={nextReview}
                 aria-label="Next reviews"
+                className="reviews__arrow reviews__arrow--next"
                 style={{
                   position: "absolute", right: "-1.5rem", top: "50%",
                   transform: "translateY(-50%)", zIndex: 2,

@@ -8,6 +8,7 @@
 /terms-and-conditions /terms/                          301!
 /ticketing            /air-ticketing/                  301!
 /insurance            /travel-insurance/               301!
+/best-travel-agent-for-:slug  /best-travel-agency-for-:slug/  301!
 
 # SPA catch-all
 /*    /index.html   200

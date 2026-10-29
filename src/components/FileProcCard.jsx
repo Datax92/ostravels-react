@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { Link } from "react-router-dom";
 
 // tilt-on-hover card used on Home "Visa File Processing" section
-export default function FileProcCard({ slug, country, img, flag, gradient, accent }) {
+export default function FileProcCard({ slug, country, img, flag, gradient, accent, price }) {
   const cardRef = useRef(null);
 
   const handleMouseEnter = () => {
@@ -62,7 +62,7 @@ export default function FileProcCard({ slug, country, img, flag, gradient, accen
 
       <div className="dropbox__card-bottom">
         <h3>{country}</h3>
-        <p>Best {country} Visa File Processing</p>
+        <p>{price ? `File processing: ${price}` : `Best ${country} Visa File Processing`}</p>
         <span className="dropbox__btn">
           Learn More <i className="ri-arrow-right-line"></i>
         </span>

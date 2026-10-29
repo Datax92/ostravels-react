@@ -12,12 +12,15 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks(id) {
-          if (id.includes("node_modules")) {
-            if (id.includes("framer-motion")) return "framer-motion";
-            if (id.includes("react-router-dom")) return "react-router";
-            if (id.includes("react-dom") || id.includes("/react/")) return "react-vendor";
-          }
+        // Rolldown's native chunk groups (manualChunks doesn't reliably catch
+        // React's CommonJS files, which then got bundled into the lazy
+        // framer-motion chunk and loaded on every page).
+        codeSplitting: {
+          groups: [
+            { name: "react-vendor", test: /[\/]node_modules[\/](react|react-dom|scheduler)[\/]/, priority: 30 },
+            { name: "react-router", test: /[\/]node_modules[\/](react-router|react-router-dom)[\/]/, priority: 20 },
+            { name: "framer-motion", test: /[\/]node_modules[\/](framer-motion|motion-dom|motion-utils)[\/]/, priority: 10 },
+          ],
         },
       },
     },

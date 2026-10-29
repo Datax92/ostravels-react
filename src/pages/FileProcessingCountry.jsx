@@ -1,12 +1,17 @@
 import { useParams, Link } from "react-router-dom";
 import { fileProcessingCountries } from "../data/fileProcessingCountries";
-import { countryMeta, defaultMeta } from "./FileProcessingIndex";
+import { countryMeta, defaultMeta } from "../data/fileProcessingMeta";
 import NotFound from "./NotFound";
 import { site } from "../data/site";
 import SEO from "../components/SEO";
 import FAQAccordion from "../components/FAQAccordion";
 import ServiceSchema from "../components/ServiceSchema";
+import FileProcessingDetails from "../components/FileProcessingDetails";
 import { fileProcessingKeywords } from "../data/seoKeywords";
+import { countryMetaDescription, PRICES_UPDATED } from "../data/pricing";
+import { filePageTitle } from "../data/seoText";
+import { countryFaqs as searchFaqs } from "../data/countryFaqs";
+import { directoryEntryForName, guidePath, agencyPath } from "../data/countryDirectory";
 
 export default function FileProcessingCountry() {
   const { slug } = useParams();
@@ -15,6 +20,8 @@ export default function FileProcessingCountry() {
   if (!country) return <NotFound />;
 
   const meta = countryMeta[country.slug] || defaultMeta;
+  const metaDescription = countryMetaDescription(country, "file");
+  const dir = directoryEntryForName(country.name);
 
   const fileFaqs = [
     {
@@ -42,8 +49,8 @@ export default function FileProcessingCountry() {
   return (
     <>
       <SEO
-        title={`Best ${country.name} Visa File Processing Services`}
-        description={country.metaDescription}
+        title={filePageTitle(country)}
+        description={metaDescription}
         keywords={fileProcessingKeywords(country.name)}
         image={meta.img}
         path={`/schengen-visa-file-processing/${country.slug}/`}
@@ -57,7 +64,7 @@ export default function FileProcessingCountry() {
       <ServiceSchema
         id={`file-${country.slug}`}
         name={`${country.name} Visa File Processing & Document Preparation`}
-        description={country.metaDescription || `Full file preparation, cover letter, itinerary booking, and appointment guidance for ${country.name}.`}
+        description={metaDescription}
         url={`https://ostravels.com/schengen-visa-file-processing/${country.slug}/`}
       />
 
@@ -90,7 +97,7 @@ export default function FileProcessingCountry() {
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem", flexWrap: "wrap", gap: "0.5rem" }}>
             <span style={{ fontSize: "0.85rem", color: "#64748b", background: "#f1f5f9", padding: "0.35rem 0.85rem", borderRadius: "50px" }}>
               <i className="ri-calendar-check-line" style={{ marginRight: "0.35rem", color: "#F5A623" }}></i>
-              Last Updated: March 2026 (Updated Embassy Submission Checklist)
+              Last Updated: {PRICES_UPDATED} (Prices &amp; Checklist Verified)
             </span>
             <Link to="/contact/" style={{ fontSize: "0.85rem", color: "#2887ff", fontWeight: 600 }}>
               Need urgent file preparation? Book appointment →
@@ -117,10 +124,36 @@ export default function FileProcessingCountry() {
                 </>
               )}
 
+              <FileProcessingDetails country={country} />
+
+              {country.officialSite && (
+                <div className="official__box">
+                  <h3><i className="ri-government-line"></i> Official Embassy &amp; Immigration Source</h3>
+                  <p>
+                    Visa fees and document rules are set by the {country.name} authorities and can change. We prepare every file against the latest official checklist.
+                  </p>
+                  <a href={country.officialSite.url} target="_blank" rel="noopener noreferrer nofollow">
+                    {country.officialSite.label} <i className="ri-external-link-line"></i>
+                  </a>
+                </div>
+              )}
+
               {/* Related guides */}
               <div style={{ marginTop: "2rem", padding: "1.25rem", background: "#fdf8ee", borderRadius: "12px", border: "1px solid #fde68a" }}>
                 <h4 style={{ color: "#92400e", marginBottom: "0.5rem" }}>Related Travel &amp; Visa Guides</h4>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
+                  {dir && (
+                    <>
+                      <Link to={guidePath(dir.key)} style={{ fontSize: "0.85rem", color: "#b45309", textDecoration: "underline" }}>
+                        {dir.name} Visa for Pakistani Citizens
+                      </Link>
+                      <span>•</span>
+                      <Link to={agencyPath(dir.key)} style={{ fontSize: "0.85rem", color: "#b45309", textDecoration: "underline" }}>
+                        Best Travel Agency for {dir.name} Visa
+                      </Link>
+                      <span>•</span>
+                    </>
+                  )}
                   <Link to="/blog/schengen-visa-guide-pakistan/" style={{ fontSize: "0.85rem", color: "#b45309", textDecoration: "underline" }}>
                     Complete Schengen Visa Guide for Pakistanis
                   </Link>
@@ -136,21 +169,21 @@ export default function FileProcessingCountry() {
               </div>
 
               {/* FAQ Section with schema */}
-              <FAQAccordion items={fileFaqs} id={`file-${country.slug}`} />
+              <FAQAccordion items={[...searchFaqs(country, { isFile: true }), ...fileFaqs]} id={`file-${country.slug}`} />
             </div>
 
             <aside className="detail__side">
               <h4>File Processing</h4>
               <div className="stat"><span>Region</span><span>{country.region}</span></div>
               {country.facts.map((f, i) => (
-                <div className="stat" key={i}>
+                <div className={`stat${f.highlight ? " stat--price" : ""}`} key={i}>
                   <span>{f.label || "NOTE"}</span>
                   <span>{f.value}</span>
                 </div>
               ))}
               <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", marginTop: "1rem" }}>
                 <a
-                  href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent(`Hi O.S Travel, I want to inquire about Schengen visa file processing for ${country.name}.`)}`}
+                  href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent(`Hi O.S Travel, I want to inquire about visa file processing for ${country.name}.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn"

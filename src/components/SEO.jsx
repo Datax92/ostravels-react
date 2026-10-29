@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { brandTitle, clampDescription } from "../data/seoText";
 // ===============================================================================
 // ==== EDIT YOUR LIVE DOMAIN HERE (used for canonical + og:url + og:image) ====
 const SITE_URL = "https://ostravels.com";
@@ -69,25 +70,10 @@ export default function SEO({
   noindex = false,
 }) {
   useEffect(() => {
-    // Build the title — skip brand suffix if already present, enforce 60-char max
-    let fullTitle;
-    if (!title) {
-      fullTitle = `${SITE_NAME} | Best Travel Agency in Islamabad`;
-    } else if (title.includes(SITE_NAME)) {
-      fullTitle = title;
-    } else {
-      const suffix = ` | ${SITE_NAME}`;
-      const maxPageLen = 60 - suffix.length;
-      let pagePart = title.trim();
-      if (pagePart.length > maxPageLen) {
-        // Truncate at last word boundary without cutting mid-word
-        pagePart = pagePart.substring(0, maxPageLen).replace(/\s+\S*$/, "").trim();
-      }
-      fullTitle = `${pagePart}${suffix}`;
-    }
-    if (fullTitle.length > 60) {
-      fullTitle = fullTitle.substring(0, 60).replace(/\s+\S*$/, "").trim();
-    }
+    // Shared rules with the prerenderer (src/data/seoText.js): brand is added
+    // only when it fits, so the keyword part of the title is never cut.
+    const fullTitle = brandTitle(title);
+    description = clampDescription(description);
     document.title = fullTitle;
 
     // Ensure canonical always uses trailing slash

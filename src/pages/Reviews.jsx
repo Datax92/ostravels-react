@@ -1,6 +1,7 @@
 import SEO from "../components/SEO";
 import { baseKeywords } from "../data/seoKeywords";
 import reviewsData from "../data/reviews.json";
+import FacebookFeed from "../components/FacebookFeed";
 
 const GOOGLE_MAPS_REVIEWS_URL =
   "https://www.google.com/maps/place/O.S+Travel+%26+Tours/@33.7178385,73.0733661,17z/data=!4m8!3m7!1s0x38dfbfa2da8ccd4b:0x1d0b22370a83b5d9!8m2!3d33.7178385!4d73.0733661!9m1!1b1";
@@ -241,6 +242,15 @@ export default function Reviews() {
             See All Reviews on Google
           </a>
         </div>
+      </section>
+      <section className="section__container fbsection">
+        <div className="fbsection__text">
+          <h2 className="section__header">More Reviews &amp; Updates on Facebook</h2>
+          <p className="section__description">
+            See client approvals and recommendations shared by our 32,000+ Facebook community.
+          </p>
+        </div>
+        <FacebookFeed />
       </section>
     </>
   );

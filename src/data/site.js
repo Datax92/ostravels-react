@@ -10,6 +10,11 @@ export const site = {
   emailAlt: "info@ostravels.com",
   facebook: "https://www.facebook.com/ostravels/",
   youtube: "https://www.youtube.com/@obrehman84",
+  // Sister / partner websites shown in the footer and on the ticketing page.
+  partners: [
+    { name: "BookMyFlight.pk", url: "https://bookmyflight.pk/", note: "Flight search & booking" },
+    { name: "OS Consultants", url: "https://osconsultants.pk/", note: "Study abroad & immigration consultancy" },
+  ],
   dtsGovUrl: "http://dts.gov.pk/Detail/NDAyY2I2ZWItYTMzNC00MWMwLThkYjktZjk0ZDliZjUwYTRj",
   address: "Office No. 03, Aaly Plaza, 44-East, Fazal-e-Haq Road, Block E, G-6/2, Blue Area, Islamabad",
   stats: [

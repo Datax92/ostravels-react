@@ -1,4 +1,7 @@
 import { visaCountriesRaw } from "./visaCountries.raw.js";
+import { newVisaCountriesRaw } from "./newVisaCountries.raw.js";
+import { osPrices, priceFacts, stripOldFeeFacts } from "./pricing.js";
+import { officialSources } from "./officialSources.js";
 
 // Real Unsplash photos, one per country's most recognizable landmark/place.
 // Tajikistan & Kyrgyzstan are temporary placeholders (Uzbekistan's Registan) —
@@ -23,11 +26,36 @@ const countryImages = {
   "philippine-visa": "https://images.unsplash.com/photo-1515511210479-bc02c48ec763?q=65&w=600&auto=format&fit=crop", // Chocolate Hills
   "sri-lanka-visa": "https://images.unsplash.com/photo-1704797390901-e1d20bd46647?q=65&w=600&auto=format&fit=crop", // Sigiriya
   "cambodia-visa": "https://images.unsplash.com/photo-1566706546199-a93ba33ce9f7?q=65&w=600&auto=format&fit=crop", // Angkor Wat
+  "japan-visa": "https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?q=65&w=600&auto=format&fit=crop", // Mt Fuji & Chureito Pagoda
+  "south-korea-visa": "https://images.unsplash.com/photo-1538485399081-7191377e8241?q=65&w=600&auto=format&fit=crop", // Seoul at night
+  "south-africa-visa": "https://images.unsplash.com/photo-1580060839134-75a5edca2e99?q=65&w=600&auto=format&fit=crop", // Cape Town & Table Mountain
+  "morocco-visa": "https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?q=65&w=600&auto=format&fit=crop", // Kasbah
+  "kenya-visa": "https://images.unsplash.com/photo-1523805009345-7448845a9e53?q=65&w=600&auto=format&fit=crop", // Giraffe at sunset
+  "uganda-visa": "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?q=65&w=600&auto=format&fit=crop", // Acacia savanna
+  "ethiopia-visa": "https://images.unsplash.com/photo-1621414050946-1b936a78491f?q=65&w=600&auto=format&fit=crop", // Highland trek
+  "tanzania-visa": "https://images.unsplash.com/photo-1516426122078-c23e76319801?q=65&w=600&auto=format&fit=crop", // Safari
+  "zambia-visa": "https://images.unsplash.com/photo-1535941339077-2dd1c7963098?q=65&w=600&auto=format&fit=crop", // Elephant
+  "zimbabwe-visa": "https://images.unsplash.com/photo-1589553416260-f586c8f1514f?q=65&w=600&auto=format&fit=crop", // Highlands — swap for Victoria Falls
+  "bahrain-visa": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=65&w=600&auto=format&fit=crop", // generic travel — swap for a Manama shot
+  "bangladesh-visa": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=65&w=600&auto=format&fit=crop", // generic travel — swap for Dhaka shot
 };
 
-// "Visa" category — matches original site's /visa/ menu + slugs
-export const visaCountries = visaCountriesRaw.map((c) => ({
-  ...c,
+// "Visa" category — original /visa/ slugs plus the countries added in 2026.
+// Prices come from pricing.js and replace any fee rows scraped from the old site.
+const allVisaRaw = [...visaCountriesRaw, ...newVisaCountriesRaw];
+
+function withPricing(c) {
+  const entry = osPrices[c.slug];
+  return {
+    ...c,
+    facts: entry ? [...priceFacts(entry), ...stripOldFeeFacts(c.facts)] : c.facts,
+    priceEntry: entry || null,
+    officialSite: c.officialSite || officialSources[c.slug] || null,
+  };
+}
+
+export const visaCountries = allVisaRaw.map((c) => ({
+  ...withPricing(c),
   summary: c.description[0] || c.metaDescription,
   image: countryImages[c.slug] || `https://picsum.photos/seed/${c.slug}/1200/800`,
 }));
@@ -37,7 +65,8 @@ export const visaCountries = visaCountriesRaw.map((c) => ({
 export const visaMenuCrossListed = [];
 
 // Pulls a display price + currency out of the facts array (first fact whose
-// label mentions "fee" and whose value has digits).
+// label mentions "fee" and whose value has digits). Used only for countries
+// that are not in the price list.
 function extractPrice(facts) {
   const feeFact = facts.find((f) => /fee/i.test(f.label) && /\d/.test(f.value));
   if (!feeFact) return { price: null, pricePeriod: "Visa" };
@@ -51,12 +80,15 @@ function extractOverview(metaDescription) {
   return metaDescription.replace(/\.?\s*Apply\.?$/i, ".").trim();
 }
 
-export const visaCountryCards = visaCountriesRaw.map((c) => {
-  const { price, pricePeriod } = extractPrice(c.facts);
+export const visaCountryCards = allVisaRaw.map((c) => {
+  const entry = osPrices[c.slug];
+  const { price, pricePeriod } = entry
+    ? { price: entry.price, pricePeriod: `${entry.currency} / ${entry.options ? "From" : "Visa"}` }
+    : extractPrice(c.facts);
   return {
     slug: c.slug,
     name: c.name,
-    location: `Islamabad, Pakistan • ${c.name} Embassy`,
+    location: `Islamabad, Pakistan • ${c.name} Visa`,
     overview: extractOverview(c.metaDescription),
     price,
     pricePeriod,

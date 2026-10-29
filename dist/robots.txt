@@ -1,12 +1,20 @@
 User-agent: *
 Allow: /
-
-# Disallow admin/API paths
 Disallow: /api/
 Disallow: /server/
+Disallow: /*?*sessionid*
+Disallow: /*?*sort=*
 
-# Block crawling of query-string URLs (session IDs, filters)
-Disallow: /*?*
+User-agent: GPTBot
+Allow: /
 
-# Sitemap location
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://ostravels.com/sitemap.xml

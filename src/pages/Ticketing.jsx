@@ -7,6 +7,7 @@ import ServiceSchema from "../components/ServiceSchema";
 import { ticketingKeywords } from "../data/seoKeywords";
 
 const AGENCY_EMAIL = "ostravelsisb@gmail.com"; // TODO: confirm real inbox to receive ticket requests
+const BOOKMYFLIGHT_URL = "https://bookmyflight.pk/";
 
 const airlines = [
   "PIA (Pakistan International Airlines)",
@@ -64,56 +65,78 @@ const initialForm = {
   to: "",
   departDate: "",
   returnDate: "",
+  from2: "",
+  to2: "",
+  departDate2: "",
+  flexibleDates: false,
   adults: "1",
   children: "0",
   infants: "0",
   travelClass: "Economy",
   airline: "No Preference",
+  baggage: "Standard",
+  budget: "",
   name: "",
   phone: "",
+  email: "",
+  city: "",
+  contactTime: "Anytime",
   notes: "",
 };
+
+const today = () => new Date().toISOString().split("T")[0];
 
 export default function Ticketing() {
   const [form, setForm] = useState(initialForm);
 
   const update = (key) => (e) =>
-    setForm((prev) => ({ ...prev, [key]: e.target.value }));
+    setForm((prev) => ({ ...prev, [key]: e.target.type === "checkbox" ? e.target.checked : e.target.value }));
 
   const setTripType = (type) =>
-    setForm((prev) => ({ ...prev, tripType: type, returnDate: type === "One Way" ? "" : prev.returnDate }));
+    setForm((prev) => ({ ...prev, tripType: type, returnDate: type === "Round Trip" ? prev.returnDate : "" }));
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  // Shared message body for WhatsApp (bold markers) and email (plain).
+  const buildLines = (bold) => {
+    const b = (label) => (bold ? `*${label}:*` : `${label}:`);
     const lines = [
-      `Trip Type: ${form.tripType}`,
-      `From: ${form.from}`,
-      `To: ${form.to}`,
-      `Departure Date: ${form.departDate}`,
-    ];
-
-    if (form.tripType === "Round Trip" && form.returnDate) {
-      lines.push(`Return Date: ${form.returnDate}`);
-    }
-
-    lines.push(
-      `Passengers: ${form.adults} Adult(s), ${form.children} Child(ren), ${form.infants} Infant(s)`,
-      `Class: ${form.travelClass}`,
-      `Preferred Airline: ${form.airline}`,
+      bold ? "✈️ *Flight Booking Request — O.S Travel & Tours*" : "Flight Booking Request — O.S Travel & Tours",
       "",
-      `Name: ${form.name}`,
-      `Phone: ${form.phone}`
-    );
-
-    if (form.notes) {
-      lines.push(`Additional Notes: ${form.notes}`);
+      `${b("Trip Type")} ${form.tripType}`,
+      `${b("From")} ${form.from || "Not specified"}`,
+      `${b("To")} ${form.to || "Not specified"}`,
+      `${b("Departure Date")} ${form.departDate || "Flexible"}${form.flexibleDates ? " (± 3 days flexible)" : ""}`,
+    ];
+    if (form.tripType === "Round Trip" && form.returnDate) lines.push(`${b("Return Date")} ${form.returnDate}`);
+    if (form.tripType === "Multi-City" && (form.from2 || form.to2)) {
+      lines.push(`${b("Leg 2")} ${form.from2 || form.to || "?"} → ${form.to2 || "?"} on ${form.departDate2 || "flexible date"}`);
     }
+    lines.push(
+      `${b("Passengers")} ${form.adults} Adult(s), ${form.children} Child(ren), ${form.infants} Infant(s)`,
+      `${b("Class")} ${form.travelClass}`,
+      `${b("Preferred Airline")} ${form.airline}`,
+      `${b("Baggage")} ${form.baggage}`
+    );
+    if (form.budget) lines.push(`${b("Budget")} ${form.budget}`);
+    lines.push(
+      "",
+      `${b("Passenger Name")} ${form.name || "N/A"}`,
+      `${b("Phone / WhatsApp")} ${form.phone || "N/A"}`
+    );
+    if (form.email) lines.push(`${b("Email")} ${form.email}`);
+    if (form.city) lines.push(`${b("City")} ${form.city}`);
+    lines.push(`${b("Best Time to Call")} ${form.contactTime}`);
+    if (form.notes) lines.push(`${b("Additional Notes")} ${form.notes}`);
+    return lines;
+  };
+
+  const handleEmailSubmit = (e) => {
+    const formEl = e.currentTarget.form;
+    if (formEl && !formEl.reportValidity()) return;
 
     const subject = encodeURIComponent(
       `New Air Ticket Request — ${form.from || "?"} to ${form.to || "?"}`
     );
-    const body = encodeURIComponent(lines.join("\n"));
+    const body = encodeURIComponent(buildLines(false).join("\n"));
 
     // opens Gmail's web compose window directly (new tab) — pre-filled,
     // user just hits send. Avoids the OS "choose an app" prompt that
@@ -122,33 +145,18 @@ export default function Ticketing() {
     window.open(gmailUrl, "_blank", "noopener,noreferrer");
   };
 
+  // Primary action: the form's submit (button or Enter key) sends the request
+  // to the ticketing desk on WhatsApp after the browser validates the fields.
   const handleWhatsAppSubmit = (e) => {
-    if (e && e.preventDefault) e.preventDefault();
-
-    const lines = [
-      "✈️ *Flight Ticket Inquiry — O.S Travel & Tours*",
-      `*Trip Type:* ${form.tripType}`,
-      `*From:* ${form.from || "Not specified"}`,
-      `*To:* ${form.to || "Not specified"}`,
-      `*Departure Date:* ${form.departDate || "Flexible"}`,
-      ...(form.tripType === "Round Trip" && form.returnDate ? [`*Return Date:* ${form.returnDate}`] : []),
-      `*Passengers:* ${form.adults} Adult(s), ${form.children} Child(ren), ${form.infants} Infant(s)`,
-      `*Class:* ${form.travelClass}`,
-      `*Preferred Airline:* ${form.airline}`,
-      "",
-      `*Passenger Name:* ${form.name || "N/A"}`,
-      `*Phone / WhatsApp:* ${form.phone || "N/A"}`,
-      ...(form.notes ? [`*Additional Notes:* ${form.notes}`] : []),
-    ];
-
-    const text = encodeURIComponent(lines.join("\n"));
+    e.preventDefault();
+    const text = encodeURIComponent(buildLines(true).join("\n"));
     window.open(`https://wa.me/${site.whatsapp}?text=${text}`, "_blank", "noopener,noreferrer");
   };
 
   return (
     <>
       <SEO
-        title="Air Ticketing Islamabad — Cheap Flights & Instant WhatsApp Booking"
+        title="Air Ticketing Islamabad — Cheap Flights"
         description="Book cheap air tickets in Islamabad with O.S Travel & Tours. Domestic & international flights on PIA, Emirates, Qatar Airways, Turkish Airlines & more. Instant WhatsApp quotes: 0333-5542877."
         keywords={ticketingKeywords}
         path="/air-ticketing/"
@@ -206,7 +214,7 @@ export default function Ticketing() {
               Need fast flight seats, Umrah flights or price quotes?
             </h3>
             <p style={{ margin: "0.35rem 0 0 0", fontSize: "0.92rem", opacity: 0.95 }}>
-              Chat directly with our ticketing officers: <strong style={{ color: "#a7f3d0" }}>0333-5542877</strong> (Obaid) / <strong style={{ color: "#a7f3d0" }}>0332-5500377</strong> (Umrah &amp; Ticketing)
+              Chat directly with our ticketing officers: <strong style={{ color: "#a7f3d0" }}>0333-5542877</strong> (Ticketing Officer) / <strong style={{ color: "#a7f3d0" }}>0332-5500377</strong> (Umrah &amp; Ticketing)
             </p>
           </div>
           <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
@@ -245,8 +253,9 @@ export default function Ticketing() {
             ))}
           </div>
 
-          <form className="ticket__form" onSubmit={handleSubmit}>
+          <form className="ticket__form" onSubmit={handleWhatsAppSubmit}>
             <div className="ticket__grid">
+              <p className="ticket__section-title">Flight Details</p>
               <label className="ticket__field">
                 <span>From</span>
                 <input
@@ -273,6 +282,7 @@ export default function Ticketing() {
                 <span>Departure Date</span>
                 <input
                   type="date"
+                  min={today()}
                   value={form.departDate}
                   onChange={update("departDate")}
                   required
@@ -283,12 +293,38 @@ export default function Ticketing() {
                 <span>Return Date</span>
                 <input
                   type="date"
+                  min={form.departDate || today()}
                   value={form.returnDate}
                   onChange={update("returnDate")}
                   disabled={form.tripType !== "Round Trip"}
                   required={form.tripType === "Round Trip"}
                 />
               </label>
+
+              {form.tripType === "Multi-City" && (
+                <>
+                  <p className="ticket__section-title">Second Flight (Multi-City)</p>
+                  <label className="ticket__field">
+                    <span>Leg 2 — From</span>
+                    <input type="text" placeholder={form.to || "e.g. Dubai"} value={form.from2} onChange={update("from2")} />
+                  </label>
+                  <label className="ticket__field">
+                    <span>Leg 2 — To</span>
+                    <input type="text" placeholder="e.g. London" value={form.to2} onChange={update("to2")} required />
+                  </label>
+                  <label className="ticket__field">
+                    <span>Leg 2 — Date</span>
+                    <input type="date" min={form.departDate || today()} value={form.departDate2} onChange={update("departDate2")} required />
+                  </label>
+                </>
+              )}
+
+              <label className="ticket__check">
+                <input type="checkbox" checked={form.flexibleDates} onChange={update("flexibleDates")} />
+                My dates are flexible (± 3 days) — show me cheaper options
+              </label>
+
+              <p className="ticket__section-title">Passengers &amp; Preferences</p>
 
               <label className="ticket__field">
                 <span>Adults (12+)</span>
@@ -335,13 +371,30 @@ export default function Ticketing() {
                   ))}
                 </select>
               </label>
+
+              <label className="ticket__field">
+                <span>Baggage</span>
+                <select value={form.baggage} onChange={update("baggage")}>
+                  <option>Standard</option>
+                  <option>Hand carry only</option>
+                  <option>Extra baggage needed</option>
+                  <option>Umrah / Zamzam allowance</option>
+                </select>
+              </label>
+
+              <label className="ticket__field">
+                <span>Budget (optional)</span>
+                <input type="text" placeholder="e.g. Rs 150,000" value={form.budget} onChange={update("budget")} />
+              </label>
             </div>
 
             <div className="ticket__grid ticket__grid--contact">
+              <p className="ticket__section-title">Your Details</p>
               <label className="ticket__field">
-                <span>Your Name</span>
+                <span>Full Name (as on passport)</span>
                 <input
                   type="text"
+                  autoComplete="name"
                   placeholder="Full Name"
                   value={form.name}
                   onChange={update("name")}
@@ -353,11 +406,35 @@ export default function Ticketing() {
                 <span>Your Phone / WhatsApp</span>
                 <input
                   type="tel"
+                  autoComplete="tel"
+                  inputMode="tel"
+                  pattern="[0-9+\-\s]{10,16}"
+                  title="Enter a valid phone number, e.g. 0333-5542877"
                   placeholder="03XX-XXXXXXX"
                   value={form.phone}
                   onChange={update("phone")}
                   required
                 />
+              </label>
+
+              <label className="ticket__field">
+                <span>Email (optional)</span>
+                <input type="email" autoComplete="email" placeholder="you@example.com" value={form.email} onChange={update("email")} />
+              </label>
+
+              <label className="ticket__field">
+                <span>Your City</span>
+                <input type="text" autoComplete="address-level2" placeholder="e.g. Islamabad" value={form.city} onChange={update("city")} />
+              </label>
+
+              <label className="ticket__field">
+                <span>Best Time to Contact</span>
+                <select value={form.contactTime} onChange={update("contactTime")}>
+                  <option>Anytime</option>
+                  <option>Morning (9am – 12pm)</option>
+                  <option>Afternoon (12pm – 4pm)</option>
+                  <option>Evening (4pm – 8pm)</option>
+                </select>
               </label>
             </div>
 
@@ -373,8 +450,7 @@ export default function Ticketing() {
 
             <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", marginTop: "1rem" }}>
               <button
-                type="button"
-                onClick={handleWhatsAppSubmit}
+                type="submit"
                 className="btn ticket__submit"
                 style={{
                   background: "#25D366",
@@ -390,7 +466,8 @@ export default function Ticketing() {
                 <i className="ri-whatsapp-fill" style={{ fontSize: "1.3rem" }}></i> Send Request via WhatsApp (Instant Reply)
               </button>
               <button
-                type="submit"
+                type="button"
+                onClick={handleEmailSubmit}
                 className="btn ticket__submit"
                 style={{
                   background: "#1a1a2e",
@@ -406,6 +483,20 @@ export default function Ticketing() {
               ⚡ WhatsApp inquiries receive live fare comparisons and flight options within 5–10 minutes during working hours.
             </p>
           </form>
+        </div>
+
+        {/* Partner flight search */}
+        <div className="ticket__partner">
+          <div>
+            <h3><i className="ri-plane-line"></i> Prefer to compare fares yourself?</h3>
+            <p>
+              Search live fares and flight schedules on our partner site <strong>BookMyFlight.pk</strong> — then send us
+              the flight you like on WhatsApp and we'll issue the ticket at the best available price.
+            </p>
+          </div>
+          <a href={BOOKMYFLIGHT_URL} target="_blank" rel="noopener" className="btn">
+            Visit BookMyFlight.pk <i className="ri-external-link-line"></i>
+          </a>
         </div>
 
         {/* Direct Ticketing Desks & Govt DTS Verification */}
@@ -447,14 +538,14 @@ export default function Ticketing() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "1rem" }}>
             <div style={{ background: "#ffffff", padding: "1.25rem", borderRadius: "12px", border: "1px solid #e2e8f0" }}>
               <div style={{ fontWeight: 700, color: "#1a1a2e", fontSize: "1rem", marginBottom: "0.25rem" }}>
-                Obaid — Senior Ticketing Consultant
+                Ticketing Officer
               </div>
               <p style={{ color: "#64748b", fontSize: "0.85rem", marginBottom: "0.75rem" }}>
                 International Fares, Umrah Flights &amp; Group Bookings
               </p>
               <div style={{ display: "flex", gap: "0.5rem" }}>
                 <a
-                  href={`https://wa.me/923335542877?text=${encodeURIComponent("Hello Obaid, I need a flight ticket quote.")}`}
+                  href={`https://wa.me/923335542877?text=${encodeURIComponent("Hello, I need a flight ticket quote.")}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn"
@@ -559,9 +650,9 @@ export default function Ticketing() {
             <p>PIA, Emirates, Qatar Airways, Etihad, Turkish Airlines, Airblue, Serene Air, Fly Jinnah and more.</p>
           </div>
           <div className="ticket__why-card">
-            <i className="ri-mail-send-line"></i>
-            <h4>Instant Email Booking</h4>
-            <p>Send your travel details and get a live fare quotation by email within minutes — no long forms, no waiting.</p>
+            <i className="ri-whatsapp-line"></i>
+            <h4>Instant WhatsApp Booking</h4>
+            <p>Fill the booking form once — your name, route, dates and passengers arrive on our WhatsApp and we reply with live fares.</p>
           </div>
           <div className="ticket__why-card">
             <i className="ri-user-star-line"></i>

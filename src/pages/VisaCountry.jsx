@@ -7,6 +7,10 @@ import FAQAccordion from "../components/FAQAccordion";
 import ServiceSchema from "../components/ServiceSchema";
 import { visaCountryKeywords } from "../data/seoKeywords";
 import { dropboxNotices } from "../data/dropboxNotices";
+import { countryMetaDescription, PRICES_UPDATED } from "../data/pricing";
+import { visaPageTitle } from "../data/seoText";
+import { countryFaqs as searchFaqs } from "../data/countryFaqs";
+import { directoryEntryForName, guidePath, agencyPath } from "../data/countryDirectory";
 
 export default function VisaCountry() {
   const { slug } = useParams();
@@ -15,6 +19,8 @@ export default function VisaCountry() {
   if (!country) return <NotFound />;
 
   const dropboxNotice = dropboxNotices[slug];
+  const metaDescription = countryMetaDescription(country);
+  const dir = directoryEntryForName(country.name);
   const headingWord = dropboxNotice ? "Authorized" : "Best";
 
   const countryFaqs = [
@@ -43,8 +49,8 @@ export default function VisaCountry() {
   return (
     <>
       <SEO
-        title={`${headingWord} ${country.name} Visa Services for Pakistani Citizens`}
-        description={country.metaDescription}
+        title={visaPageTitle(country)}
+        description={metaDescription}
         keywords={visaCountryKeywords(country.name)}
         image={country.image}
         path={`/visa/${country.slug}/`}
@@ -58,7 +64,7 @@ export default function VisaCountry() {
       <ServiceSchema
         id={`visa-${country.slug}`}
         name={`${country.name} Visa Services for Pakistani Citizens`}
-        description={country.metaDescription || `Professional visa application filing, document review, and embassy appointment assistance for ${country.name}.`}
+        description={metaDescription}
         url={`https://ostravels.com/visa/${country.slug}/`}
       />
 
@@ -93,7 +99,7 @@ export default function VisaCountry() {
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem", flexWrap: "wrap", gap: "0.5rem" }}>
             <span style={{ fontSize: "0.85rem", color: "#64748b", background: "#f1f5f9", padding: "0.35rem 0.85rem", borderRadius: "50px" }}>
               <i className="ri-calendar-check-line" style={{ marginRight: "0.35rem", color: "#F5A623" }}></i>
-              Last Updated: March 2026 (Verified Consular Requirements)
+              Last Updated: {PRICES_UPDATED} (Prices &amp; Requirements Verified)
             </span>
             <Link to="/contact/" style={{ fontSize: "0.85rem", color: "#2887ff", fontWeight: 600 }}>
               Need urgent consultation? Talk to an expert →
@@ -140,19 +146,19 @@ export default function VisaCountry() {
                 is one of the best {country.name} visa consultants in Islamabad, Pakistan.
               </p>
 
-              {/* Official immigration reference link (Task 4.7) */}
-              <div style={{ background: "#f8fafc", border: "1px solid #e2e8f0", padding: "1.25rem", borderRadius: "12px", marginTop: "2rem" }}>
-                <h4 style={{ color: "#1a1a2e", marginBottom: "0.5rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                  <i className="ri-external-link-line" style={{ color: "#2887ff" }}></i> Official Embassy &amp; Consular Guidelines
-                </h4>
-                <p style={{ fontSize: "0.9rem", color: "#64748b", lineHeight: 1.6 }}>
-                  Visa policies, consular fees, and immigration laws are subject to sovereign government modifications. O.S Travel &amp; Tours cross-verifies all submissions directly against the relevant embassy or official immigration authority.
+              {/* Official immigration reference */}
+              <div className="official__box">
+                <h3><i className="ri-government-line"></i> Official Embassy &amp; Immigration Source</h3>
+                <p>
+                  Visa policies, consular fees and immigration rules are set by the {country.name} government and can change without notice. We cross-check every application against the official source before submission.
                 </p>
-                <div style={{ marginTop: "0.75rem" }}>
-                  <Link to="/contact/" style={{ fontSize: "0.85rem", color: "#2887ff", fontWeight: 600 }}>
-                    Inquire about latest embassy fee updates for {country.name} →
-                  </Link>
-                </div>
+                {country.officialSite ? (
+                  <a href={country.officialSite.url} target="_blank" rel="noopener noreferrer nofollow">
+                    {country.officialSite.label} <i className="ri-external-link-line"></i>
+                  </a>
+                ) : (
+                  <Link to="/contact/">Ask us for the latest {country.name} embassy fee →</Link>
+                )}
               </div>
 
               {/* Related guides widget (Task 4.6) */}
@@ -162,6 +168,22 @@ export default function VisaCountry() {
                   Check our detailed visa guides and travel tips for Pakistani passport holders:
                 </p>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
+                  {dir && (
+                    <>
+                      <Link to={guidePath(dir.key)} style={{ fontSize: "0.85rem", color: "#b45309", textDecoration: "underline" }}>
+                        {country.name} Visa for Pakistani Citizens — Full Guide
+                      </Link>
+                      <span>•</span>
+                      <Link to={agencyPath(dir.key)} style={{ fontSize: "0.85rem", color: "#b45309", textDecoration: "underline" }}>
+                        Best Travel Agency for {country.name} Visa
+                      </Link>
+                      <span>•</span>
+                      <Link to="/visa-guides/" style={{ fontSize: "0.85rem", color: "#b45309", textDecoration: "underline" }}>
+                        Visa Price List {PRICES_UPDATED}
+                      </Link>
+                      <span>•</span>
+                    </>
+                  )}
                   <Link to="/blog/visa-free-countries-pakistani-passport/" style={{ fontSize: "0.85rem", color: "#b45309", textDecoration: "underline" }}>
                     Visa-Free Countries for Pakistanis
                   </Link>
@@ -177,13 +199,13 @@ export default function VisaCountry() {
               </div>
 
               {/* FAQ Section with schema */}
-              <FAQAccordion items={countryFaqs} id={`visa-${country.slug}`} />
+              <FAQAccordion items={[...searchFaqs(country), ...countryFaqs.slice(3)]} id={`visa-${country.slug}`} />
             </div>
 
             <aside className="detail__side">
               <h4>Visa Snapshot</h4>
               {country.facts.map((f, i) => (
-                <div className="stat" key={i}>
+                <div className={`stat${f.highlight ? " stat--price" : ""}`} key={i}>
                   <span>{f.label || "Passport Bio Page (Scan Copy)"}</span>
                   <span>{f.value}</span>
                 </div>

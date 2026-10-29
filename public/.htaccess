@@ -15,6 +15,7 @@ ErrorDocument 404 /404.html
 
   # 3. Legacy redirect /contact-2/ -> /contact/
   RewriteRule ^contact-2/?$ /contact/ [L,R=301]
+  RewriteRule ^best-travel-agent-for-(.+?)/?$ https://ostravels.com/best-travel-agency-for-$1/ [L,R=301]
 
   # 4. Force trailing slash for directory/page URLs (excluding real files)
   RewriteCond %{REQUEST_FILENAME} !-f

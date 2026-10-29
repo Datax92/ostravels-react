@@ -38,21 +38,9 @@ function ContentBlock({ block }) {
   }
 }
 
-export default function BlogPost() {
-  const { slug } = useParams();
-  const post = getPostBySlug(slug);
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" });
-  }, [slug]);
-
-  if (!post) return <NotFound />;
-
-  const related = getRelatedPosts(post, 3);
-  const headings = post.content.filter((b) => b.type === "h2");
-
-  // JSON-LD structured data — Article + FAQPage, for rich results.
-  const jsonLd = {
+// JSON-LD structured data — Article + FAQPage, for rich results.
+function buildJsonLd(post) {
+  return {
     "@context": "https://schema.org",
     "@graph": [
       {
@@ -61,6 +49,7 @@ export default function BlogPost() {
         description: post.excerpt,
         image: post.image,
         datePublished: post.date,
+        dateModified: post.updated || post.date,
         author: { "@type": "Organization", name: site.name },
         publisher: { "@type": "Organization", name: site.name },
       },
@@ -74,8 +63,19 @@ export default function BlogPost() {
       },
     ],
   };
+}
+
+export default function BlogPost() {
+  const { slug } = useParams();
+  const post = getPostBySlug(slug);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, [slug]);
+
+  useEffect(() => {
+    if (!post) return undefined;
+    const jsonLd = buildJsonLd(post);
     let script = document.head.querySelector('script[data-seo-id="blog-article-faq"]');
     if (!script) {
       script = document.createElement("script");
@@ -90,6 +90,12 @@ export default function BlogPost() {
     };
   }, [post]);
 
+  if (!post) return <NotFound />;
+
+  const related = getRelatedPosts(post, 3);
+  const headings = post.content.filter((b) => b.type === "h2");
+
+
   return (
     <>
       <SEO
@@ -100,7 +106,7 @@ export default function BlogPost() {
         path={`/blog/${post.slug}/`}
         type="article"
         datePublished={post.date}
-        dateModified={post.date}
+        dateModified={post.updated || post.date}
         breadcrumbs={[
           { name: "Home", url: "/" },
           { name: "Blog", url: "/blog/" },
@@ -134,6 +140,7 @@ export default function BlogPost() {
               <div className="blogpost__meta">
                 <span><i className="ri-user-3-line"></i> {post.author}</span>
                 <span><i className="ri-calendar-line"></i> {formatDate(post.date)}</span>
+                {post.updated && <span><i className="ri-refresh-line"></i> Updated {formatDate(post.updated)}</span>}
                 <span><i className="ri-time-line"></i> {post.readTime}</span>
               </div>
 

@@ -38,3 +38,14 @@
 - Contact Page: https://ostravels.com/contact/
 - Privacy Policy: https://ostravels.com/privacy-policy/
 - Terms & Conditions: https://ostravels.com/terms/
+
+## Visa Price List & Country Guides (updated October 2026)
+- Visa price list for Pakistani citizens (all countries): https://ostravels.com/visa-guides/
+- Every destination has three pages:
+  - Service page: https://ostravels.com/visa/{country}-visa/ or https://ostravels.com/schengen-visa-file-processing/{country}-visa/
+  - Requirements guide: https://ostravels.com/{country}-visa-for-pakistani/ (e.g. https://ostravels.com/japan-visa-for-pakistani/)
+  - Agency page: https://ostravels.com/best-travel-agency-for-{country}-visa/ (e.g. https://ostravels.com/best-travel-agency-for-bahrain-visa/)
+- Destinations added in 2026: Japan, South Korea, South Africa, Morocco, Kenya (eTA), Uganda, Ethiopia, Tanzania, Zambia, Zimbabwe, Bahrain, Bangladesh, New Zealand.
+- Policy: O.S Travel & Tours does NOT handle work visas or work permits — visit, tourist, family-visit and business-visit visas only.
+- Partner websites: https://bookmyflight.pk/ (flight search & booking), https://osconsultants.pk/
+- Sitemap index: https://ostravels.com/sitemap.xml

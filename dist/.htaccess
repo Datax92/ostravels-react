@@ -1,7 +1,28 @@
-# ===================== SPA Routing =====================
+ErrorDocument 404 /404.html
+
+# ===================== Canonical Redirection & SPA Routing =====================
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+
+  # 1. Force HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # 2. Force non-www
+  RewriteCond %{HTTP_HOST} ^www\.ostravels\.com$ [NC]
+  RewriteRule ^(.*)$ https://ostravels.com/$1 [L,R=301]
+
+  # 3. Legacy redirect /contact-2/ -> /contact/
+  RewriteRule ^contact-2/?$ /contact/ [L,R=301]
+  RewriteRule ^best-travel-agent-for-(.+?)/?$ https://ostravels.com/best-travel-agency-for-$1/ [L,R=301]
+
+  # 4. Force trailing slash for directory/page URLs (excluding real files)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_URI} !(.*)/$
+  RewriteRule ^(.*)$ https://ostravels.com/$1/ [L,R=301]
+
+  # 5. SPA Fallback
   RewriteRule ^index\.html$ - [L]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d

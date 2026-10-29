@@ -40,6 +40,11 @@
       "source": "/insurance",
       "destination": "/travel-insurance/",
       "permanent": true
+    },
+    {
+      "source": "/best-travel-agent-for-:slug",
+      "destination": "/best-travel-agency-for-:slug/",
+      "permanent": true
     }
   ],
   "rewrites": [

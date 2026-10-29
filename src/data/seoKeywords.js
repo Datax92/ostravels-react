@@ -1,24 +1,10 @@
 import { visaCountriesRaw } from "./visaCountries.raw";
 import { fileProcessingCountriesData } from "./fileProcessingCountries.raw";
+import { newVisaCountriesRaw, newFileProcessingCountries } from "./newVisaCountries.raw.js";
 
-// Core brand + service keywords used on every page.
-// Add/remove terms here to change what appears site-wide.
-export const baseKeywords = [
-  "Best Travel Agency in Islamabad",
-  "Best Tour Agency in Pakistan",
-  "Top Travel Agency Islamabad",
-  "O.S Travel & Tours",
-  "Best Visa Consultant Islamabad",
-  "Best Visa Agent Pakistan",
-  "Best Umrah Services Islamabad",
-  "Umrah Visa Pakistan",
-  "Best Visa File Processing Islamabad",
-  "Schengen Visa Consultant Pakistan",
-  "Air Ticketing Islamabad",
-  "Hotel Booking Pakistan",
-  "Travel Insurance Pakistan",
-  "Authorized Visa Drop Box Agent",
-];
+export { baseKeywords } from "./baseKeywords.js";
+import { baseKeywords } from "./baseKeywords.js";
+
 
 // Keywords for the Air Ticketing / flight booking page.
 export const ticketingKeywords = [
@@ -82,6 +68,9 @@ export function visaCountryKeywords(countryName) {
     `Apply ${countryName} Visa Online`,
     `Best ${countryName} Visa Agent Islamabad`,
     `${countryName} eVisa Pakistan`,
+    `${countryName} Visa for Pakistani`,
+    `${countryName} Visa Price in Pakistan 2026`,
+    `Best Travel Agency for ${countryName} Visa`,
     ...baseKeywords,
   ];
 }
@@ -146,12 +135,12 @@ export function fileProcessingKeywords(countryName) {
 // pulls every country name straight from your raw data, no manual syncing needed.
 export const visaIndexKeywords = [
   ...baseKeywords,
-  ...visaCountriesRaw.map((c) => `Best ${c.name} Visa Services`),
+  ...[...visaCountriesRaw, ...newVisaCountriesRaw].map((c) => `Best ${c.name} Visa Services`),
 ];
 
 export const fileProcessingIndexKeywords = [
   ...baseKeywords,
-  ...fileProcessingCountriesData.map((c) => `Best ${c.name} Visa File Processing`),
+  ...[...fileProcessingCountriesData, ...newFileProcessingCountries].map((c) => `Best ${c.name} Visa File Processing`),
 ];
 
 // Blog listing page — broad travel/visa content keywords for ranking on

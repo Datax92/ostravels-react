@@ -2,6 +2,7 @@ import { Suspense, lazy } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
+import { landingKeys } from "./data/menuIndex.generated";
 
 const About = lazy(() => import("./pages/About"));
 const VisaIndex = lazy(() => import("./pages/VisaIndex"));
@@ -20,6 +21,8 @@ const Terms = lazy(() => import("./pages/Terms"));
 const BranchesIndex = lazy(() => import("./pages/BranchesIndex"));
 const BranchIslamabad = lazy(() => import("./pages/BranchIslamabad"));
 const Credentials = lazy(() => import("./pages/Credentials"));
+const CountryLanding = lazy(() => import("./pages/CountryLanding"));
+const VisaGuides = lazy(() => import("./pages/VisaGuides"));
 
 export default function App() {
   return (
@@ -37,6 +40,28 @@ export default function App() {
           <Route path="/insurance" element={<Navigate to="/travel-insurance/" replace />} />
           <Route path="/visa" element={<VisaIndex />} />
           <Route path="/visa/:slug" element={<VisaCountry />} />
+          <Route path="/visa-guides" element={<VisaGuides />} />
+          {landingKeys.map((key) => (
+            <Route
+              key={`guide-${key}`}
+              path={`/${key}-visa-for-pakistani`}
+              element={<CountryLanding type="guide" countryKey={key} />}
+            />
+          ))}
+          {landingKeys.map((key) => (
+            <Route
+              key={`agent-${key}`}
+              path={`/best-travel-agent-for-${key}-visa`}
+              element={<Navigate to={`/best-travel-agency-for-${key}-visa/`} replace />}
+            />
+          ))}
+          {landingKeys.map((key) => (
+            <Route
+              key={`agency-${key}`}
+              path={`/best-travel-agency-for-${key}-visa`}
+              element={<CountryLanding type="agency" countryKey={key} />}
+            />
+          ))}
           <Route path="/schengen-visa-file-processing" element={<FileProcessingIndex />} />
           <Route path="/schengen-visa-file-processing/:slug" element={<FileProcessingCountry />} />
           <Route path="/blog" element={<BlogIndex />} />

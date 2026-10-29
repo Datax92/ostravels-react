@@ -45,6 +45,17 @@ export default function Footer() {
             <li><Link to="/about/registrations-and-licenses/">Government DTS License</Link></li>
             <li><Link to="/reviews/">Client Reviews</Link></li>
             <li><Link to="/blog/">Travel Blog</Link></li>
+            <li><Link to="/visa-guides/">Visa Price List 2026</Link></li>
+          </ul>
+          <h4 className="footer__partners-title">Our Partner Websites</h4>
+          <ul className="footer__links">
+            {site.partners.map((p) => (
+              <li key={p.url}>
+                <a href={p.url} target="_blank" rel="noopener" title={p.note}>
+                  <span><i className="ri-global-line"></i></span> {p.name}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -59,6 +70,9 @@ export default function Footer() {
             <li><Link to="/visa/singapore-visa/">Singapore Visa</Link></li>
             <li><Link to="/visa/thailand-visa/">Thailand Visa</Link></li>
             <li><Link to="/schengen-visa-file-processing/united-kingdom-uk-visa/">UK Visa File</Link></li>
+            <li><Link to="/visa/japan-visa/">Japan Visa</Link></li>
+            <li><Link to="/visa/bahrain-visa/">Bahrain Visa</Link></li>
+            <li><Link to="/visa/kenya-visa/">Kenya eTA</Link></li>
           </ul>
         </div>
 

@@ -22,4 +22,5 @@ export const regionMap = {
   "hong-kong-visa": "Non-Schengen",
   "china-visa": "Non-Schengen",
   "philippine-visa": "Non-Schengen",
+  "new-zealand-visa": "Non-Schengen",
 };

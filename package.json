@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build && node scripts/prerender.js",
+    "dev": "node scripts/gen-index.js && vite",
+    "build": "node scripts/gen-index.js && vite build && node scripts/prerender.js",
     "lint": "oxlint",
     "preview": "vite preview"
   },

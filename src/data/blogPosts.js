@@ -6,6 +6,8 @@
 // category filters, related-posts, and sitemap all update automatically.
 // ============================================================================
 
+import { october2026Posts, priceUpdates } from "./blogPosts.oct2026.js";
+
 export const blogCategories = [
   "All",
   "Visa Guides",
@@ -15,7 +17,7 @@ export const blogCategories = [
   "News & Updates",
 ];
 
-export const blogPosts = [
+const basePosts = [
   {
     slug: "malaysia-visa-guide-from-pakistan",
     category: "Visa Guides",
@@ -704,6 +706,25 @@ export const blogPosts = [
     ],
     related: ["schengen-visa-guide-pakistan", "uk-visa-guide-pakistan", "usa-visa-b1-b2-guide"],
   },
+];
+
+// Newest first. Older guides whose prices changed get a dated "Current Price"
+// section and an `updated` date (used for dateModified in schema).
+export const blogPosts = [
+  ...october2026Posts,
+  ...basePosts.map((post) =>
+    priceUpdates[post.slug]
+      ? {
+          ...post,
+          updated: "2026-10-29",
+          content: [
+            ...post.content,
+            { type: "h2", text: "Current Price (October 2026)" },
+            { type: "p", text: priceUpdates[post.slug] },
+          ],
+        }
+      : post
+  ),
 ];
 
 export function getPostBySlug(slug) {

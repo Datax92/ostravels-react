@@ -4526,3 +4526,979 @@ footer {
     box-shadow: 0 4px 12px rgba(255, 107, 0, 0.35);
   }
 }
+/* ==========================================================================
+   OCT 2026 UPDATE — price highlight, official source box, landing pages,
+   visa guides hub, ticket booking extras, partner links
+   ========================================================================== */
+.breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 0;
+}
+
+.detail__side .stat--price {
+  background: #fff8eb;
+  border: 1px solid #fde3a7;
+  border-radius: 0.6rem;
+  padding: 0.65rem 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.detail__side .stat--price span:last-child {
+  color: #b45309;
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+.official__box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid #16a34a;
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+  margin-top: 2rem;
+}
+
+.official__box h3 {
+  font-size: 1.05rem;
+  color: #1a1a2e;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.official__box h3 i {
+  color: #16a34a;
+}
+
+.detail__main .official__box p {
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.official__box a {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 0.9rem;
+  word-break: break-word;
+}
+
+.landing__body .landing__lead {
+  font-size: 1.08rem;
+  color: #334155;
+}
+
+.landing__table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0.5rem 0 1.25rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+}
+
+.landing__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.93rem;
+  background: var(--white);
+}
+
+.landing__table th,
+.landing__table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eef2f7;
+  vertical-align: top;
+}
+
+.landing__table tr:last-child th,
+.landing__table tr:last-child td {
+  border-bottom: none;
+}
+
+.landing__table tbody th {
+  color: #475569;
+  font-weight: 600;
+  width: 42%;
+}
+
+.landing__table thead th {
+  background: #1a1a2e;
+  color: var(--white);
+  font-weight: 600;
+}
+
+.landing__table--compare td:last-child {
+  color: #15803d;
+  font-weight: 600;
+}
+
+.landing__steps {
+  counter-reset: step;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+
+.landing__steps li {
+  counter-increment: step;
+  position: relative;
+  padding: 0.6rem 0 0.6rem 2.75rem;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+.landing__steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  background: #f5a623;
+  color: var(--white);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+.landing__quotes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.landing__quotes blockquote {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1rem 1.15rem;
+}
+
+.detail__main .landing__quotes p {
+  font-size: 0.92rem;
+  margin-bottom: 0.5rem;
+}
+
+.landing__quotes cite {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #1a1a2e;
+}
+
+.landing__more,
+.side__link {
+  display: inline-block;
+  margin-top: 0.75rem;
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.side__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+.btn.btn--whatsapp {
+  background: #25d366;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
+}
+
+.btn.btn--whatsapp:hover {
+  background: #1ebe5a;
+}
+
+/* Visa guides hub */
+.guides__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0 1rem;
+}
+
+.guides__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.guides__tab {
+  border: 1px solid #e2e8f0;
+  background: var(--white);
+  border-radius: 50px;
+  padding: 0.45rem 1rem;
+  font: inherit;
+  font-size: 0.88rem;
+  cursor: pointer;
+  color: #334155;
+}
+
+.guides__tab.active {
+  background: #1a1a2e;
+  border-color: #1a1a2e;
+  color: var(--white);
+}
+
+.guides__search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 50px;
+  padding: 0.4rem 1rem;
+  background: var(--white);
+  min-width: 0;
+  flex: 1 1 220px;
+  max-width: 320px;
+}
+
+.guides__search input {
+  border: none;
+  outline: none;
+  font: inherit;
+  width: 100%;
+  min-width: 0;
+  background: transparent;
+}
+
+.guides__table tbody th a {
+  color: #1a1a2e;
+}
+
+.guides__table td {
+  white-space: nowrap;
+}
+
+.guides__note {
+  color: #64748b;
+}
+
+.guides__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  white-space: normal !important;
+}
+
+.guides__links a {
+  color: var(--primary-color);
+  font-size: 0.88rem;
+}
+
+@media (max-width: 640px) {
+  .guides__search {
+    max-width: none;
+  }
+  .landing__table th,
+  .landing__table td {
+    padding: 0.6rem 0.7rem;
+  }
+}
+
+/* Travel-card price on the visa grid wraps cleanly on small cards */
+.travel__card-price small {
+  white-space: nowrap;
+}
+
+/* Footer partner sites */
+.footer__partners {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.footer__partners a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 0.85rem;
+}
+
+.footer__partners a:hover {
+  border-color: #f5a623;
+  color: #f5a623;
+}
+
+/* Ticketing — partner banner */
+.ticket__partner {
+  max-width: 850px;
+  margin: 2rem auto 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #2b2b55 100%);
+  color: var(--white);
+}
+
+.ticket__partner h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.15rem;
+  color: var(--white);
+}
+
+.ticket__partner p {
+  margin: 0;
+  opacity: 0.85;
+  font-size: 0.92rem;
+}
+
+.ticket__partner .btn {
+  background: #f5a623;
+  color: #1a1a2e;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.ticket__section-title {
+  grid-column: 1 / -1;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #64748b;
+  margin: 0.5rem 0 -0.25rem;
+}
+
+.ticket__check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #334155;
+  cursor: pointer;
+}
+
+.ticket__check input {
+  width: 1.05rem;
+  height: 1.05rem;
+  accent-color: #25d366;
+}
+
+.footer__partners-title {
+  margin-top: 1.5rem;
+}
+
+/* Long country menus: two columns on desktop, taller scroll area */
+@media (min-width: 901px) {
+  .mainnav__dropdown--grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(190px, 1fr));
+    min-width: 420px;
+    max-height: min(70vh, 560px);
+  }
+}
+
+.mainnav__dropdown a.mainnav__dropdown-all {
+  grid-column: 1 / -1;
+  margin-top: 0.35rem;
+  border-top: 1px solid #eef2f7;
+  border-radius: 0 0 8px 8px;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+/* Breadcrumbs are <nav> elements — undo the global sticky/white `nav` rule
+   that turned every breadcrumb into a white bar stuck to the top on scroll. */
+nav.breadcrumb {
+  position: static;
+  background: none;
+  box-shadow: none;
+  z-index: auto;
+}
+
+@media (max-width: 640px) {
+  .guides__table td {
+    white-space: normal;
+  }
+  .guides__table thead th:last-child {
+    display: none;
+  }
+  .guides__table tbody tr {
+    display: grid;
+    grid-template-columns: 1fr auto;
+  }
+  .guides__table tbody .guides__links {
+    grid-column: 1 / -1;
+    padding-top: 0;
+  }
+}
+
+.req__list--warn li i {
+  color: #dc2626;
+}
+
+/* ---------- Country search (Home hero, Visa pages) ---------- */
+.csearch {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  margin: 1.25rem auto 0;
+  text-align: left;
+  z-index: 20;
+}
+
+.csearch__box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--white);
+  border-radius: 999px;
+  padding: 0.35rem 0.35rem 0.35rem 1.1rem;
+  box-shadow: 0 12px 30px rgba(10, 10, 30, 0.18);
+  border: 1px solid #e2e8f0;
+}
+
+.csearch__icon {
+  color: #64748b;
+  font-size: 1.15rem;
+}
+
+.csearch__box input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  font: inherit;
+  font-size: 1rem;
+  padding: 0.6rem 0;
+  background: transparent;
+  color: #0f172a;
+}
+
+.csearch__btn {
+  border: none;
+  border-radius: 999px;
+  background: #f5a623;
+  color: #1a1a2e;
+  font: inherit;
+  font-weight: 700;
+  padding: 0.65rem 1.3rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.csearch__btn:hover {
+  background: #e8961a;
+}
+
+.csearch__box:focus-within {
+  box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.45), 0 12px 30px rgba(10, 10, 30, 0.18);
+}
+
+.csearch__list {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  right: 0;
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: 0 18px 40px rgba(10, 10, 30, 0.2);
+  border: 1px solid #e2e8f0;
+  padding: 0.4rem;
+  max-height: 340px;
+  overflow-y: auto;
+}
+
+.csearch__list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #0f172a;
+}
+
+.csearch__list li.active {
+  background: #fff4e0;
+}
+
+.csearch__name {
+  font-weight: 600;
+}
+
+.csearch__group {
+  font-size: 0.78rem;
+  color: #64748b;
+  white-space: nowrap;
+}
+
+.csearch__list li.csearch__empty {
+  cursor: default;
+  display: block;
+  color: #475569;
+  font-size: 0.92rem;
+}
+
+.csearch__empty a {
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.csearch--light .csearch__box {
+  box-shadow: 0 6px 18px rgba(10, 10, 30, 0.08);
+}
+
+@media (max-width: 480px) {
+  .csearch__btn {
+    padding: 0.6rem 0.9rem;
+  }
+  .csearch__group {
+    display: none;
+  }
+}
+
+/* The ticket card overlaps the page header by design; when the WhatsApp
+   banner sits above it, drop the overlap so the banner isn't covered. */
+.ticket__section .ticket__card {
+  margin-top: 0;
+}
+
+/* Keep the search results above the hero buttons that follow it */
+.hero__overlay-text .csearch {
+  z-index: 60;
+}
+.hero__overlay-text .csearch + div {
+  position: relative;
+  z-index: 1;
+}
+.csearch__list {
+  z-index: 61;
+}
+
+/* The hero clips overflow (slider), so its results open upwards */
+.csearch--hero .csearch__list {
+  top: auto;
+  bottom: calc(100% + 0.5rem);
+  max-height: min(300px, 45vh);
+}
+
+/* ---------- Facebook page embed ---------- */
+.fbsection {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 500px);
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.fbsection .section__header,
+.fbsection .section__description {
+  text-align: left;
+}
+
+.fbsection__points {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.fbsection__points li {
+  display: flex;
+  gap: 0.5rem;
+  color: #334155;
+}
+
+.fbsection__points i {
+  color: #1877f2;
+}
+
+.fbfeed {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.fbfeed__frame {
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #f0f2f5;
+  box-shadow: 0 10px 30px rgba(10, 10, 30, 0.1);
+  display: flex;
+  justify-content: center;
+}
+
+.fbfeed__placeholder {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: #1877f2;
+}
+
+.fbfeed__placeholder i {
+  font-size: 3rem;
+}
+
+.fbfeed__placeholder span {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.fbfeed__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+  color: #1877f2;
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .fbsection {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .fbsection .section__header,
+  .fbsection .section__description {
+    text-align: center;
+  }
+  .fbsection__points {
+    justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   MOBILE-FIRST REFINEMENTS (phones → tablets → laptops)
+   ========================================================================== */
+p, li, td, th, h1, h2, h3 {
+  overflow-wrap: break-word;
+}
+
+.official__box a,
+.detail__side .stat span {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1024px) {
+  .detail__grid {
+    gap: 1.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  /* 16px inputs stop iOS Safari from zooming into form fields */
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  .detail__main h2 {
+    font-size: 1.3rem;
+  }
+
+  .detail__side {
+    padding: 1.15rem;
+  }
+
+  .detail__side .stat {
+    grid-template-columns: 1fr auto;
+  }
+
+  .ticket__submit {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .ticket__partner {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .ticket__partner .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .landing__steps li {
+    padding-left: 2.5rem;
+  }
+
+  .guides__tabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 0.25rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .guides__tab {
+    flex-shrink: 0;
+  }
+
+  .guides__search {
+    flex-basis: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .country__hero-content h1 {
+    font-size: 1.6rem;
+    line-height: 1.25;
+    padding: 0 0.75rem;
+  }
+
+  .page__header h1 {
+    font-size: 1.6rem;
+  }
+
+  .landing__body .landing__lead {
+    font-size: 1rem;
+  }
+
+  .csearch__box {
+    padding-left: 0.85rem;
+  }
+
+  .csearch__box input {
+    font-size: 15px !important;
+  }
+
+  .fbsection__points li {
+    font-size: 0.92rem;
+  }
+
+  /* comfortable tap targets for small links */
+  .guides__links a,
+  .side__link,
+  .landing__more {
+    padding: 0.25rem 0;
+  }
+}
+
+/* Small phones: the logo block didn't shrink, pushing the menu button
+   partly off-screen at ≤400px. Let the logo shrink and pin the button. */
+@media (max-width: 600px) {
+  nav.mainnav .mainnav__inner {
+    gap: 0.4rem;
+  }
+  nav.mainnav .mainnav__logo {
+    min-width: 0;
+    flex: 0 1 auto;
+    overflow: hidden;
+  }
+  nav.mainnav .mainnav__logo-img {
+    width: auto;
+    flex-shrink: 0;
+  }
+  nav.mainnav .mainnav__logo-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  nav.mainnav .mainnav__actions {
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+  nav.mainnav .mainnav__mobile-btn {
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 360px) {
+  nav.mainnav .mainnav__logo-text {
+    font-size: 0.78rem;
+  }
+}
+
+/* Ticketing trip-type tabs: fit on narrow phones */
+@media (max-width: 480px) {
+  .ticket__triptype {
+    display: flex;
+    width: 100%;
+  }
+  .ticket__triptype-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+}
+
+/* Grid children default to min-width:auto, so date inputs and long words
+   could push columns past the screen edge on small phones. */
+.ticket__grid,
+.ticket__grid--contact {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.ticket__grid--contact {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (max-width: 900px) {
+  .ticket__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 560px) {
+  .ticket__grid,
+  .ticket__grid--contact {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.ticket__field input,
+.ticket__field select,
+.ticket__field textarea {
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+}
+.detail__grid > * {
+  min-width: 0;
+}
+@media (max-width: 900px) {
+  .detail__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Review carousel arrows sit outside the cards on desktop; keep them
+   on-screen on phones. */
+@media (max-width: 640px) {
+  .reviews__arrow.reviews__arrow--prev {
+    left: 0.25rem !important;
+  }
+  .reviews__arrow.reviews__arrow--next {
+    right: 0.25rem !important;
+  }
+}
+
+/* Facebook: header plugin + scrollable feed */
+.fbfeed__header {
+  width: 100%;
+  border-radius: 14px 14px 0 0;
+  overflow: hidden;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  border: 1px solid #e4e6eb;
+  border-bottom: none;
+}
+
+.fbfeed__scroll {
+  width: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  background: #f0f2f5;
+  border: 1px solid #e4e6eb;
+  border-radius: 0 0 14px 14px;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  box-shadow: 0 10px 30px rgba(10, 10, 30, 0.08);
+  scrollbar-width: thin;
+}
+
+.fbfeed__scroll:focus-visible {
+  outline: 3px solid rgba(24, 119, 242, 0.4);
+}
+
+.fbfeed__post {
+  border: none;
+  background: #ffffff;
+  border-radius: 8px;
+  max-width: 100%;
+  flex-shrink: 0;
+}
+
+.fbfeed__updates {
+  width: 100%;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.fbfeed__update {
+  display: block;
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  color: #050505;
+}
+
+.fbfeed__update img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.fbfeed__update div {
+  padding: 0.75rem 0.9rem 0.9rem;
+}
+
+.fbfeed__date {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.78rem;
+  color: #65676b;
+  margin-bottom: 0.35rem;
+}
+
+.fbfeed__date i {
+  color: #1877f2;
+  font-size: 1rem;
+}
+
+.fbfeed__update strong {
+  display: block;
+  font-size: 0.98rem;
+  line-height: 1.35;
+  margin-bottom: 0.3rem;
+}
+
+.fbfeed__update p {
+  font-size: 0.88rem;
+  color: #3a3b3c;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.fbfeed__update:hover strong {
+  color: #1877f2;
+}

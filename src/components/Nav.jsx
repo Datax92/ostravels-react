@@ -1,8 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { site } from "../data/site";
-import { visaCountries, visaMenuCrossListed } from "../data/visaCountries";
-import { fileProcessingCountries } from "../data/fileProcessingCountries";
+import { visaMenuIndex, fileMenuIndex } from "../data/menuIndex.generated";
+
+// Alphabetical copies for the menus — 30+ countries are easier to scan A–Z.
+const byName = (a, b) => a.name.localeCompare(b.name);
+const visaMenu = [...visaMenuIndex].sort(byName);
+const fileMenu = [...fileMenuIndex].sort(byName);
 import logo from "../assets/logo.webp";
 
 // how long to wait before closing dropdown after mouse leaves (stops flicker)
@@ -67,22 +71,18 @@ export default function Nav() {
               Visa <i className="ri-arrow-down-s-line"></i>
             </Link>
             <div
-              className={`mainnav__dropdown mainnav__dropdown--css ${openMenu === "visa" ? "mainnav__dropdown--open" : ""}`}
+              className={`mainnav__dropdown mainnav__dropdown--grid mainnav__dropdown--css ${openMenu === "visa" ? "mainnav__dropdown--open" : ""}`}
               onMouseEnter={() => openNow("visa")}
               onMouseLeave={closeSoon}
             >
-              {visaCountries.map((c) => (
+              {visaMenu.map((c) => (
                 <Link key={c.slug} to={`/visa/${c.slug}/`}>
                   {c.name} Visa
                 </Link>
               ))}
-              {visaMenuCrossListed.map((c) => (
-                <Link
-                  key={c.slug}
-                  to={`/schengen-visa-file-processing/${c.slug}/`}>
-                  {c.label}
-                </Link>
-              ))}
+              <Link to="/visa-guides/" className="mainnav__dropdown-all">
+                Visa Price List &amp; All Countries →
+              </Link>
             </div>
           </li>
 
@@ -95,11 +95,11 @@ export default function Nav() {
               Visa File Processing <i className="ri-arrow-down-s-line"></i>
             </Link>
             <div
-              className={`mainnav__dropdown mainnav__dropdown--css ${openMenu === "processing" ? "mainnav__dropdown--open" : ""}`}
+              className={`mainnav__dropdown mainnav__dropdown--grid mainnav__dropdown--css ${openMenu === "processing" ? "mainnav__dropdown--open" : ""}`}
               onMouseEnter={() => openNow("processing")}
               onMouseLeave={closeSoon}
             >
-              {fileProcessingCountries.map((c) => (
+              {fileMenu.map((c) => (
                 <Link
                   key={c.slug}
                   to={`/schengen-visa-file-processing/${c.slug}/`}>
@@ -196,19 +196,10 @@ export default function Nav() {
               </button>
             </div>
             <ul className={`mobile-dropdown__submenu ${mobileSubOpen.visa ? "mobile-dropdown__submenu--open" : ""}`}>
-              {visaCountries.map((c) => (
+              {visaMenu.map((c) => (
                 <li key={c.slug}>
                   <Link to={`/visa/${c.slug}/`} onClick={closeMobileMenu}>
                     {c.name} Visa
-                  </Link>
-                </li>
-              ))}
-              {visaMenuCrossListed.map((c) => (
-                <li key={c.slug}>
-                  <Link
-                    to={`/schengen-visa-file-processing/${c.slug}/`}
-                    onClick={closeMobileMenu}>
-                    {c.label}
                   </Link>
                 </li>
               ))}
@@ -230,7 +221,7 @@ export default function Nav() {
               </button>
             </div>
             <ul className={`mobile-dropdown__submenu ${mobileSubOpen.processing ? "mobile-dropdown__submenu--open" : ""}`}>
-              {fileProcessingCountries.map((c) => (
+              {fileMenu.map((c) => (
                 <li key={c.slug}>
                   <Link
                     to={`/schengen-visa-file-processing/${c.slug}/`}

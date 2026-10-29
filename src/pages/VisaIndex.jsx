@@ -5,12 +5,13 @@ import SEO from "../components/SEO";
 import FAQAccordion from "../components/FAQAccordion";
 import ServiceSchema from "../components/ServiceSchema";
 import { visaIndexKeywords } from "../data/seoKeywords";
+import CountrySearch from "../components/CountrySearch";
 
 export default function VisaIndex() {
   const visaFaqs = [
     {
       question: "Which country visas can Pakistani citizens apply for through O.S Travel & Tours?",
-      answer: "We process eVisas and sticker visas for Malaysia, Singapore, Thailand, Saudi Arabia (Umrah and Tourist), China, Turkey, Azerbaijan, Indonesia, Vietnam, Egypt, Tajikistan, Uzbekistan, Kazakhstan, and Kyrgyzstan, alongside full Schengen and Western visa file preparation."
+      answer: "We process e-Visas and sticker visas for Malaysia, Singapore, Thailand, Indonesia, Saudi Arabia, China, Hong Kong, Japan, South Korea, Philippines, Vietnam, Cambodia, Sri Lanka, Nepal, Bangladesh, Turkey, Azerbaijan, Egypt, Morocco, Bahrain, Kazakhstan, Uzbekistan, Tajikistan, Kyrgyzstan, Kenya, Uganda, Ethiopia, Tanzania, Zambia, Zimbabwe and South Africa — alongside full Schengen, UK, USA, Canada, Australia and New Zealand visa file preparation."
     },
     {
       question: "What documents are required for tourist and visit visa processing?",
@@ -34,7 +35,7 @@ export default function VisaIndex() {
     <>
       <SEO
         title="Best Visa Services Islamabad — All Countries"
-        description="Best visa services for Pakistanis — Malaysia, Singapore, Thailand, Saudi Arabia, China & more. Complete application & document prep by O.S Travel & Tours, Islamabad."
+        description="Best visa services for Pakistanis — Malaysia, Thailand, Japan, Bahrain, Kenya, Saudi Arabia, China & 30+ more. Visa price list 2026 & document prep in Islamabad."
         keywords={visaIndexKeywords}
         path="/visa/"
         breadcrumbs={[
@@ -62,8 +63,10 @@ export default function VisaIndex() {
       </div>
 
       <section className="section__container">
-        <p className="section__description">
-          We provide complete visa assistance — from document preparation to submission — for international destinations.
+        <CountrySearch />
+        <p className="section__description" style={{ marginTop: "1.5rem" }}>
+          We provide complete visa assistance — from document preparation to submission — for {visaCountryCards.length} destinations across Asia, the Gulf and Africa.
+          {" "}<Link to="/visa-guides/" style={{ color: "#2887ff", fontWeight: 600 }}>See the full visa price list →</Link>
         </p>
 
         <div className="card__grid visa__grid">

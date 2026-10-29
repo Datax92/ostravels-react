@@ -16,7 +16,7 @@ export const fileProcessingCountriesData = [
       "France offers different types of visas depending on the purpose of your visit. The most common types of visas are.",
       "This visa allows you to stay in France for up to 90 days for tourism, business, or other non-work related purposes.",
       "This visa is for stays longer than 90 days, such as for work, study, or family reunification.",
-      "This visa allows you to travel to any of the 26 countries in the Schengen area, including France, for up to 90 days within a six-month period.",
+      "This visa allows you to travel to any of the 29 countries in the Schengen area, including France, for up to 90 days within a six-month period.",
       "O.S Travel and Tours is a reputable travel agency that specializes in providing travel solutions for their clients. We have a wealth of experience and expertise in helping travelers with their visa applications for various countries, including France.Our employs a team of professional and knowledgeable staff who are dedicated to providing top-quality consultancy services for their clients. Our clients can easily manage the frequently challenging visa application procedure with the help of our team. In addition to France visa processing, O.S Travel and Tours can also assist you and we are the best choice for you."
     ],
   },
@@ -52,7 +52,7 @@ export const fileProcessingCountriesData = [
       "Visit visa Longer-term (valid for up to 2 years) 475 £ Pounds",
       "Visit visa Longer-term (valid for up to 5 years) 848 £ Pounds",
       "Visit visa Longer-term (valid for up to 10 years) 1059 £ Pounds",
-      "O.S Travel and Tours is a reputable travel agency that specializes in providing travel solutions for their clients. We have a wealth of experience and expertise in helping travelers with their visa applications for various countries, including Spain.Our employs a team of professional and knowledgeable staff who are dedicated to providing top-quality consultancy services for their clients. Our clients can easily manage the frequently challenging visa application procedure with the help of our team. In addition to Spain visa processing, O.S Travel and Tours can also assist you and we are the best choice for you. If you’re based in Islamabad, Pakistan and looking for a reliable travel consultant, then look no further than the best and top travel consultant in the city. With years of experience in the industry, we specialize in helping our clients obtain Schengen visas, Europe visas, USA visas, UK visas, Canada visas, Australia visas, New Zealand visas, and many more."
+      "O.S Travel and Tours is a reputable travel agency that specializes in providing travel solutions for their clients. We have a wealth of experience and expertise in helping travelers with their visa applications for various countries, including United Kingdom.Our employs a team of professional and knowledgeable staff who are dedicated to providing top-quality consultancy services for their clients. Our clients can easily manage the frequently challenging visa application procedure with the help of our team. In addition to United Kingdom visa processing, O.S Travel and Tours can also assist you and we are the best choice for you. If you’re based in Islamabad, Pakistan and looking for a reliable travel consultant, then look no further than the best and top travel consultant in the city. With years of experience in the industry, we specialize in helping our clients obtain Schengen visas, Europe visas, USA visas, UK visas, Canada visas, Australia visas, New Zealand visas, and many more."
     ],
   },
   {
@@ -67,7 +67,7 @@ export const fileProcessingCountriesData = [
     description: [
       "If you are a Pakistani citizen looking to apply for United States visa, then you are at the right place. The process for USA visa can be daunting and time-consuming. There are various types of visas available, each with its own conditions and application process, such as tourist, student, and work visas., and each has its own requirements and application process. It is important to make sure that you have all the necessary documentation and meet the eligibility requirements before applying. O.S Travel and Tours is one of the best and top visa consultants in the industry, we can manage your entire visa application process from start to finish. Our experienced team of professionals will help ensure that your file is complete and meets all the necessary requirements, saving you valuable time and effort. We’ll even prepare you for your USA visa interview so you can feel confident and ready. Trust O.S Travel and Tours to make your USA visa application process as smooth and stress free as possible. Contact us today to get started.",
       "Temporary/Seasonal Workers and Employment, Trainees 205 $ USD",
-      "O.S Travel and Tours is a reputable travel agency that specializes in providing travel solutions for their clients. We have a wealth of experience and expertise in helping travelers with their visa applications for various countries, including Spain.Our employs a team of professional and knowledgeable staff who are dedicated to providing top-quality consultancy services for their clients. Our clients can easily manage the frequently challenging visa application procedure with the help of our team. In addition to Spain visa processing, O.S Travel and Tours can also assist you and we are the best choice for you. If you’re based in Islamabad, Pakistan and looking for a reliable travel consultant, then look no further than the best and top travel consultant in the city. With years of experience in the industry, we specialize in helping our clients obtain Schengen visas, Europe visas, USA visas, UK visas, Canada visas, Australia visas, New Zealand visas, and many more."
+      "O.S Travel and Tours is a reputable travel agency that specializes in providing travel solutions for their clients. We have a wealth of experience and expertise in helping travelers with their visa applications for various countries, including United States.Our employs a team of professional and knowledgeable staff who are dedicated to providing top-quality consultancy services for their clients. Our clients can easily manage the frequently challenging visa application procedure with the help of our team. In addition to United States visa processing, O.S Travel and Tours can also assist you and we are the best choice for you. If you’re based in Islamabad, Pakistan and looking for a reliable travel consultant, then look no further than the best and top travel consultant in the city. With years of experience in the industry, we specialize in helping our clients obtain Schengen visas, Europe visas, USA visas, UK visas, Canada visas, Australia visas, New Zealand visas, and many more."
     ],
   },
   {
@@ -84,7 +84,7 @@ export const fileProcessingCountriesData = [
       "If you’re looking for information on how to obtain an Australia visa for Pakistani citizen, you’ve come to the right place. It can be a complicated process, but with the right guidance, it is certainly possible.One of the best consultants for Australian visas in Pakistan is O.S Travel and Tours. We have an amazing success ratio and are highly recommended by their clients. Our Team can guide you through the entire visa application process, including filling out the necessary forms, gathering the required documents, and scheduling an appointment at the Australian embassy or consulate in Pakistan. O.S Travel and Tours has a team of experienced professionals who are well-versed in the Australian visa application process. We can help you determine the type of visa you need and assist you in meeting all the eligibility criteria. Our Team can also help you prepare for your visa interview and provide you with tips on how to increase your chances of approval. If you’re considering applying for an Australian visa from Pakistan, O.S Travel and Tours is a great choice for a consultant. Our amazing success ratio speaks for itself, and our expertise can help make the process as smooth and stress free as possible.",
       "Business/Tourist visa visitor ( subclass 600) 195 AUSD $",
       "To apply for a Canadian visa, you must pay the required fees and include the receipts with your application. The fee amounts vary depending on the reason for your travel.",
-      "O.S Travel and Tours is a reputable travel agency that specializes in providing travel solutions for their clients. We have a wealth of experience and expertise in helping travelers with their visa applications for various countries, including Spain.Our employs a team of professional and knowledgeable staff who are dedicated to providing top-quality consultancy services for their clients. Our clients can easily manage the frequently challenging visa application procedure with the help of our team. In addition to Spain visa processing, O.S Travel and Tours can also assist you and we are the best choice for you. If you’re based in Islamabad, Pakistan and looking for a reliable travel consultant, then look no further than the best and top travel consultant in the city. With years of experience in the industry, we specialize in helping our clients obtain Schengen visas, Europe visas, USA visas, UK visas, Canada visas, Australia visas, New Zealand visas, and many more."
+      "O.S Travel and Tours is a reputable travel agency that specializes in providing travel solutions for their clients. We have a wealth of experience and expertise in helping travelers with their visa applications for various countries, including Australia.Our employs a team of professional and knowledgeable staff who are dedicated to providing top-quality consultancy services for their clients. Our clients can easily manage the frequently challenging visa application procedure with the help of our team. In addition to Australia visa processing, O.S Travel and Tours can also assist you and we are the best choice for you. If you’re based in Islamabad, Pakistan and looking for a reliable travel consultant, then look no further than the best and top travel consultant in the city. With years of experience in the industry, we specialize in helping our clients obtain Schengen visas, Europe visas, USA visas, UK visas, Canada visas, Australia visas, New Zealand visas, and many more."
     ],
   },
   {
@@ -123,7 +123,7 @@ export const fileProcessingCountriesData = [
       "France offers different types of visas depending on the purpose of your visit. The most common types of visas are.",
       "This visa allows you to stay in France for up to 90 days for tourism, business, or other non-work related purposes.",
       "This visa is for stays longer than 90 days, such as for work, study, or family reunification.",
-      "This visa allows you to travel to any of the 26 countries in the Schengen area, including France, for up to 90 days within a six-month period.",
+      "This visa allows you to travel to any of the 29 countries in the Schengen area, including France, for up to 90 days within a six-month period.",
       "You must have a valid passport and any other travel documentation. When you apply for a Canadian visa, you have to provide photocopies of the information page of your passport. It must include:"
     ],
   },
@@ -142,7 +142,7 @@ export const fileProcessingCountriesData = [
       "France offers different types of visas depending on the purpose of your visit. The most common types of visas are.",
       "This visa allows you to stay in France for up to 90 days for tourism, business, or other non-work related purposes.",
       "This visa is for stays longer than 90 days, such as for work, study, or family reunification.",
-      "This visa allows you to travel to any of the 26 countries in the Schengen area, including France, for up to 90 days within a six-month period.",
+      "This visa allows you to travel to any of the 29 countries in the Schengen area, including France, for up to 90 days within a six-month period.",
       "Once you have all the documents you need for your Schengen visa application, make an appointment at VFS Global. You can apply for your visa up to 6 months ahead of your trip. Apply no later than 45 days before your trip."
     ],
   },
@@ -160,7 +160,7 @@ export const fileProcessingCountriesData = [
       "France offers different types of visas depending on the purpose of your visit. The most common types of visas are.",
       "This visa allows you to stay in France for up to 90 days for tourism, business, or other non-work related purposes.",
       "This visa is for stays longer than 90 days, such as for work, study, or family reunification.",
-      "This visa allows you to travel to any of the 26 countries in the Schengen area, including France, for up to 90 days within a six-month period.",
+      "This visa allows you to travel to any of the 29 countries in the Schengen area, including France, for up to 90 days within a six-month period.",
       "The current service standard for Visitor Visa (Tourist and Business) applications is 15 days.The time to make the decision can be extended up to 45 days."
     ],
   },
@@ -181,7 +181,7 @@ export const fileProcessingCountriesData = [
       "France offers different types of visas depending on the purpose of your visit. The most common types of visas are.",
       "This visa allows you to stay in France for up to 90 days for tourism, business, or other non-work related purposes.",
       "This visa is for stays longer than 90 days, such as for work, study, or family reunification.",
-      "This visa allows you to travel to any of the 26 countries in the Schengen area, including France, for up to 90 days within a six-month period.",
+      "This visa allows you to travel to any of the 29 countries in the Schengen area, including France, for up to 90 days within a six-month period.",
       "In some cases, you may need to provide a letter of inviation from someone in Germany. That person has to be either a Germany citizen or hold Permanent Residence."
     ],
   },
@@ -202,7 +202,7 @@ export const fileProcessingCountriesData = [
       "France offers different types of visas depending on the purpose of your visit. The most common types of visas are.",
       "This visa allows you to stay in France for up to 90 days for tourism, business, or other non-work related purposes.",
       "This visa is for stays longer than 90 days, such as for work, study, or family reunification.",
-      "This visa allows you to travel to any of the 26 countries in the Schengen area, including France, for up to 90 days within a six-month period.",
+      "This visa allows you to travel to any of the 29 countries in the Schengen area, including France, for up to 90 days within a six-month period.",
       "You must have a valid passport and any other travel documentation. When you apply for a Canadian visa, you have to provide photocopies of the information page of your passport. It must include:"
     ],
   },
@@ -244,7 +244,7 @@ export const fileProcessingCountriesData = [
       "France offers different types of visas depending on the purpose of your visit. The most common types of visas are.",
       "This visa allows you to stay in France for up to 90 days for tourism, business, or other non-work related purposes.",
       "This visa is for stays longer than 90 days, such as for work, study, or family reunification.",
-      "This visa allows you to travel to any of the 26 countries in the Schengen area, including France, for up to 90 days within a six-month period.",
+      "This visa allows you to travel to any of the 29 countries in the Schengen area, including France, for up to 90 days within a six-month period.",
       "You must have a valid passport and any other travel documentation. When you apply for a Greece visa, you have to provide photocopies of the information page of your passport. It must include:"
     ],
   },
@@ -265,7 +265,7 @@ export const fileProcessingCountriesData = [
       "France offers different types of visas depending on the purpose of your visit. The most common types of visas are.",
       "This visa allows you to stay in France for up to 90 days for tourism, business, or other non-work related purposes.",
       "This visa is for stays longer than 90 days, such as for work, study, or family reunification.",
-      "This visa allows you to travel to any of the 26 countries in the Schengen area, including France, for up to 90 days within a six-month period.",
+      "This visa allows you to travel to any of the 29 countries in the Schengen area, including France, for up to 90 days within a six-month period.",
       "You must have a valid passport and any other travel documentation. When you apply for a Czech Republic visa, you have to provide photocopies of the information page of your passport. It must include:"
     ],
   },
@@ -286,7 +286,7 @@ export const fileProcessingCountriesData = [
       "France offers different types of visas depending on the purpose of your visit. The most common types of visas are.",
       "This visa allows you to stay in France for up to 90 days for tourism, business, or other non-work related purposes.",
       "This visa is for stays longer than 90 days, such as for work, study, or family reunification.",
-      "This visa allows you to travel to any of the 26 countries in the Schengen area, including France, for up to 90 days within a six-month period.",
+      "This visa allows you to travel to any of the 29 countries in the Schengen area, including France, for up to 90 days within a six-month period.",
       "You must have a valid passport and any other travel documentation. When you apply for a Switzerland visa, you have to provide photocopies of the information page of your passport. It must include:"
     ],
   },
@@ -307,7 +307,7 @@ export const fileProcessingCountriesData = [
       "France offers different types of visas depending on the purpose of your visit. The most common types of visas are.",
       "This visa allows you to stay in France for up to 90 days for tourism, business, or other non-work related purposes.",
       "This visa is for stays longer than 90 days, such as for work, study, or family reunification.",
-      "This visa allows you to travel to any of the 26 countries in the Schengen area, including France, for up to 90 days within a six-month period.",
+      "This visa allows you to travel to any of the 29 countries in the Schengen area, including France, for up to 90 days within a six-month period.",
       "You must have a valid passport and any other travel documentation. When you apply for a Portugal visa, you have to provide photocopies of the information page of your passport. It must include:"
     ],
   },
@@ -328,7 +328,7 @@ export const fileProcessingCountriesData = [
       "France offers different types of visas depending on the purpose of your visit. The most common types of visas are.",
       "This visa allows you to stay in France for up to 90 days for tourism, business, or other non-work related purposes.",
       "This visa is for stays longer than 90 days, such as for work, study, or family reunification.",
-      "This visa allows you to travel to any of the 26 countries in the Schengen area, including France, for up to 90 days within a six-month period.",
+      "This visa allows you to travel to any of the 29 countries in the Schengen area, including France, for up to 90 days within a six-month period.",
       "You must have a valid passport and any other travel documentation. When you apply for a Canadian visa, you have to provide photocopies of the information page of your passport. It must include:"
     ],
   },
@@ -349,7 +349,7 @@ export const fileProcessingCountriesData = [
       "France offers different types of visas depending on the purpose of your visit. The most common types of visas are.",
       "This visa allows you to stay in France for up to 90 days for tourism, business, or other non-work related purposes.",
       "This visa is for stays longer than 90 days, such as for work, study, or family reunification.",
-      "This visa allows you to travel to any of the 26 countries in the Schengen area, including France, for up to 90 days within a six-month period.",
+      "This visa allows you to travel to any of the 29 countries in the Schengen area, including France, for up to 90 days within a six-month period.",
       "You must have a valid passport and any other travel documentation. When you apply for a Sweden visa, you have to provide photocopies of the information page of your passport. It must include:"
     ],
   },
@@ -370,7 +370,7 @@ export const fileProcessingCountriesData = [
       "France offers different types of visas depending on the purpose of your visit. The most common types of visas are.",
       "This visa allows you to stay in France for up to 90 days for tourism, business, or other non-work related purposes.",
       "This visa is for stays longer than 90 days, such as for work, study, or family reunification.",
-      "This visa allows you to travel to any of the 26 countries in the Schengen area, including France, for up to 90 days within a six-month period.",
+      "This visa allows you to travel to any of the 29 countries in the Schengen area, including France, for up to 90 days within a six-month period.",
       "You must have a valid passport and any other travel documentation. When you apply for a Norway visa, you have to provide photocopies of the information page of your passport. It must include:"
     ],
   },
@@ -392,7 +392,7 @@ export const fileProcessingCountriesData = [
     requirements: ["Original Passport { Validity At least 6 Months }", "04 Pictures with White Background { 35mm x 50mm }", "Online visa application", "Bank Statment with account maintenance certificate", "Visa Request Letter", "Return Air Ticket", "Hotel Booking", "FRC or MRC", "Travel insurance", "ID Card copy", "Four passport size pictures (white background 33×48 mm size)", "Bank account maintenance covering letter", "Visa Request letter to Embassy (preferably on company letterhead)", "Chamber of commerce certificate ( If available )", "Polio vaccination certificate", "Air Ticket (reservation only)"],
     description: [
       "Pakistani citizens are eligible to apply for a Turkey e-Visa if they hold a valid visa or residence permit from one of the following countries: USA, UK, Canada, or any Schengen country.",
-      "Embassy of NepalStreet 1, Diplomatic Enclave, G-5, 44000 Islamabad – Pakistan",
+      "Embassy of the Republic of Türkiye: Street 1, Diplomatic Enclave, G-5, 44000 Islamabad – Pakistan",
       "Telephones:Tel: +92 51 831 98 00 / +92 51 831 98 10Fax: +92 51 227 76 71 / +92 51 227 87 52",
       "If you are a Pakistani traveler looking to explore Turkey’s beautiful landscapes, vibrant culture, and friendly people, you are in the right place. We are here to help you with the important details about getting your Turkey visa for Pakistan. Turkey visa requirements from Pakistan can be different according to the travel purpose and duration of stay. Here we are going to share some important type of documents required for Turkey visa from Pakistan.For document requirements, please visit the ‘Visa Requirements’ section located on the top left side.",
       "O.S Travel & Tours as the best agent for Turkey visa in Pakistan. They have a team of experts who will guide you through the process and ensure that your application is handled correctly and efficiently.",
