@@ -45,11 +45,16 @@
       "source": "/best-travel-agent-for-:slug",
       "destination": "/best-travel-agency-for-:slug/",
       "permanent": true
+    },
+    {
+      "source": "/(sitemap_index|sitemap-index|wp-sitemap|page-sitemap|post-sitemap)\\.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
     }
   ],
   "rewrites": [
     {
-      "source": "/((?!api/).*)",
+      "source": "/((?!api/)(?!.*\\.[a-zA-Z0-9]+$).*)",
       "destination": "/index.html"
     }
   ]
